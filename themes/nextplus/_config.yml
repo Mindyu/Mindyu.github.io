@@ -266,9 +266,6 @@ mathjax:
 # Baidu Analytics ID
 baidu_analytics:
   search: 554a56208def44a6507511e869f978d9
- 
-# Duoshuo ShortName
-#duoshuo_shortname:
 
 # Disqus
 #disqus_shortname:
@@ -291,9 +288,6 @@ baidu_analytics:
 # Warning: JiaThis does not support https.
 #add_this_id:
 
-# Share
-#duoshuo_share: true
-
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
 #google_site_verification:
@@ -308,15 +302,6 @@ baidu_analytics:
 # Application Insights
 # See https://azure.microsoft.com/en-us/services/application-insights/
 # application_insights:
-
-# Make duoshuo show UA
-# user_id must NOT be null when admin_enable is true!
-# you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: false
-  user_id: 0
-  #admin_nickname: Author
 
 
 # Facebook SDK Support.
@@ -463,14 +448,6 @@ vendors:
 reward_comment: 你的鼓励是我最大的动力~
 wechatpay: /images/pay/wechatpay.jpg
 alipay: /images/pay/alipay.jpg
-
-# ---------------------------------------------------------------
-# Third Party Services Settings
-# --------------------------------------------------------------
-# Duoshuo ShortName
-#duoshuo_shortname:
-# youyan
-youyan_uid: 2137617
 
 
 # Assets

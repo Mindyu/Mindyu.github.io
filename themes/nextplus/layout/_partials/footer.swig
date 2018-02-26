@@ -25,8 +25,10 @@ tpwidget("show");</script>
   </span>
   <span class="author" itemprop="copyrightHolder">{{ config.author }}</span>
   <br />
+  <span > 转载请注明出处 , 一切权利保留</span>
+  <br />
   <span id="busuanzi_container_site_pv">
-	访客数<span id="busuanzi_value_site_uv"></span>人 | 访问量<span id="busuanzi_value_site_pv"></span>次
+	本站访客数&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;人&nbsp;&nbsp;|&nbsp;&nbsp;访问量&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;&nbsp;次
   </span>
 </div>
 
