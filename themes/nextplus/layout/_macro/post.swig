@@ -190,6 +190,28 @@
              </span>
           {% endif %}
 		  
+		  <br />
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-file-word-o"></i>
+               </span>
+		  {% if theme.post_meta.item_text %}
+                 <span class="post-meta-item-text">字数统计: </span>
+          {% endif %}
+		  <span title="{{ __('post.wordcount') }}">
+			{{ wordcount(post.content) }} 字
+		  </span>
+		  
+		  <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-clock-o"></i>
+               </span>
+		  {% if theme.post_meta.item_text %}
+                 <span class="post-meta-item-text">阅读时长≈ </span>
+          {% endif %}
+		  <span title="{{ __('post.min2read') }}">
+			{{ min2read(post.content) }} 分钟
+		  </span>
+		  
           {% if not is_index and theme.busuanzi_count.enable and theme.busuanzi_count.page_pv %}
             <span class="post-meta-divider">|</span>
             <span class="page-pv">{{ theme.busuanzi_count.page_pv_header }}
