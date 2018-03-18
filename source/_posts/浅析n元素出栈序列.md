@@ -236,4 +236,5 @@ public class Main {
   [2]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/catalen.png
   [3]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/CatalenCode.png
   [4]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/outStackSeq.png
+
   [5]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/isOutStackSeq.png

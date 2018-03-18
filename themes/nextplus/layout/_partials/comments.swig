@@ -7,6 +7,15 @@
            data-width="{{ theme.facebook_comments_plugin.width }}"
            data-colorscheme="{{ theme.facebook_comments_plugin.scheme }}">
       </div>
+	{% elseif theme.gitment.enable %}
+      {% if theme.gitment.lazy %}
+        <div onclick="ShowGitment()" id="gitment-display-button">{{  __('gitmentbutton') }}</div>
+        <div id="gitment-container" style="display:none"></div>
+      {% else %}
+        <div id="gitment-container"></div>
+      {% endif %}
+	{% elseif theme.valine.app_id and theme.valine.app_key %}
+		<div class="comments" id="comment"></div>
     {% elseif theme.disqus_shortname %}
       <div id="disqus_thread">
         <noscript>
