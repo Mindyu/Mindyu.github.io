@@ -376,13 +376,13 @@ busuanzi_count:
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
 valine:
-  enable: false
-  app_id: 6uSk7EDRGpfRsDjb5SvRsh0p-gzGzoHsz
-  app_key: IKbk5p03EEim9KtBOXebWRkP
+  enable: true
+  appid: 6uSk7EDRGpfRsDjb5SvRsh0p-gzGzoHsz
+  appkey: IKbk5p03EEim9KtBOXebWRkP
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
-  placeholder: Just go go # comment box placeholder
-  avatar: mm # gravatar style
+  placeholder: ヾﾉ≧∀≦)o来啊，快活啊!  # comment box placeholder
+  avatar: wavatar # gravatar style
   guest_info: nick,mail,link # custom comment header
   pageSize: 10 # pagination size
 
@@ -390,7 +390,7 @@ valine:
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
 gitment:
-  enable: true
+  enable: false
   githubID: Mindyu
   repo: Gitment-comments
   ClientID: d7e0394f75668aa7ed3a

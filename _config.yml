@@ -63,10 +63,6 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: next
-#theme: landscape
-#theme: jacman
-#theme: tkl
 theme: nextplus
 
 # Deployment
@@ -88,8 +84,8 @@ search:
 # add post views
 leancloud_visitors:
   enable: true
-  app_id: djHGMoQGEcN56vUneJs2E7DC-gzGzoHsz
-  app_key: TpxIAstxYvYAGRY4Oiu2yDL9
+  appid: djHGMoQGEcN56vUneJs2E7DC-gzGzoHsz
+  appkey: TpxIAstxYvYAGRY4Oiu2yDL9
   
 # 自动生成sitemap
 sitemap:

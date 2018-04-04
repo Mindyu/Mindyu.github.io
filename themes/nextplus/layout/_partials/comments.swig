@@ -14,8 +14,8 @@
       {% else %}
         <div id="gitment-container"></div>
       {% endif %}
-	{% elseif theme.valine.app_id and theme.valine.app_key %}
-		<div class="comments" id="comment"></div>
+	{% elseif theme.valine.enable and theme.valine.appid and theme.valine.appkey %}
+		<div class="comments" id="comments"></div>
     {% elseif theme.disqus_shortname %}
       <div id="disqus_thread">
         <noscript>
