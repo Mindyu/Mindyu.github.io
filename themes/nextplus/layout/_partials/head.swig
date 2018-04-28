@@ -1,4 +1,16 @@
 <meta charset="UTF-8"/>
+
+<script>
+    (function(){
+        if('{{ page.password }}'){
+            if (prompt('Sorry,^_^') !== '{{ page.password }}'){
+                alert('Oh!');
+                history.back();
+            }
+        }
+    })();
+</script>
+
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="google-site-verification" content="wrBYCbAVAocwjeMxIXrF6zSXygrIyjzbb5kBu35hMgs" />
@@ -7,7 +19,6 @@
 {# #238, Disable Baidu tranformation #}
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-
 
 {% if theme.google_site_verification %}
   <meta name="google-site-verification" content="{{ theme.google_site_verification }}" />
