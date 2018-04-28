@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "hexo": {
-    "version": "3.5.0"
+    "version": "3.7.1"
   },
   "dependencies": {
     "aplayer": "^1.6.0",
     "dplayer": "^1.22.2",
     "gitment": "0.0.3",
-    "hexo": "^3.5.0",
+    "hexo": "^3.2.0",
     "hexo-asset-image": "git+https://github.com/CodeFalling/hexo-asset-image.git",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.4",
@@ -20,9 +20,9 @@
     "hexo-generator-sitemap": "^1.2.0",
     "hexo-generator-tag": "^0.2.0",
     "hexo-renderer-ejs": "^0.2.0",
-    "hexo-renderer-marked": "^0.2.10",
+    "hexo-renderer-marked": "^0.3.0",
     "hexo-renderer-stylus": "^0.3.1",
-    "hexo-server": "^0.2.1",
+    "hexo-server": "^0.2.0",
     "hexo-tag-aplayer": "^2.0.7",
     "hexo-tag-dplayer": "^0.3.1",
     "hexo-wordcount": "^3.0.2",
