@@ -1,6 +1,6 @@
 ---
 title: Ubuntu安装小书匠并创建桌面快捷方式
-date: 2018-04-28 23:47:16
+date: 2018-04-24 23:47:16
 tags: [Ubuntu16.04,小书匠,Markdown]
 categories: [Ubuntu学习]
 ---
