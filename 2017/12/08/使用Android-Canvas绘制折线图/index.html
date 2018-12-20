@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="优化画图方法 原先磁感应力检测仪项目的绘图方法一直是采用的Android AChartEngine方法，简单介绍一下AChartEngine，它是 Android 平台的图表开发库, 能绘制 折线图, 饼图, 气泡图, 柱状图, 散点图, 面积图等统计图表。网上有很多例子，推荐一个Android 图表绘制 achartengine 示例解析。该方法优点：使用简单，只需要将数据传入到数据集，并设置相">
+<meta name="keywords" content="安卓,漏磁检测,Andriod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Android Canvas绘制折线图">
+<meta property="og:url" content="http://mindyu.com/2017/12/08/使用Android-Canvas绘制折线图/index.html">
+<meta property="og:site_name" content="Yang Cq">
+<meta property="og:description" content="优化画图方法 原先磁感应力检测仪项目的绘图方法一直是采用的Android AChartEngine方法，简单介绍一下AChartEngine，它是 Android 平台的图表开发库, 能绘制 折线图, 饼图, 气泡图, 柱状图, 散点图, 面积图等统计图表。网上有很多例子，推荐一个Android 图表绘制 achartengine 示例解析。该方法优点：使用简单，只需要将数据传入到数据集，并设置相">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%8A%98%E7%BA%BF%E5%9B%BE%E5%8F%8A%E6%9B%B2%E7%BA%BF%E5%9B%BE%E5%AE%8C%E6%95%B4%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C.png">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E5%9D%90%E6%A0%87%E5%8A%A8%E6%80%81%E9%80%82%E9%85%8D%E6%95%88%E6%9E%9C.png">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/ChartService%E6%8A%BD%E8%B1%A1%E7%B1%BB.jpg">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E5%A4%A7%E5%9B%BE%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C.png">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E9%80%82%E9%85%8D%E8%AE%BE%E5%A4%87%E6%A0%A1%E5%87%86%E7%9A%84%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95.png">
+<meta property="og:updated_time" content="2018-02-25T14:06:45.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Android Canvas绘制折线图">
+<meta name="twitter:description" content="优化画图方法 原先磁感应力检测仪项目的绘图方法一直是采用的Android AChartEngine方法，简单介绍一下AChartEngine，它是 Android 平台的图表开发库, 能绘制 折线图, 饼图, 气泡图, 柱状图, 散点图, 面积图等统计图表。网上有很多例子，推荐一个Android 图表绘制 achartengine 示例解析。该方法优点：使用简单，只需要将数据传入到数据集，并设置相">
+<meta name="twitter:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%8A%98%E7%BA%BF%E5%9B%BE%E5%8F%8A%E6%9B%B2%E7%BA%BF%E5%9B%BE%E5%AE%8C%E6%95%B4%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yang Cq" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://mindyu.com/2017/12/08/使用Android-Canvas绘制折线图/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>使用Android Canvas绘制折线图 | Yang Cq</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang Cq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个学习的网站</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2017/12/08/使用Android-Canvas绘制折线图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Cq">
+      <meta itemprop="description" content="陪伴是最长情的告白~">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Cq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">使用Android Canvas绘制折线图
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-08 09:17:58" itemprop="dateCreated datePublished" datetime="2017-12-08T09:17:58+08:00">2017-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-02-25 22:06:45" itemprop="dateModified" datetime="2018-02-25T22:06:45+08:00">2018-02-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/安卓学习/" itemprop="url" rel="index"><span itemprop="name">安卓学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/08/使用Android-Canvas绘制折线图/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/12/08/使用Android-Canvas绘制折线图/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/12/08/使用Android-Canvas绘制折线图/" class="leancloud_visitors" data-flag-title="使用Android Canvas绘制折线图">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="\assets\js\APlayer.min.js"> </script><h2 id="优化画图方法"><a href="#优化画图方法" class="headerlink" title="优化画图方法"></a>优化画图方法</h2><p> 原先磁感应力检测仪项目的绘图方法一直是采用的Android AChartEngine方法，简单介绍一下AChartEngine，它是 Android 平台的图表开发库, 能绘制 折线图, 饼图, 气泡图, 柱状图, 散点图, 面积图等统计图表。网上有很多例子，推荐一个<a href="http://www.cnblogs.com/wangfeng520/p/5610540.html" target="_blank" rel="noopener">Android 图表绘制 achartengine 示例解析</a>。该方法优点：使用简单，只需要将数据传入到数据集，并设置相应渲染器的绘制颜色，线的粗细等等。缺点：当数据量较大时，在移动与缩放时会显得比较卡顿。<br> <a id="more"></a><br> 接下来就介绍一种新的绘制方法：<strong>Android Canvas方法</strong><br> 当我们在自定义 View的时候，我们经常需要绘制一些自己想要的效果。通过Canvas对象我们就可以绘制出我们自己想要的效果。比如折线图、平面图等等。<br>对于一些简单的原理操作网上有很多Demo，推荐一个我在简书上面看到的一篇<a href="http://www.jianshu.com/p/f69873371763" target="_blank" rel="noopener">Android Canvas 方法总结</a>，里面介绍了关于Canvas的平移、缩放、旋转，以及后面使用Canvas对象绘制直线、各种形状以及文字。通过图形的展示，我相信很快就可以看懂啦！</p>
+<p>正式开始我做的内容： </p>
+<ul>
+<li>首先贴一张我们所需要最终达到的效果图<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%8A%98%E7%BA%BF%E5%9B%BE%E5%8F%8A%E6%9B%B2%E7%BA%BF%E5%9B%BE%E5%AE%8C%E6%95%B4%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C.png" width="50%" height="50%"></li>
+</ul>
+<p>1.<strong>坐标线的绘制：</strong><br>此时需要注意的是Canvas画布的坐标是以 <em>左上角为坐标原点的，水平向右为X轴的正方向，垂直向下为Y轴的正方向</em>，而为了美观以及需求，我们需要将<strong>坐标原点设置在左下角，同时Y轴的正方向为垂直向上</strong>。而达到最终效果。坐标原点设置在左下角可以通过简单的平移画布而实现坐标（0，0）位于View的左下角，但是方向岂不是还要通过翻转？ 这里其实并没有翻转这个方法，我指的其实就是通过坐标数据计算它对应的位置。画布的坐标原点并非你所显示的坐标原点。这样会使得画图麻烦很多。此时通过一个巧妙地方法，坐标数据的Y值我给它一个负号，那么如果是（2，5）和（3，7），而我实际将它们绘制在画布上的（2，-5）和（3，-7）；而-7比-5小，正好-7就在-5的上方，从而模拟出正方形为垂直向上。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绘制坐标线</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawAxis</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">    canvasWidth -= <span class="number">140f</span>;        <span class="comment">//留有边距以显示坐标对应的值</span></span><br><span class="line">    canvasHeight -= <span class="number">140f</span>;</span><br><span class="line">    canvas.translate(<span class="number">110f</span>, canvasHeight + <span class="number">40f</span>);     <span class="comment">// 使画布向 x 轴正向移动 110f，向 y 轴移动 40f</span></span><br><span class="line">    canvas.drawLine(<span class="number">0</span>, <span class="number">0</span>, canvasWidth, <span class="number">0</span>, paint);   <span class="comment">// 绘制 x 轴</span></span><br><span class="line">    canvas.drawLine(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>,-canvasHeight, paint);  <span class="comment">// 绘制 y 轴</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2.<strong>坐标刻度的绘制</strong><br>坐标主要需要完成动态的适配，当平移和缩放的时候坐标动态显示，并且完成它们之间的间距控制，所显示的画布上坐标轴上只显示2-6个坐标，避免坐标刻度太密而使得刻度值挤在一块无法显示。实现思路是：<br>a.通过<code>float interval = measureInterval(xDistance/xScale);        //每组值得间隔</code>计算当前显示区域的相邻坐标的间距。<br>b.通过<code>int n = (int) Math.ceil((xDistance/xScale)/interval);      //一组有几个值</code>计算当前显示区域的坐标数量也就对于上述的（2-6）<br>c.通过<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> first = (<span class="keyword">int</span>) Math.floor((xStart-((<span class="number">1</span>-xScale)/<span class="number">2</span>+xTranslate/canvasWidth)*xDistance/xScale)/interval);</span><br></pre></td></tr></table></figure></p>
+<p>计算出所显示的首坐标的位置。<br>d.循环n次，依次显示n个从first+i开始的坐标刻度值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 所需要的坐标属性：</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">float</span> xDistance;              <span class="comment">// x 方向总距离</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">float</span> yDistance;              <span class="comment">// y 方向总距离</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">float</span> xStart=<span class="number">0</span>, yStart=<span class="number">0</span>;     <span class="comment">// 起始点坐标</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">float</span> xTranslate = <span class="number">0</span>, yTranslate = <span class="number">0</span>;   <span class="comment">// 分别控制 x 和 y 方向的平移距离，单位为屏幕像素，达到手指移动多少，坐标平移多少</span></span><br><span class="line">   <span class="keyword">protected</span> <span class="keyword">float</span> xScale = <span class="number">1</span>, yScale = <span class="number">1</span>;           <span class="comment">// 分别控制 x 和 y 方向的缩放程度</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//绘制坐标值及刻度</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawCoordinates</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        String number;</span><br><span class="line">        DecimalFormat df1 = <span class="keyword">new</span> DecimalFormat(<span class="string">"0.0"</span>);</span><br><span class="line">        DecimalFormat df2 = <span class="keyword">new</span> DecimalFormat(<span class="string">"0.00"</span>);</span><br><span class="line">        DecimalFormat df3 = <span class="keyword">new</span> DecimalFormat(<span class="string">"0.000"</span>);</span><br><span class="line">        <span class="comment">// 绘制 x 轴坐标</span></span><br><span class="line">        canvas.save();  <span class="comment">// 保存画布状态</span></span><br><span class="line">        canvas.clipRect(<span class="number">0</span>, <span class="number">0</span>, canvasWidth, <span class="number">60f</span>);                   <span class="comment">// 切割画布，使坐标显示在一定范围内</span></span><br><span class="line">        canvas.translate((<span class="number">1</span> - xScale) / <span class="number">2</span> * canvasWidth, <span class="number">0</span>);       <span class="comment">// 缩放时，平移使得与折线图一致</span></span><br><span class="line">        canvas.translate(xTranslate, <span class="number">0</span>);                           <span class="comment">// 使坐标跟着图形一起平移</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">float</span> interval = measureInterval(xDistance/xScale);        <span class="comment">//每组值得间隔</span></span><br><span class="line">        <span class="keyword">int</span> n = (<span class="keyword">int</span>) Math.ceil((xDistance/xScale)/interval);      <span class="comment">//一组有几个值</span></span><br><span class="line">        <span class="keyword">int</span> first = (<span class="keyword">int</span>) Math.floor((xStart-((<span class="number">1</span>-xScale)/<span class="number">2</span>+xTranslate/canvasWidth)*xDistance/xScale)/interval);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (interval &lt; <span class="number">0.01</span>)&#123;</span><br><span class="line">                number = df3.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (interval &lt;= <span class="number">0.1</span>)&#123;</span><br><span class="line">                number = df2.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (interval &lt; <span class="number">1</span>)&#123;</span><br><span class="line">                number = df1.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                number = String.valueOf((first+i)*(<span class="keyword">int</span>)interval);</span><br><span class="line">            &#125;</span><br><span class="line">            canvas.drawLine((canvasWidth * (first+i) * interval / xDistance * xScale), <span class="number">0f</span>,</span><br><span class="line">                    (canvasWidth * (first+i) * interval / xDistance * xScale), <span class="number">10f</span>,paint);</span><br><span class="line">            canvas.drawText(</span><br><span class="line">                    number,</span><br><span class="line">                    (canvasWidth * (first+i) * interval / xDistance * xScale),</span><br><span class="line">                    <span class="number">40f</span>,</span><br><span class="line">                    paint);</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.restore();   <span class="comment">// 使画布返回上一个状态</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 绘制 y 轴坐标</span></span><br><span class="line">        canvas.save();  <span class="comment">// 保存画布状态</span></span><br><span class="line">        canvas.clipRect(-<span class="number">110f</span>, -canvasHeight, <span class="number">0</span>, <span class="number">0</span>);                        <span class="comment">// 切割画布，使坐标显示在一定范围内</span></span><br><span class="line">        canvas.translate(<span class="number">0</span>, -(<span class="number">1</span> - yScale) / <span class="number">2</span> * canvasHeight);              <span class="comment">// 缩放时平移使得与折线图一致</span></span><br><span class="line">        canvas.translate(<span class="number">0</span>, (yTranslate/yScale-yStart/yDistance*canvasHeight)*yScale);      <span class="comment">// 使坐标跟着图形一起平移</span></span><br><span class="line">        interval = measureInterval(yDistance/yScale);                       <span class="comment">//每组值得间隔</span></span><br><span class="line"><span class="comment">//        Log.d("Chart","interval="+interval);</span></span><br><span class="line">        n = (<span class="keyword">int</span>) Math.ceil((yDistance/yScale)/interval);                   <span class="comment">//一组有几个值</span></span><br><span class="line"><span class="comment">//        Log.d("Chart","n="+n);</span></span><br><span class="line">        first = -(<span class="keyword">int</span>) Math.floor((yStart+yDistance/yScale/<span class="number">2</span>*(<span class="number">1</span>-yScale)-yTranslate/yScale/canvasHeight*yDistance)/interval);</span><br><span class="line"><span class="comment">//        Log.d("Chart","first="+first);</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span> (interval &lt; <span class="number">0.01</span>)&#123;</span><br><span class="line">                number = df3.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (interval &lt;= <span class="number">0.1</span>)&#123;</span><br><span class="line">                number = df2.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (interval &lt; <span class="number">1</span>)&#123;</span><br><span class="line">                number = df1.format((first+i)*interval);</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                number = String.valueOf((first+i)*(<span class="keyword">int</span>)interval);</span><br><span class="line">            &#125;</span><br><span class="line">            canvas.drawLine(-<span class="number">10f</span>, -(canvasHeight * (first+i) * interval / yDistance * yScale),</span><br><span class="line">                    <span class="number">0f</span>, -(canvasHeight * (first+i) * interval / yDistance * yScale),paint);</span><br><span class="line">            canvas.drawText(</span><br><span class="line">                    number,</span><br><span class="line">                    -<span class="number">5f</span>,</span><br><span class="line">                    -(canvasHeight * (first+i) * interval / yDistance * yScale)-<span class="number">4</span>,</span><br><span class="line">                    paint);</span><br><span class="line">        &#125;</span><br><span class="line">        canvas.restore();   <span class="comment">// 使画布返回上一个状态</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以下为坐标完成动态适配的效果图：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E5%9D%90%E6%A0%87%E5%8A%A8%E6%80%81%E9%80%82%E9%85%8D%E6%95%88%E6%9E%9C.png" width="50%" height="50%"></p>
+<p>3.<strong>折线与图形的绘制</strong><br>由于需要绘制两种不同的图形，去噪图（折线图）和扫描图（平面图），此处将画图方法抽象出来：子类通过重写drawAction方法来完成各自所需绘制的图形。同时后期如果需要绘制其他类型的图，继承此抽象类然后重写自己的drawAction方法即可实现不同类型的图形绘制。<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/ChartService%E6%8A%BD%E8%B1%A1%E7%B1%BB.jpg" alt="AbstractChartService画图抽象类"><br>以下为折线图的drawAction方法：<br>根据平移与缩放值，将画布进行相应的平移与缩放，同时设置图形的缩放中心，以所显示图形的中心点为缩放中心。然后设置画笔样式及颜色，通过所获取的xList与yList值连接相邻点达到绘制折线的效果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//绘制曲线</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">drawAction</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 裁切矩形，把画面控制在坐标平面内</span></span><br><span class="line">        canvas.clipRect(<span class="number">0</span>, <span class="number">0</span>, canvasWidth, -canvasHeight);</span><br><span class="line">        <span class="comment">// 手势缩放移动</span></span><br><span class="line">        canvas.translate(xTranslate/xScale, yTranslate/yScale-yStart/yDistance*canvasHeight);</span><br><span class="line">        <span class="keyword">float</span> px = (canvasWidth / <span class="number">2</span> - xTranslate/xScale);</span><br><span class="line">        <span class="keyword">float</span> py = (canvasHeight / <span class="number">2</span> + yTranslate/yScale-yStart/yDistance*canvasHeight);</span><br><span class="line">        canvas.scale(xScale, yScale, px, -py);               <span class="comment">//以图的中心点缩放</span></span><br><span class="line"></span><br><span class="line">        paint.setDither(<span class="keyword">true</span>);                           <span class="comment">//设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰</span></span><br><span class="line">        paint.setFilterBitmap(<span class="keyword">true</span>);                     <span class="comment">//如果该项设置为true，则图像在动画进行中会滤掉对Bitmap图像的优化操作，加快显示速度，本设置项依赖于dither和xfermode的设置</span></span><br><span class="line">        paint.setStyle(Paint.Style.FILL_AND_STROKE);     <span class="comment">//设置画笔的样式，Style.FILL: 实心   STROKE:空心   FILL_OR_STROKE:同时实心与空心</span></span><br><span class="line">        paint.setStrokeJoin(Paint.Join.ROUND);           <span class="comment">//设置绘制时各图形的结合方式，如平滑效果等  BEVEL斜角</span></span><br><span class="line">        <span class="comment">//paint.setStrokeWidth(4/xScale);                  //当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的粗细度</span></span><br><span class="line">        <span class="keyword">int</span>[] colors = GlobalParameter.getInstance().getColors();</span><br><span class="line">        <span class="comment">// 绘制图形</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;showIDs.size(); i++) &#123;           <span class="comment">//通道数</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>; j&lt; yList.get(showIDs.get(i)).size()-<span class="number">1</span>; j++) &#123;</span><br><span class="line">                paint.setColor(colors[showIDs.get(i)]);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> ((yList.get(showIDs.get(i)).get(j+<span class="number">1</span>)-yList.get(showIDs.get(i)).get(j))&lt;<span class="number">15</span>&amp;&amp;(yList.get(showIDs.get(i)).get(j+<span class="number">1</span>)-yList.get(showIDs.get(i)).get(j))&gt;-<span class="number">15</span>)&#123;</span><br><span class="line">                    paint.setStrokeWidth(<span class="number">3</span>/yScale);</span><br><span class="line">                &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                    paint.setStrokeWidth(<span class="number">3</span>/xScale);</span><br><span class="line">                &#125;</span><br><span class="line">                canvas.drawLine(        <span class="comment">//xDistance x方向的总距离</span></span><br><span class="line">                        xList.get(j) / xDistance * canvasWidth,</span><br><span class="line">                        -yList.get(showIDs.get(i)).get(j) / yDistance * canvasHeight,</span><br><span class="line">                        xList.get(j+<span class="number">1</span>) / xDistance * canvasWidth,</span><br><span class="line">                        -yList.get(showIDs.get(i)).get(j+<span class="number">1</span>) / yDistance * canvasHeight,</span><br><span class="line">                        paint</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (points!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            paint.setColor(Color.RED);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;points.size()-<span class="number">1</span>;i++)&#123;</span><br><span class="line">                canvas.drawLine(        <span class="comment">//xDistance x方向的总距离</span></span><br><span class="line">                        points.get(i).getX() / xDistance * canvasWidth,</span><br><span class="line">                        -points.get(i).getY() / yDistance * canvasHeight,</span><br><span class="line">                        points.get(i+<span class="number">1</span>).getX() / xDistance * canvasWidth,</span><br><span class="line">                        -points.get(i+<span class="number">1</span>).getY() / yDistance * canvasHeight,</span><br><span class="line">                        paint</span><br><span class="line">                );</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        initPaints();   <span class="comment">//画笔reset</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>以下为PopWindow弹出框中横屏显示折线图的效果：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E5%A4%A7%E5%9B%BE%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C.png" width="50%" height="50%"></p>
+<p>4.<strong>Touch手势事件的监听</strong><br>Android Canvas 没有提供有关手势缩放的功能，但我们可以利用onTouchListener 来监测手势，并根据手势的不同对扫描图作不同处理，比如移动和缩放。采用接口回调机制，在所需用到AbstractChartService对象处，进行手势监控，减少抽象类间的耦合性。</p>
+<p>通过设置OnTouchListener监听，只要有手指触碰到绘制的图形，就会触发 onTouch 方法，同时通过判断event.getAction() 获取到手势的不同动作，来完成你所重写的响应事件。重写onTouch方法，通过 event.getAction() 获取到的值，自动判断执行哪一个 case 中的代码，即通过监测不同的动作来对图形作出相应处理。我们的处理主要就是移动和缩放，通过event.getX、event.getY方法所获取的手势点击的屏幕坐标，计算图形的平移及缩放值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置折线图的触摸事件，使扫描图保持同步平移和缩放</span></span><br><span class="line">      chartView.setOnTouchListener(<span class="keyword">new</span> View.OnTouchListener() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouch</span><span class="params">(View view, MotionEvent event)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">switch</span> (event.getAction()) &#123;</span><br><span class="line">                  <span class="comment">// 一根手指按下时</span></span><br><span class="line">                  <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</span><br><span class="line">                      <span class="keyword">if</span> (!mPopupWindow.isShowing()) &#123;      <span class="comment">//大图未显示时</span></span><br><span class="line">                          <span class="comment">// 双击扫描图跳转到大图</span></span><br><span class="line">                          <span class="keyword">if</span> (event.getEventTime() - chartView.getUpTime() &lt; <span class="number">200</span>) &#123;</span><br><span class="line">                              addToBigchartLayout(chartView);</span><br><span class="line">                          &#125;</span><br><span class="line">                      &#125;</span><br><span class="line">                      chartView.setxDown(event.getX());</span><br><span class="line">                      chartView.setyDown(event.getY());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="comment">// 手指抬起时</span></span><br><span class="line">                  <span class="keyword">case</span> MotionEvent.ACTION_UP:</span><br><span class="line">                      chartView.setUpTime(event.getEventTime());</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="comment">// 手指移动时</span></span><br><span class="line">                  <span class="keyword">case</span> MotionEvent.ACTION_MOVE:</span><br><span class="line">                      <span class="comment">// 只有一根手指移动时</span></span><br><span class="line">                      <span class="keyword">if</span> (event.getPointerCount() == <span class="number">1</span> &amp;&amp; event.getAction() != <span class="number">261</span></span><br><span class="line">                              &amp;&amp; chartView.getxDown() != <span class="number">0</span> &amp;&amp; chartView.getyDown() != <span class="number">0</span> ) &#123;</span><br><span class="line">                          <span class="comment">// 实现图形平移</span></span><br><span class="line">                          chartView.setxTranslate(chartView.getxTranslate()+(event.getX() - chartView.getxDown()) );</span><br><span class="line">                          chartView.setyTranslate(chartView.getyTranslate()+(event.getY() - chartView.getyDown()) );</span><br><span class="line">                          chartView.setxDown(event.getX());</span><br><span class="line">                          chartView.setyDown(event.getY());</span><br><span class="line">                      &#125;</span><br><span class="line">                      <span class="comment">// 有两根手指移动时</span></span><br><span class="line">                      <span class="keyword">else</span> <span class="keyword">if</span> (event.getPointerCount() == <span class="number">2</span>) &#123;</span><br><span class="line">                          <span class="comment">// 实现扫描图缩放</span></span><br><span class="line">                          <span class="keyword">double</span> xLenMove = Math.abs(event.getX(<span class="number">0</span>) - event.getX(<span class="number">1</span>));</span><br><span class="line">                          <span class="keyword">double</span> yLenMove = Math.abs(event.getY(<span class="number">0</span>) - event.getY(<span class="number">1</span>));</span><br><span class="line">                          <span class="keyword">double</span> lenMove = Math.sqrt(xLenMove * xLenMove + yLenMove * yLenMove);</span><br><span class="line">                          <span class="comment">// 动态更新</span></span><br><span class="line">                          <span class="comment">// 设置最小缩放比例为 0.4</span></span><br><span class="line">                          <span class="keyword">if</span> (chartView.getxScale() + (lenMove / chartView.getLenDown() - <span class="number">1</span>) &gt; <span class="number">0.4</span>) &#123;</span><br><span class="line">                              chartView.setxScale((<span class="keyword">float</span>) (chartView.getxScale() + (lenMove / chartView.getLenDown()  - <span class="number">1</span>)));</span><br><span class="line">                              chartView.setyScale((<span class="keyword">float</span>) (chartView.getyScale() + (lenMove / chartView.getLenDown()  - <span class="number">1</span>)));</span><br><span class="line">                              chartView.setLenDown(lenMove);</span><br><span class="line">                          &#125;</span><br><span class="line">                          chartView.setxDown(<span class="number">0</span>);</span><br><span class="line">                          chartView.setyDown(<span class="number">0</span>);</span><br><span class="line">                      &#125;</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="comment">// 有两根手指按下时</span></span><br><span class="line">                  <span class="keyword">case</span> <span class="number">261</span>:</span><br><span class="line">                      <span class="keyword">double</span> xLenDown = Math.abs(event.getX(<span class="number">0</span>) - event.getX(<span class="number">1</span>));</span><br><span class="line">                      <span class="keyword">double</span> yLenDown = Math.abs(event.getY(<span class="number">0</span>) - event.getY(<span class="number">1</span>));</span><br><span class="line">                      chartView.setLenDown(Math.sqrt(xLenDown * xLenDown + yLenDown * yLenDown));</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="comment">// 两根手指中的一根抬起时</span></span><br><span class="line">                  <span class="keyword">case</span> MotionEvent.ACTION_POINTER_UP:</span><br><span class="line">                      chartView.setxDown(<span class="number">0</span>);</span><br><span class="line">                      chartView.setyDown(<span class="number">0</span>);</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">default</span>:</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">              &#125;</span><br><span class="line">              chartView.postInvalidate();   <span class="comment">//手势完成时重绘</span></span><br><span class="line">              scanView.setxTranslate(chartView.getxTranslate());</span><br><span class="line">              scanView.setxScale(chartView.getxScale());</span><br><span class="line">              scanView.postInvalidate();</span><br><span class="line">              <span class="comment">// 只有当返回 false 时才会开启手势检测效果，否则折线图将无法移动和缩放</span></span><br><span class="line">              <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+<p>最后通过计算的平移值以及缩放值，重绘图形。</p>
+<ul>
+<li>完成以上步骤就可以在其它Activity中使用自己封装的对象来完成各种不同图形的绘制。如下是适配设备校准的绘图方法：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E9%80%82%E9%85%8D%E8%AE%BE%E5%A4%87%E6%A0%A1%E5%87%86%E7%9A%84%E7%BB%98%E5%88%B6%E6%96%B9%E6%B3%95.png" width="50%" height="50%"></li>
+</ul>
+<p>项目源码可见我的Github仓库<a href="https://github.com/Mindyu/LCJCSystem" target="_blank" rel="noopener">漏磁检测系统</a>。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的鼓励是我最大的动力~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wechatpay.jpg" alt="Yang Cq 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/alipay.jpg" alt="Yang Cq 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/安卓/" rel="tag"># 安卓</a>
+          
+            <a href="/tags/漏磁检测/" rel="tag"># 漏磁检测</a>
+          
+            <a href="/tags/Andriod/" rel="tag"># Andriod</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/校准数据处理篇-漏磁检测/" rel="next" title="校准数据处理篇-漏磁检测">
+                <i class="fa fa-chevron-left"></i> 校准数据处理篇-漏磁检测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/13/操作系统经典算法之银行家算法/" rel="prev" title="操作系统经典算法之银行家算法">
+                操作系统经典算法之银行家算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Yang Cq" />
+            
+              <p class="site-author-name" itemprop="name">Yang Cq</p>
+              <p class="site-description motion-element" itemprop="description">陪伴是最长情的告白~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Mindyu" title="GitHub &rarr; https://github.com/Mindyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/users/4b1edbec3f22" title="简书 &rarr; https://www.jianshu.com/users/4b1edbec3f22" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/u/5197800401" title="Weibo &rarr; https://weibo.com/u/5197800401" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化画图方法"><span class="nav-number">1.</span> <span class="nav-text">优化画图方法</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<!--  天气预报的代码
+<script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
+<script>tpwidget("init", {
+    "flavor": "bubble",
+    "location": "WT3Q0FW9ZJ3Q",
+    "geolocation": "enabled",
+    "position": "top-right",
+    "margin": "10px 10px",
+    "language": "zh-chs",
+    "unit": "c",
+    "theme": "chameleon",
+    "uid": "U61E2DDC5B",
+    "hash": "589598a04005ed5ff60225ea0a96533b"
+});
+tpwidget("show");</script>
+-->
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yang Cq</span>
+  <br />
+  <span > 转载请注明出处 , 一切权利保留 </span>
+  <br />
+  <span id="busuanzi_container_site_pv">
+	本站访客数&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;人&nbsp;&nbsp;|&nbsp;&nbsp;访问量&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;&nbsp;次
+  </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '6uSk7EDRGpfRsDjb5SvRsh0p-gzGzoHsz',
+        appKey: 'IKbk5p03EEim9KtBOXebWRkP',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "EoSr6uThXQrfyMx9PQ8RknJY-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "EoSr6uThXQrfyMx9PQ8RknJY-gzGzoHsz",
+                'X-LC-Key': "p6ybVQcBqqPQoYbooHUVWdmP",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

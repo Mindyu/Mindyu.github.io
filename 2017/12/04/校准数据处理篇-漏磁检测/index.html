@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="优化校准数据处理问题描述： 校准模块通过正反方向两次校准。每次进行数据处理获取到该次校准四个梯度(20%、40%、60%、80%)的去噪值以及对应步长（X坐标），以便后续的曲线拟合。">
+<meta name="keywords" content="安卓,漏磁检测,Andriod">
+<meta property="og:type" content="article">
+<meta property="og:title" content="校准数据处理篇-漏磁检测">
+<meta property="og:url" content="http://mindyu.com/2017/12/04/校准数据处理篇-漏磁检测/index.html">
+<meta property="og:site_name" content="Yang Cq">
+<meta property="og:description" content="优化校准数据处理问题描述： 校准模块通过正反方向两次校准。每次进行数据处理获取到该次校准四个梯度(20%、40%、60%、80%)的去噪值以及对应步长（X坐标），以便后续的曲线拟合。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E6%A0%A1%E5%87%86.png">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%A0%A1%E5%87%86%E6%95%B0%E6%8D%AE%E5%8F%AF%E5%A4%84%E7%90%86%E6%95%88%E6%9E%9C.jpg">
+<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E6%A0%A1%E5%87%86%E9%97%AE%E9%A2%98.jpg">
+<meta property="og:updated_time" content="2018-02-25T14:06:45.153Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="校准数据处理篇-漏磁检测">
+<meta name="twitter:description" content="优化校准数据处理问题描述： 校准模块通过正反方向两次校准。每次进行数据处理获取到该次校准四个梯度(20%、40%、60%、80%)的去噪值以及对应步长（X坐标），以便后续的曲线拟合。">
+<meta name="twitter:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E6%A0%A1%E5%87%86.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Yang Cq" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://mindyu.com/2017/12/04/校准数据处理篇-漏磁检测/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>校准数据处理篇-漏磁检测 | Yang Cq</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?[object Object]";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion .logo-line-before i { left: initial; }
+    .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Yang Cq</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">一个学习的网站</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2017/12/04/校准数据处理篇-漏磁检测/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Cq">
+      <meta itemprop="description" content="陪伴是最长情的告白~">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Cq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">校准数据处理篇-漏磁检测
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-04 08:55:45" itemprop="dateCreated datePublished" datetime="2017-12-04T08:55:45+08:00">2017-12-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-02-25 22:06:45" itemprop="dateModified" datetime="2018-02-25T22:06:45+08:00">2018-02-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/安卓学习/" itemprop="url" rel="index"><span itemprop="name">安卓学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/04/校准数据处理篇-漏磁检测/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/12/04/校准数据处理篇-漏磁检测/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/12/04/校准数据处理篇-漏磁检测/" class="leancloud_visitors" data-flag-title="校准数据处理篇-漏磁检测">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="\assets\js\APlayer.min.js"> </script><h2 id="优化校准数据处理"><a href="#优化校准数据处理" class="headerlink" title="优化校准数据处理"></a>优化校准数据处理</h2><p><strong>问题描述：</strong></p>
+<p>校准模块通过正反方向两次校准。每次进行数据处理获取到该次校准四个梯度(20%、40%、60%、80%)的去噪值以及对应步长（X坐标），以便后续的曲线拟合。<br><a id="more"></a></p>
+<hr>
+<p><strong>处理方法1：</strong>（维护极大值间的顺序关系）</p>
+<ol>
+<li>所有极大值按Y值（去噪值）排序。</li>
+<li>根据最大的两个极大值点，计算x坐标满足的关系（x坐标递增或者递减），通过改关系以剔除错误数据。</li>
+<li>选择最大的四个极大值</li>
+</ol>
+<p>该方法的处理效果：<br>    去噪值排序后，X轴也满足递增或者递减的顺序。可以排除当20%的缺陷去噪值小于其他区间的误差值。如下图：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E6%A0%A1%E5%87%86.png" alt="数据校准bug图"></p>
+<p><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%A0%A1%E5%87%86%E6%95%B0%E6%8D%AE%E5%8F%AF%E5%A4%84%E7%90%86%E6%95%88%E6%9E%9C.jpg" alt="数据校准可处理区域"><br>上图阴影部分为可去噪的效果。在阴影部分出现的缺陷值都可以过滤掉。<br>    缺点：当某些地方误差值过大时，可能掩盖真实缺陷比处的值。（A、C为真实缺陷百分比对应的值，而B点为错误值。因为B&gt;C而过滤掉C点）<br>    <img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E6%A0%A1%E5%87%86%E9%97%AE%E9%A2%98.jpg" alt="数据校准存在的问题"></p>
+<p><strong>处理方法2：</strong>（改进方法，x坐标之间间隔控制，同时维护间距）</p>
+<ol>
+<li>所有极大值按Y值（去噪值）排序。</li>
+<li>首先获取数据最大为80%缺陷对对应的去噪值，以此寻找第二个值，通过这两个值计算步数间隔。</li>
+<li>继续计算下一个点的位置，在第二个点的基础上增加间隔internal，从该X坐标左右寻找存在的去噪值。</li>
+<li>更新间隔internal,按此方法计算第四个满足条件的值。</li>
+<li>若无满足的条件，依次选取第二大的去噪值为80%对应的缺陷值。重复2-4步骤。</li>
+</ol>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br></pre></td><td class="code"><pre><span class="line">import com.tomatoLCJC.tools.Parameter.SystemParameter;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collections;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by YCQ on 2017/10/10.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line">public class InstrumentCalibration &#123;</span><br><span class="line"></span><br><span class="line">    private static double range = 0.1;     //左右寻找10%的区域  通过修改这个确定精确度</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*******************************************************************************************</span></span><br><span class="line"><span class="comment">     * 函数名称：getMaximumValue</span></span><br><span class="line"><span class="comment">     * 函数介绍：获取曲线的极大值, 原理是:已知输入曲线有4个峰,该算法的思想就是求出这每个峰的起始x坐标和结束x坐标（即求出峰所在的区间）</span></span><br><span class="line"><span class="comment">     然后在该区间中搜最大值从而求出极大值。</span></span><br><span class="line"><span class="comment">     * 输入参数：order 表示第几次获取极大值</span></span><br><span class="line"><span class="comment">     * 输出参数：无</span></span><br><span class="line"><span class="comment">     * 返回值  ：无</span></span><br><span class="line"><span class="comment">     ********************************************************************************************/</span></span><br><span class="line">    public static List&lt;Point&gt; getMaximumValue(List&lt;Double&gt; yValue)          <span class="comment">//获取极大值</span></span><br><span class="line">    &#123;</span><br><span class="line">        List&lt;Point&gt; maxValue=new ArrayList&lt;&gt;();</span><br><span class="line">	    double key = 10;           //设置标记值为10（即认为从某个大于60的点开始到某个小于60的点结束为峰的区间）也可以为其他值，根据需要来定</span><br><span class="line">        int end = yValue.size();</span><br><span class="line">        List&lt;Integer&gt; xValue=new ArrayList&lt;&gt;();        //记录所有峰的起始坐标和结束坐标（就是记录所有峰的区间）</span><br><span class="line">        int flag = 0;                 //信号量   因为算法要求记录峰值的起始和结束坐标，当某一点大于标记值key以后因为峰的单调递增性会有很多点也大于可以</span><br><span class="line">        <span class="comment">//所以用flag标记当获取了第一个大于标记值key以后让程序不再记录x坐标直到条件再次满足</span></span><br><span class="line">        for (int i = 0; i &lt; end; ++i)     //这是搜索峰的区间部分</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (key &lt; yValue.get(i) &amp;&amp; <span class="number">0</span> == flag)</span><br><span class="line">            &#123;</span><br><span class="line">                xValue.add(i);</span><br><span class="line">                flag = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (key &gt; yValue.get(i) &amp;&amp; <span class="number">1</span> == flag)</span><br><span class="line">            &#123;</span><br><span class="line">                xValue.add(i);</span><br><span class="line">                flag = 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        xValue.add(end - 1);</span><br><span class="line">        int length = xValue.size();</span><br><span class="line">        for (int i = 0; i &lt; length / 2; ++i)      //根据区间搜索极大值</span><br><span class="line">        &#123;</span><br><span class="line">            double temp = yValue.get(xValue.get(2*i));</span><br><span class="line">            int k = xValue.get(2*i) + 1;</span><br><span class="line">            for (int j = k; j &lt; xValue.get(2*i+1); ++j)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (temp &lt; yValue.get(j))</span><br><span class="line">                &#123;</span><br><span class="line">                    temp = yValue.get(j);</span><br><span class="line">                    k = j;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">            maxValue.add(new Point(k,Float.valueOf(String.valueOf(temp))));</span><br><span class="line">        &#125;</span><br><span class="line">        Collections.sort(maxValue);          //根据Y值 从大到小排序</span><br><span class="line">        <span class="keyword">if</span> (maxValue.size()&lt;<span class="number">4</span>) &#123;</span><br><span class="line">            return maxValue;    //极大值个数小于4，在后续过程会滤掉该情况，直接返回</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"><span class="comment">//            return adjustOrder(maxValue);  //第一种校准方法</span></span><br><span class="line">            return adjustOrder2(maxValue);  //第二种校准方法</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一种调整方法，根据递增和递减顺序</span></span><br><span class="line">    public static List&lt;Point&gt; adjustOrder(List&lt;Point&gt; value )&#123;</span><br><span class="line">        List&lt;Point&gt; resValue=new ArrayList&lt;&gt;();</span><br><span class="line">        resValue.add(value.get(0));             //滤掉可能出现的错误</span><br><span class="line">        double flag_x = value.get(0).getX();</span><br><span class="line">        int flag_pOm = value.get(1).getX()-value.get(0).getX() &gt; 0 ? 1:-1;    //设置正序标记</span><br><span class="line">        <span class="comment">//剔除x非正序的Point</span></span><br><span class="line">        for (int i=1;i&lt;value.size();i++)&#123;</span><br><span class="line">            if ((value.get(i).getX()-flag_x &gt; 0 ? 1:-1)==flag_pOm)&#123;</span><br><span class="line">                resValue.add(value.get(i));</span><br><span class="line">                flag_x = value.get(i).getX();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        resValue = new ArrayList&lt;&gt;(resValue.subList(0 , Math.min(4,resValue.size()))); //size&gt;4时仅获取前四个值，</span><br><span class="line">        return resValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第二种调整方法，根据递增和递减顺序</span></span><br><span class="line">    public static List&lt;Point&gt; adjustOrder2(List&lt;Point&gt; value )&#123;     <span class="comment">//x为步数，y为去噪值</span></span><br><span class="line">        Map&lt;Integer,Float&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">        for (int i= 0;i&lt;value.size();i++)&#123;</span><br><span class="line">            map.put((int) value.get(i).getX(), value.get(i).getY());</span><br><span class="line">        &#125;</span><br><span class="line">        List&lt;Point&gt; resValue=new ArrayList&lt;&gt;();</span><br><span class="line">        for(int i=0;i&lt;4;i++)    resValue.add(new Point(0.0f, 0.0f));  //初始化4个point</span><br><span class="line">        int interval; //间隔</span><br><span class="line">        for (int i=0 ; i&lt;value.size()-4 ; i++)&#123;</span><br><span class="line">            resValue.set(0,value.get(i));       //循环以此向后寻找一个最优的缺陷  80%</span><br><span class="line">            for(int j=i+1;j&lt;value.size()-3; j++)&#123;</span><br><span class="line">                resValue.set(1,value.get(j));           //60%</span><br><span class="line">                interval = (int) (resValue.get(1).getX()-resValue.get(0).getX());    //80与60之间的间距（步数）</span><br><span class="line">                for (int k=0;k&lt;Math.abs((int)(interval*range));k++)&#123;</span><br><span class="line">                    <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">1</span>).getX()+interval+k)) &amp;&amp; map.get((int)(resValue.get(<span class="number">1</span>).getX()+interval+k)) &lt; resValue.get(<span class="number">1</span>).getY())&#123;</span><br><span class="line">                        resValue.set(2,new Point((resValue.get(1).getX()+interval+k), map.get((int)(resValue.get(1).getX()+interval+k))));</span><br><span class="line">                        int interval1= (((int) (resValue.get(2).getX()-resValue.get(1).getX()))+interval)/2;</span><br><span class="line">                        for (int m=0;m&lt;Math.abs((int)(interval1*range));m++)&#123;</span><br><span class="line">                            <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">2</span>).getX()+interval1+m)) &amp;&amp; map.get((int)(resValue.get(<span class="number">2</span>).getX()+interval1+m)) &lt; resValue.get(<span class="number">2</span>).getY())&#123;</span><br><span class="line">                                resValue.set(3,new Point((resValue.get(2).getX()+interval1+m), map.get((int)(resValue.get(2).getX()+interval1+m))));</span><br><span class="line">                                return resValue;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">2</span>).getX()+interval1-m)) &amp;&amp; map.get((int)(resValue.get(<span class="number">2</span>).getX()+interval1-m)) &lt; resValue.get(<span class="number">2</span>).getY())&#123;</span><br><span class="line">                                resValue.set(3,new Point((resValue.get(2).getX()+interval1-m), map.get((int)(resValue.get(2).getX()+interval1-m))));</span><br><span class="line">                                return resValue;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">1</span>).getX()+interval-k)) &amp;&amp; map.get((int)(resValue.get(<span class="number">1</span>).getX()+interval-k)) &lt; resValue.get(<span class="number">1</span>).getY() )&#123;</span><br><span class="line">                        resValue.set(2,new Point((resValue.get(1).getX()+interval-k), map.get((int)(resValue.get(1).getX()+interval-k))));</span><br><span class="line">                        int interval1= (((int) (resValue.get(2).getX()-resValue.get(1).getX()))+interval)/2;</span><br><span class="line">                        for (int m=0;m&lt;Math.abs((int)(interval1*range));m++)&#123;</span><br><span class="line">                            <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">2</span>).getX()+interval1+m)) &amp;&amp; map.get((int)(resValue.get(<span class="number">2</span>).getX()+interval1+m)) &lt; resValue.get(<span class="number">2</span>).getY())&#123;</span><br><span class="line">                                resValue.set(3,new Point((resValue.get(2).getX()+interval1+m), map.get((int)(resValue.get(2).getX()+interval1+m))));</span><br><span class="line">                                return resValue;</span><br><span class="line">                            &#125;</span><br><span class="line">                            <span class="keyword">if</span> (map.containsKey((int)(resValue.get(<span class="number">2</span>).getX()+interval1-m)) &amp;&amp; map.get((int)(resValue.get(<span class="number">2</span>).getX()+interval1-m)) &lt; resValue.get(<span class="number">2</span>).getY())&#123;</span><br><span class="line">                                resValue.set(3,new Point((resValue.get(2).getX()+interval1-m), map.get((int)(resValue.get(2).getX()+interval1-m))));</span><br><span class="line">                                return resValue;</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//list逆序</span></span><br><span class="line">    public static List&lt;Point&gt; invertedOrder(List&lt;Point&gt; value )&#123;</span><br><span class="line">        List&lt;Point&gt; resValue = new ArrayList&lt;&gt;();</span><br><span class="line">        for (int i=1;i &lt;= value.size();i++)&#123;       //从小到大排列，逆序填充</span><br><span class="line">            resValue.add(new Point( value.get(value.size()-i).getX()*(float) SystemParameter.getInstance().disSensorStepLen/1000 , value.get(value.size()-i).getY() ));</span><br><span class="line">        &#125;</span><br><span class="line">        return resValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>你的鼓励是我最大的动力~</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/pay/wechatpay.jpg" alt="Yang Cq 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/pay/alipay.jpg" alt="Yang Cq 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/安卓/" rel="tag"># 安卓</a>
+          
+            <a href="/tags/漏磁检测/" rel="tag"># 漏磁检测</a>
+          
+            <a href="/tags/Andriod/" rel="tag"># Andriod</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/07/Python入门（1）/" rel="next" title="Python入门（1）">
+                <i class="fa fa-chevron-left"></i> Python入门（1）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/08/使用Android-Canvas绘制折线图/" rel="prev" title="使用Android Canvas绘制折线图">
+                使用Android Canvas绘制折线图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Yang Cq" />
+            
+              <p class="site-author-name" itemprop="name">Yang Cq</p>
+              <p class="site-description motion-element" itemprop="description">陪伴是最长情的告白~</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">34</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Mindyu" title="GitHub &rarr; https://github.com/Mindyu" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.jianshu.com/users/4b1edbec3f22" title="简书 &rarr; https://www.jianshu.com/users/4b1edbec3f22" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>简书</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/u/5197800401" title="Weibo &rarr; https://weibo.com/u/5197800401" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#优化校准数据处理"><span class="nav-number">1.</span> <span class="nav-text">优化校准数据处理</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<!--  天气预报的代码
+<script>(function(T,h,i,n,k,P,a,g,e){g=function(){P=h.createElement(i);a=h.getElementsByTagName(i)[0];P.src=k;P.charset="utf-8";P.async=1;a.parentNode.insertBefore(P,a)};T["ThinkPageWeatherWidgetObject"]=n;T[n]||(T[n]=function(){(T[n].q=T[n].q||[]).push(arguments)});T[n].l=+new Date();if(T.attachEvent){T.attachEvent("onload",g)}else{T.addEventListener("load",g,false)}}(window,document,"script","tpwidget","//widget.seniverse.com/widget/chameleon.js"))</script>
+<script>tpwidget("init", {
+    "flavor": "bubble",
+    "location": "WT3Q0FW9ZJ3Q",
+    "geolocation": "enabled",
+    "position": "top-right",
+    "margin": "10px 10px",
+    "language": "zh-chs",
+    "unit": "c",
+    "theme": "chameleon",
+    "uid": "U61E2DDC5B",
+    "hash": "589598a04005ed5ff60225ea0a96533b"
+});
+tpwidget("show");</script>
+-->
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Yang Cq</span>
+  <br />
+  <span > 转载请注明出处 , 一切权利保留 </span>
+  <br />
+  <span id="busuanzi_container_site_pv">
+	本站访客数&nbsp;&nbsp;<span id="busuanzi_value_site_uv"></span>&nbsp;&nbsp;人&nbsp;&nbsp;|&nbsp;&nbsp;访问量&nbsp;&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;&nbsp;次
+  </span>
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+  <script>
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '6uSk7EDRGpfRsDjb5SvRsh0p-gzGzoHsz',
+        appKey: 'IKbk5p03EEim9KtBOXebWRkP',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'wavatar',
+        meta:guest,
+        pageSize:'10' || 10,
+        visitor: false
+    });
+  </script>
+
+
+
+
+  
+
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              Counter('post', '/classes/Counter', JSON.stringify({ title: title, url: url, time: 1}))
+                .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(1);
+                })
+                .fail(function () {
+                  console.log('Failed to create');
+                });
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "EoSr6uThXQrfyMx9PQ8RknJY-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "EoSr6uThXQrfyMx9PQ8RknJY-gzGzoHsz",
+                'X-LC-Key': "p6ybVQcBqqPQoYbooHUVWdmP",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
