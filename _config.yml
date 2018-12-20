@@ -7,7 +7,7 @@ title: Yang Cq
 subtitle: 一个学习的网站
 description: 陪伴是最长情的告白~
 author: Yang Cq
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -30,6 +30,7 @@ skip_render:
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
+auto_spacing: true 
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -63,7 +64,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: nextplus
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -80,12 +81,6 @@ search:
   field: post
   format: html
   limit: 10000
-  
-# add post views
-leancloud_visitors:
-  enable: true
-  appid: djHGMoQGEcN56vUneJs2E7DC-gzGzoHsz
-  appkey: TpxIAstxYvYAGRY4Oiu2yDL9
   
 # 自动生成sitemap
 sitemap:
