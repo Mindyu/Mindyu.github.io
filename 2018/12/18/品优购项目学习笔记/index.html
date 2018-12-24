@@ -114,8 +114,10 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%B6%E6%9E%84.jpg">
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/Dubbox%E5%8E%9F%E7%90%86.jpg">
+<meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/dubbox%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.jpg">
+<meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/zookeeper%E6%9C%8D%E5%8A%A1.jpg">
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-12-19T12:13:54.028Z">
+<meta property="og:updated_time" content="2018-12-20T08:13:25.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="品优购项目学习笔记">
 <meta name="twitter:description" content="一个综合性的 B2B2C 的电商网站系统。网站采用商家入驻的模式，商家入驻平台提交申请，有平台进行资质审核，审核通过后，商家拥有独立的管理后台录入商品信息。商品经过平台审核后即可发布。  Github地址">
@@ -458,7 +460,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-19 20:13:54" itemprop="dateModified" datetime="2018-12-19T20:13:54+08:00">2018-12-19</time>
+                <time title="修改时间：2018-12-20 16:13:25" itemprop="dateModified" datetime="2018-12-20T16:13:25+08:00">2018-12-20</time>
               
             
           </span>
@@ -542,9 +544,10 @@
 <p><strong>框架组合</strong></p>
 <p>​    前端 angularJS + Bootstrap </p>
 <p>​    后端 Spring + SpringMVC + mybatis + Dubbox</p>
-<p><strong>系统架构</strong><br>​    面向服务的架构（SOA架构）。控制层与服务层分离，通过网络调用。<br><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%B6%E6%9E%84.jpg" alt="面向服务的架构"></p>
+<p><strong>系统架构</strong><br>​    面向服务的架构（SOA架构）。控制层与服务层分离，通过网络调用。<br><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9E%B6%E6%9E%84.jpg" width="50%" height="50%"></p>
 <p><strong>Dubbox框架</strong><br>    致力于提供高性能和透明化的RPC远程服务调用方案，以及SOA服务治理方案。远程服务调用的分布式框架。</p>
-<p>原理图<br><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/Dubbox%E5%8E%9F%E7%90%86.jpg" alt="Dubbox原理图"><br>    节点角色说明：</p>
+<p>原理图<br><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/Dubbox%E5%8E%9F%E7%90%86.jpg" width="50%" height="50%"></p>
+<p>节点角色说明：</p>
 <ul>
 <li>Provider: 暴露服务的服务提供方。 </li>
 <li>Consumer: 调用远程服务的服务消费方。 </li>
@@ -552,7 +555,25 @@
 <li>Monitor: 统计服务的调用次调和调用时间的监控中心。 </li>
 <li>Container: 服务运行容器。</li>
 </ul>
-<p>模块关联关系图：<img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E5%9B%BE.png" alt="模块关联图"></p>
+<p><em>Dubbox 本地 jar 包部署与安装 ：</em></p>
+<p>Dubbox 并不在 maven 中央仓库，需安装到本地仓库。将 dubbo-2.8.4.jar 包放到 d:\setup, 然后输入命令</p>
+<p><code>mvn install:install-file -Dfile=d:\setup\dubbo-2.8.4.jar -DgroupId=com.alibaba -DartifactId=dubbo -Dversion=2.8.4 -Dpackaging=jar</code> 即可。</p>
+<p><em>管理中心的部署 ：</em></p>
+<p>开发过程中需要知道注册了哪些服务以便测试与管理。通过部署一个管理中心来实现。其实管理中心就是一个web应用，部署到tomcat即可。 </p>
+<ul>
+<li>编译 dubbox 源码，dubbox-master.zip 文件中的 dubbox-master 目录下，执行 mvn package -Dmaven.skip.test=true 。即可在 target 目录下看到 dubbo-admin-2.8.4.war 。将 war 包放置到服务器的 webapps 下。</li>
+<li>如果你部署在zookeeper同一台主机并且端口是默认的2181，则无需修改任何配置。如果不是在一台主机上或端口被修改，需要修改 WEB-INF 下的 dubbo.properties  ，修改如下配置：<br><code>dubbo.registry.address=&lt;zookeeper://127.0.0.1:2181&gt;</code> 修改后重新启动tomcat。</li>
+<li><a href="http://虚拟机ip:8080/dubbo-admin" target="_blank" rel="noopener">http://虚拟机ip:8080/dubbo-admin</a> 用户名 root 密码</li>
+</ul>
+<p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/dubbox%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.jpg" width="50%" height="50%"></p>
+<p><em>注册中心 Zookeeper :</em></p>
+<ul>
+<li>上传 zookeeper 包，解压缩，创建 data 目录，修改 zoo.cfg 配置文件的 dataDir 配置</li>
+<li>启动命令 安装目录 /root/zookeeper-3.4.6/</li>
+</ul>
+<p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/zookeeper%E6%9C%8D%E5%8A%A1.jpg" width="50%" height="50%"></p>
+<p><strong>模块关联关系图：</strong></p>
+<p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E5%9B%BE.png" width="50%" height="50%"></p>
 
       
     </div>
@@ -712,7 +733,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
