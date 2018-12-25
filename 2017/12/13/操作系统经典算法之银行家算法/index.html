@@ -450,22 +450,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-02-25 22:06:45" itemprop="dateModified" datetime="2018-02-25T22:06:45+08:00">2018-02-25</time>
-              
-            
           </span>
 
           
@@ -542,7 +526,7 @@
 <h2 id="概要设计"><a href="#概要设计" class="headerlink" title="概要设计"></a>概要设计</h2><p><strong>1.数据结构</strong><br>1) 可利用资源向量Available。这是一个含有m个元素的数组，其中的而每一个元素代表一类可利用资源数目，其初始值是系统中所配置的该类全部可用资源的数目，其数值随该类资源的分配和回收而动态的改变。如果Available[j]=K,则表示系统中现有Rj类资源K个。</p>
 <p>2) 最大需求矩阵Max。这是一个n * m的矩阵，它定义了系统中n个进程中的每一个进程对m类资源的最大需求。如果Max[i,j]=K；则表示进程i需要Rj类资源的最大数目为K。</p>
 <p>3) 分配矩阵Allocation。这也是一个n * m的矩阵，它定义了系统中每一类资源当前已分配给每一进程的资源数。如果Allocation[i,j]=K，则表示进程i当前已分得Rj类资源的数目为K。</p>
-<p>4) 需求矩阵Need。这也是一个n <em> m的矩阵，用以表示每一个进程尚需的各类资源数。如果Need[i,j]=K,则表示进程i还需要Rj类资源K个，方能完成任务。<br>      上述三个矩阵间存在下述关系：<br><em>*Need[i,j]=Max[i,j]-Allocation[i,j]</em></em></p>
+<p>4) 需求矩阵Need。这也是一个n * m的矩阵，用以表示每一个进程尚需的各类资源数。如果Need[i,j]=K,则表示进程i还需要Rj类资源K个，方能完成任务。<br>      上述三个矩阵间存在下述关系：<br><strong>Need[i,j]=Max[i,j]-Allocation[i,j]</strong></p>
 <h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><p>第一部分：银行家算法模块<br>1．如果Request&lt;=Need,则转向2;否则,出错<br>2．如果Request&lt;=Available,则转向3,否则等待<br>3．系统试探分配请求的资源给进程<br>4．系统执行安全性算法    </p>
 <p>第二部分:安全性算法模块</p>
 <ol>
@@ -881,6 +865,17 @@
                     
                   
                   <a href="https://weibo.com/u/5197800401" title="Weibo &rarr; https://weibo.com/u/5197800401" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qiai9932" title="CSDN &rarr; https://blog.csdn.net/qiai9932" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
                 </span>
               
             </div>

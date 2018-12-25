@@ -449,22 +449,6 @@
             
 
             
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-05-07 21:32:43" itemprop="dateModified" datetime="2018-05-07T21:32:43+08:00">2018-05-07</time>
-              
-            
           </span>
 
           
@@ -540,7 +524,7 @@
 </ol>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:hzwhuang/ss-qt5 </span><br><span class="line"></span><br><span class="line">      sudo apt-get update</span><br><span class="line"></span><br><span class="line">      sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure>
 <p><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/shadowsocks.png" alt="enter description here"><br>在Ubuntu系统上使用还需要设置系统代理，在 设置-》网络-》网络代理 中设置代理模式，最好设置为自动代理方式，然后添加一个pac文件，应用到整个系统即可。</p>
-<ol>
+<ol start="2">
 <li><p>小书匠安装<br>一款Markdown编辑器，支持多平台使用。详细的<a href="http://www.mindyu.com/2018/04/28/Ubuntu%E5%AE%89%E8%A3%85%E5%B0%8F%E4%B9%A6%E5%8C%A0%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" target="_blank" rel="noopener">安装及添加桌面快捷方式</a>可见我的另一篇博客。</p>
 </li>
 <li><p>安装搜狗输入法<br>其实个人感觉系统自带的输入法也还可以。<br> 3.1 在官网下载搜狗输入法安装包<br> 3.2 切换到deb包所在的目录，并执行以下命令：<br><code>sudo dkpg -i deb包名</code><br> 3.3 若出现由于缺少相关依赖文件的错误。执行以下命令，安装所缺少的依赖文件，然后再次使用3.2命令完成安装：<br><code>sudo apt-get -f install</code><br> 3.4 在“语言支持”面板，添加汉语支持，并将输入法系统设置为fcitx。然后重启<br> 3.5 在Dash中搜索fcitx configuartion，在Input Method中添加和配置sogoupinyin即可</p>
@@ -557,7 +541,7 @@
 </ol>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">JDK8</span><br><span class="line">sudo apt-get install oracle-java8-installer</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">JDK7</span><br><span class="line">sudo apt-get install oracle-java7-installer</span><br></pre></td></tr></table></figure>
 <p>安装时会提示你同意Oracle的服务条款，选择ok，然后选择yes</p>
-<ol>
+<ol start="5">
 <li><p>Eclipse安装<br>安装Eclipse<br><code>sudo apt-get install eclipse</code><br>启动Eclipse<br><code>eclipse</code><br>以及快捷方式制作，可见<a href="http://www.mindyu.com/2018/04/28/Ubuntu%E5%AE%89%E8%A3%85%E5%B0%8F%E4%B9%A6%E5%8C%A0%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/" target="_blank" rel="noopener">小书匠安装的详细博客</a></p>
 </li>
 <li><p>MyEclipse安装</p>
@@ -570,7 +554,7 @@
 <li>然后下载对应的破解包，解压之后，执行cracker.jar包<br><code>java -jar cracker.jar</code></li>
 <li>之后的步骤和Windows破解过程一样。<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/myeclipse.png" alt="enter description here"><br>如果你一遍成功，那么就恭喜你。 我第一次安装失败了，因为破解包的问题，所以要确保破解包的正确性。 失败之后存在一个卸载不干净的问题。我也没有找到解决办法。 换了一台电脑，另外找了一个破解包，完美破解。</li>
 </ul>
-<ol>
+<ol start="7">
 <li>Google浏览器安装</li>
 </ol>
 <ul>
@@ -581,12 +565,12 @@
 <p>使用中可能遇到两个问题：<br> （1）重启之后，Google浏览器就打不开了<br> （2）设置新标签页打开网页</p>
 <p> 解决方案：<br> 问题1：<br> 网上的解决办法，大多是删除chrome的配置文件<br> <code>rm -r~/.config/google-chrome</code><br> 但是指标不治本，下次打开依然会出现问题<br> 真正的解决方案是：<br> 安装gnome-keyring。因为在登录谷歌账户之后，chrome会使用gnome-keyring来保护你的账户。<br> <code>sudo apt install gnome-keyring</code></p>
 <p> 问题2：<br> 打开google页面，任意搜索一个内容，在搜索结果页面的上面靠中间位置有一个设置，点击设置然后选择 搜索设置 ，即进入如下页面。<br>     <img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/google%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F.png" alt="enter description here"><br>    然后勾选结果打开方式的 在新的浏览器窗口中打开所选的每条搜索结果即可。</p>
-<ol>
+<ol start="8">
 <li>系统监视器<br>实时查看电脑的cpu，内存占用率，更可以查看网速<br>安装：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor </span><br><span class="line"></span><br><span class="line">      sudo apt-get update  </span><br><span class="line"></span><br><span class="line">      sudo apt-get install indicator-sysmonitor</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/sysmonitor.png" alt="    "></p>
-<ol>
+<ol start="9">
 <li>WPS 安装</li>
 </ol>
 <ul>
@@ -599,7 +583,7 @@
 <li>切换到<code>/usr/share/fonts/wps-office</code>目录解压字体包：<br><code>sudo unzip wps_symbol_fonts.zip</code></li>
 <li>解压后删除字体包：<br><code>sudo rm -r wps_symbol_fonts.zip</code><br>再次打开就不会提示缺失字体包了！<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/wps.png" alt="enter description here"></li>
 </ul>
-<ol>
+<ol start="10">
 <li>下载工具uget安装</li>
 </ol>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:plushuang-tw/uget-stable</span><br><span class="line"></span><br><span class="line">　　 sudo apt-get update</span><br><span class="line"></span><br><span class="line">　　 sudo apt-get install uget</span><br></pre></td></tr></table></figure>
@@ -927,6 +911,17 @@
                     
                   
                   <a href="https://weibo.com/u/5197800401" title="Weibo &rarr; https://weibo.com/u/5197800401" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Weibo</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://blog.csdn.net/qiai9932" title="CSDN &rarr; https://blog.csdn.net/qiai9932" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>CSDN</a>
                 </span>
               
             </div>
