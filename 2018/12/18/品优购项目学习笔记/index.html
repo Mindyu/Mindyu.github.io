@@ -117,7 +117,7 @@
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/dubbox%E7%AE%A1%E7%90%86%E4%B8%AD%E5%BF%83.jpg">
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/zookeeper%E6%9C%8D%E5%8A%A1.jpg">
 <meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E5%9B%BE.png">
-<meta property="og:updated_time" content="2018-12-20T08:13:25.707Z">
+<meta property="og:updated_time" content="2018-12-27T14:24:01.402Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="品优购项目学习笔记">
 <meta name="twitter:description" content="一个综合性的 B2B2C 的电商网站系统。网站采用商家入驻的模式，商家入驻平台提交申请，有平台进行资质审核，审核通过后，商家拥有独立的管理后台录入商品信息。商品经过平台审核后即可发布。  Github地址">
@@ -510,7 +510,7 @@
                 
                   <span class="post-meta-item-text">文章字数：</span>
                 
-                <span title="文章字数">1.3k</span>
+                <span title="文章字数">1.8k</span>
               
 
               
@@ -524,7 +524,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">2 分钟</span>
               
             </div>
           
@@ -586,6 +586,9 @@
 <p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/zookeeper%E6%9C%8D%E5%8A%A1.jpg" width="50%" height="50%"></p>
 <p><strong>模块关联关系图：</strong></p>
 <p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/%E5%93%81%E4%BC%98%E8%B4%AD/%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9D%97%E5%9B%BE.png" width="50%" height="50%"></p>
+<p>克隆项目之后，使用 Eclipse 打开，导入Maven项目，此时会报找不到 dubbox 和 fastDFS 依赖包。而这两个依赖包不在 Maven 中央仓库中，所以需要我们手动将这两个包导入本地依赖库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mvn install:install-file -Dfile=D:\src\dubbo-2.8.4.jar -DgroupId=com.alibaba -DartifactId=dubbo -Dversion=2.8.4 -Dpackaging=jar</span><br><span class="line"></span><br><span class="line">// 然后配置离线约束：XML Catalog</span><br><span class="line">http://code.alibabatech.com/schema/dubbo/dubbo.xsd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">mvn  install:install-file  -DgroupId=org.csource.fastdfs  -DartifactId=fastdfs  -Dversion=1.2 -Dpackaging=jar -Dfile=d:\src\fastdfs_client_v1.20.jar</span><br></pre></td></tr></table></figure>
+<p>以上配置包存放在 <a href="https://github.com/Mindyu/pinyougou" target="_blank" rel="noopener">https://github.com/Mindyu/pinyougou</a> 下的 src 目录中。</p>
 
       
     </div>
