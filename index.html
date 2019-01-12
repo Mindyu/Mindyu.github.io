@@ -2405,15 +2405,12 @@
 
       
         
-          <h4 id="GC-算法"><a href="#GC-算法" class="headerlink" title="GC 算法"></a>GC 算法</h4><p><strong>标记清除算法 Mark-Sweep</strong></p>
-<ul>
-<li><p>原理</p>
+          <h4 id="GC-算法"><a href="#GC-算法" class="headerlink" title="GC 算法"></a>GC 算法</h4><h5 id="标记清除算法-Mark-Sweep"><a href="#标记清除算法-Mark-Sweep" class="headerlink" title="标记清除算法 Mark-Sweep"></a>标记清除算法 Mark-Sweep</h5><p>原理</p>
 <ul>
 <li>标记出所有需要回收的对象</li>
 <li>标记完成后统一回收所有被标记的对象<img src="https://mubu.com/document_image/e4f0c0d5-4045-4f24-b6ae-8ad9bd67b5b8-983181.jpg" alt="img"></li>
 </ul>
-</li>
-<li><p>缺点</p>
+<p>缺点</p>
 <ul>
 <li>效率不高，标记和清除效率都不高</li>
 <li>空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作</li>

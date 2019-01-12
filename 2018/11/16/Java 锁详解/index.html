@@ -105,7 +105,7 @@
 <meta property="og:description" content="synchronized 与 Lock 的区别synchronized  存在层次：Java 的关键字，在jvm层面上 锁的释放：1、获取锁的线程执行完同步代码，释放锁 2、线程执行发生异常，jvm会让线程释放锁 锁的获取：假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 锁状态：无法判断 锁类型：可重入 不可中断 非公平 性能：适用于少量同步  Lock  存在层次：一个类  锁的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://mubu.com/document_image/d8afe36d-7bc3-4f58-b625-aa943c59fdf1-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T12:20:12.846Z">
+<meta property="og:updated_time" content="2019-01-12T14:47:53.289Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 锁详解">
 <meta name="twitter:description" content="synchronized 与 Lock 的区别synchronized  存在层次：Java 的关键字，在jvm层面上 锁的释放：1、获取锁的线程执行完同步代码，释放锁 2、线程执行发生异常，jvm会让线程释放锁 锁的获取：假设A线程获得锁，B线程等待。如果A线程阻塞，B线程会一直等待 锁状态：无法判断 锁类型：可重入 不可中断 非公平 性能：适用于少量同步  Lock  存在层次：一个类  锁的">
@@ -596,7 +596,7 @@
 </ul>
 <h5 id="Java-对象头信息"><a href="#Java-对象头信息" class="headerlink" title="Java 对象头信息"></a>Java 对象头信息</h5><p>Mark Word 被设计成为一个非固定的数据结构，以便存储更多有效的数据，它会根据对象本身的状态复用自己的存储空间。 一个字节 32 位。</p>
 <p><img src="https://mubu.com/document_image/d8afe36d-7bc3-4f58-b625-aa943c59fdf1-983181.jpg" alt="img"></p>
-<h5 id="锁机制存在的问题："><a href="#锁机制存在的问题：" class="headerlink" title="锁机制存在的问题："></a>锁机制存在的问题：</h5><ul>
+<h5 id="锁机制存在的问题"><a href="#锁机制存在的问题" class="headerlink" title="锁机制存在的问题"></a>锁机制存在的问题</h5><ul>
 <li>在多线程竞争下，加锁、释放锁会导致比较多的上下文切换和调度延时，引起性能问题。</li>
 <li>一个线程持有锁会导致其它所有需要此锁的线程挂起。</li>
 <li>如果一个优先级高的线程等待一个优先级低的线程释放锁会导致优先级倒置，引起性能风险。</li>
@@ -1048,7 +1048,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized-与-Lock-的区别"><span class="nav-number">1.</span> <span class="nav-text">synchronized 与 Lock 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized-锁优化-https-blog-csdn-net-championhengyi-article-details-80105718"><span class="nav-number">2.</span> <span class="nav-text">synchronized 锁优化 https://blog.csdn.net/championhengyi/article/details/80105718</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-对象头信息"><span class="nav-number">3.</span> <span class="nav-text">Java 对象头信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#锁机制存在的问题："><span class="nav-number">4.</span> <span class="nav-text">锁机制存在的问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#乐观锁与悲观锁"><span class="nav-number">5.</span> <span class="nav-text">乐观锁与悲观锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CAS机制（Compare-and-Swap）"><span class="nav-number">6.</span> <span class="nav-text">CAS机制（Compare and Swap）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程同步的多种实现"><span class="nav-number">7.</span> <span class="nav-text">线程同步的多种实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生产者与消费者问题"><span class="nav-number">8.</span> <span class="nav-text">生产者与消费者问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized-与-Lock-的区别"><span class="nav-number">1.</span> <span class="nav-text">synchronized 与 Lock 的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#synchronized-锁优化-https-blog-csdn-net-championhengyi-article-details-80105718"><span class="nav-number">2.</span> <span class="nav-text">synchronized 锁优化 https://blog.csdn.net/championhengyi/article/details/80105718</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-对象头信息"><span class="nav-number">3.</span> <span class="nav-text">Java 对象头信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#锁机制存在的问题"><span class="nav-number">4.</span> <span class="nav-text">锁机制存在的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#乐观锁与悲观锁"><span class="nav-number">5.</span> <span class="nav-text">乐观锁与悲观锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CAS机制（Compare-and-Swap）"><span class="nav-number">6.</span> <span class="nav-text">CAS机制（Compare and Swap）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#线程同步的多种实现"><span class="nav-number">7.</span> <span class="nav-text">线程同步的多种实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#生产者与消费者问题"><span class="nav-number">8.</span> <span class="nav-text">生产者与消费者问题</span></a></li></ol></div>
             
 
           </div>

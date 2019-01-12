@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://mubu.com/document_image/34564eaa-c11d-4197-baba-e099c5c74909-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/fa73d98b-d2a1-4a5d-9e48-2cd1e4b2475d-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/0cc9ab96-dacf-411c-8a19-8351c2203797-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T13:07:18.509Z">
+<meta property="og:updated_time" content="2019-01-12T14:41:37.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 异常与反射">
 <meta name="twitter:description" content="Throwable Java异常的基类  Error: 用于标记严重错误。合理的应用程序不应该去 try/catch 这种错误。绝大多数的错误都是非正常的，就根本不该出现的。常见的有OOM、StackOverflowError。 Exception: 用于指示一种合理的程序想去 catch 的条件。即它仅仅是一种程序运行条件，而非严重错误，并且鼓励用户程序去 catch 它。">
@@ -542,13 +542,15 @@
 </ul>
 <a id="more"></a>
 <p>Error和RuntimeException 及其子类都是未检查的异常（unchecked exceptions），而所有其他的Exception类都是检查异常（checked exceptions）</p>
-<p>checked exceptions：通常是从一个可以恢复的程序中抛出来的，并且最好能够从这种异常中使程序恢复。比如 <strong>ParseException(DateFormat日期转换时)、IOException、SQLException、InterruptedException(Thread.sleep方法)、ClassNotFoundException、FileNotFoundException</strong>等。检查异常发生在编译阶段，必须要使用 try…catch（或者throws）否则编译不通过。</p>
-<p>unchecked exceptions：通常是如果一切正常的话本不该发生的异常，但是的确发生了。发生在运行期，具有不确定性，主要是由于程序的逻辑问题所引起的。比如<strong>IndexOutOfBoundException、ClassCastException(强制类型转换)、NullPointerException、NumberFormatException(Integer.valueOf(“123a”);)、ArithmeticException(15/0)、ConcurrentModificationException(迭代时快速失败)、NoSuchMethodException</strong>等。这类错误本身就是bug，应该被修复，出现此类错误时程序就应该立即停止执行。因此，面对 Errors 和 unchecked exceptions 应该让程序自动终止执行，程序员不该做诸如 try/catch 这样的事情，而是应该查明原因，修改代码逻辑。</p>
-<h6 id="一个线程运行时发生异常会怎样？"><a href="#一个线程运行时发生异常会怎样？" class="headerlink" title="一个线程运行时发生异常会怎样？"></a>一个线程运行时发生异常会怎样？</h6><p>存在两种情形(属于运行时异常)：</p>
+<p>checked exceptions</p>
+<p>​    通常是从一个可以恢复的程序中抛出来的，并且最好能够从这种异常中使程序恢复。比如 <strong>ParseException(DateFormat日期转换时)、IOException、SQLException、InterruptedException(Thread.sleep方法)、ClassNotFoundException、FileNotFoundException</strong>等。检查异常发生在编译阶段，必须要使用 try…catch（或者throws）否则编译不通过。</p>
+<p>unchecked exceptions</p>
+<p>​    通常是如果一切正常的话本不该发生的异常，但是的确发生了。发生在运行期，具有不确定性，主要是由于程序的逻辑问题所引起的。比如<strong>IndexOutOfBoundException、ClassCastException(强制类型转换)、NullPointerException、NumberFormatException(Integer.valueOf(“123a”);)、ArithmeticException(15/0)、ConcurrentModificationException(迭代时快速失败)、NoSuchMethodException</strong>等。这类错误本身就是bug，应该被修复，出现此类错误时程序就应该立即停止执行。因此，面对 Errors 和 unchecked exceptions 应该让程序自动终止执行，程序员不该做诸如 try/catch 这样的事情，而是应该查明原因，修改代码逻辑。</p>
+<h5 id="一个线程运行时发生异常会怎样？"><a href="#一个线程运行时发生异常会怎样？" class="headerlink" title="一个线程运行时发生异常会怎样？"></a>一个线程运行时发生异常会怎样？</h5><p>存在两种情形(属于运行时异常)：</p>
 <p>​    ① 如果该异常被捕获或抛出，则程序继续运行。</p>
 <p>​    ② 如果异常没有被捕获该线程将会停止执行。</p>
 <p>Thread.UncaughtExceptionHandler 是用于处理未捕获异常造成线程突然中断情况的一个内嵌接口。当一个未捕获异常将造成线程中断的时候JVM会使用Thread.getUncaughtExceptionHandler() 来查询线程的 UncaughtExceptionHandler ，并将线程和异常作为参数传递给 handler 的 uncaughtException() 方法进行处理。</p>
-<h6 id="Java-反射"><a href="#Java-反射" class="headerlink" title="Java 反射"></a>Java 反射</h6><h6 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h6><p>在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取信息以及动态调用对象的方法的功能就是反射。</p>
+<h5 id="Java-反射"><a href="#Java-反射" class="headerlink" title="Java 反射"></a>Java 反射</h5><h6 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h6><p>在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取信息以及动态调用对象的方法的功能就是反射。</p>
 <h6 id="使用的前提条件"><a href="#使用的前提条件" class="headerlink" title="使用的前提条件"></a>使用的前提条件</h6><ul>
 <li>必须先得到代表字节码的Class对象，Class类用于表示.class文件（字节码）。</li>
 <li>在运行期间，一个类，只有一个Class对象产生。</li>
@@ -636,7 +638,8 @@
 <p><img src="https://mubu.com/document_image/0cc9ab96-dacf-411c-8a19-8351c2203797-983181.jpg" alt="img"></p>
 <p>​    案例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取某方法的参数名称</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> List&lt;String&gt; <span class="title">getParameterNameJava8</span><span class="params">(Class clazz, String methodName)</span> </span>&#123;</span><br><span class="line">    List&lt;String&gt; lists = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    Method[] methods = clazz.getDeclaredMethods();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; methods.length; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (methods[i].getName().equals(methodName)) &#123;</span><br><span class="line">            Parameter[] p = methods[i].getParameters();</span><br><span class="line">            <span class="keyword">for</span> (Parameter parameter : p) &#123;</span><br><span class="line">                lists.add(parameter.getName());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> lists;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Java-新特性-https-www-cnblogs-com-tony-yang-flutter-p-3503935-html"><a href="#Java-新特性-https-www-cnblogs-com-tony-yang-flutter-p-3503935-html" class="headerlink" title="Java 新特性 https://www.cnblogs.com/tony-yang-flutter/p/3503935.html"></a>Java 新特性 <a href="https://www.cnblogs.com/tony-yang-flutter/p/3503935.html" target="_blank" rel="noopener">https://www.cnblogs.com/tony-yang-flutter/p/3503935.html</a></h5><ul>
+<h5 id="Java-新特性"><a href="#Java-新特性" class="headerlink" title="Java 新特性"></a>Java 新特性</h5><p><a href="https://www.cnblogs.com/tony-yang-flutter/p/3503935.html" target="_blank" rel="noopener">https://www.cnblogs.com/tony-yang-flutter/p/3503935.html</a></p>
+<ul>
 <li><p>jdk 1.5</p>
 <ul>
 <li>枚举</li>
@@ -713,26 +716,17 @@
 </ul>
 </li>
 <li><p>接口的默认方法 <a href="https://blog.csdn.net/qq_40369829/article/details/79356133" target="_blank" rel="noopener">https://blog.csdn.net/qq_40369829/article/details/79356133</a></p>
-<ul>
-<li><p>默认方法 default :</p>
+<p><em>默认方法 default :</em></p>
 <ul>
 <li>可以通过实现接口的类实例化的对象来调用，也可以被重写。</li>
 <li>是 public 的。</li>
 </ul>
-</li>
-<li><p>静态方法 static：</p>
-<ul>
-<li>只能在本接口中调用，实现类中也不能调用。职责上是工具方法</li>
-</ul>
+<p><em>静态方法 static：</em></p>
+<p>只能在本接口中调用，实现类中也不能调用。职责上是工具方法</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getStatic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">default</span> <span class="keyword">int</span> <span class="title">getDefault</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        getStatic();</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>注解(Annotation) <a href="https://www.cnblogs.com/xdp-gacl/p/3622275.html" target="_blank" rel="noopener">https://www.cnblogs.com/xdp-gacl/p/3622275.html</a></p>
+<li><p>注解(Annotation)</p>
+<p> <a href="https://www.cnblogs.com/xdp-gacl/p/3622275.html" target="_blank" rel="noopener">https://www.cnblogs.com/xdp-gacl/p/3622275.html</a></p>
 </li>
 <li><p>Fork/Join 框架</p>
 <ul>
@@ -757,6 +751,8 @@
 <li><p>jvm 元空间代替永久代</p>
 </li>
 <li><p>HashMap 链表长度&gt;=8时，转换为红黑树；取消 Segment 使用 CAS 和 Synchronized 进行锁操作。</p>
+</li>
+</ul>
 </li>
 </ul>
 
@@ -1174,7 +1170,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Throwable-Java异常的基类"><span class="nav-number">1.</span> <span class="nav-text">Throwable Java异常的基类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#一个线程运行时发生异常会怎样？"><span class="nav-number">1.1.</span> <span class="nav-text">一个线程运行时发生异常会怎样？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Java-反射"><span class="nav-number">1.2.</span> <span class="nav-text">Java 反射</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#概述"><span class="nav-number">1.3.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用的前提条件"><span class="nav-number">1.4.</span> <span class="nav-text">使用的前提条件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取Class对象的三种方式"><span class="nav-number">1.5.</span> <span class="nav-text">获取Class对象的三种方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用规范"><span class="nav-number">1.6.</span> <span class="nav-text">使用规范</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-新特性-https-www-cnblogs-com-tony-yang-flutter-p-3503935-html"><span class="nav-number">2.</span> <span class="nav-text">Java 新特性 https://www.cnblogs.com/tony-yang-flutter/p/3503935.html</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Throwable-Java异常的基类"><span class="nav-number">1.</span> <span class="nav-text">Throwable Java异常的基类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一个线程运行时发生异常会怎样？"><span class="nav-number">2.</span> <span class="nav-text">一个线程运行时发生异常会怎样？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-反射"><span class="nav-number">3.</span> <span class="nav-text">Java 反射</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#概述"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用的前提条件"><span class="nav-number">3.2.</span> <span class="nav-text">使用的前提条件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#获取Class对象的三种方式"><span class="nav-number">3.3.</span> <span class="nav-text">获取Class对象的三种方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用规范"><span class="nav-number">3.4.</span> <span class="nav-text">使用规范</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java-新特性"><span class="nav-number">4.</span> <span class="nav-text">Java 新特性</span></a></li></ol></div>
             
 
           </div>

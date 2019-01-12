@@ -96,13 +96,13 @@
 
 
 
-  <meta name="description" content="GC 算法标记清除算法 Mark-Sweep  原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象   缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
+  <meta name="description" content="GC 算法标记清除算法 Mark-Sweep原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象  缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
 <meta name="keywords" content="垃圾回收器,GC算法,笔记整理,面经">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java GC笔记">
 <meta property="og:url" content="http://mindyu.com/2018/11/13/Java GC笔记/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="GC 算法标记清除算法 Mark-Sweep  原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象   缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
+<meta property="og:description" content="GC 算法标记清除算法 Mark-Sweep原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象  缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://mubu.com/document_image/e4f0c0d5-4045-4f24-b6ae-8ad9bd67b5b8-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/bb382fc9-43e3-47a3-9ca6-b1c3731dc613-983181.jpg">
@@ -113,10 +113,10 @@
 <meta property="og:image" content="https://mubu.com/document_image/cfc359f4-21a0-4f03-a4b5-ae39ac349047-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/415ade9c-b92f-40c2-9f51-830bdaaaf757-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/ca0c2332-d94f-44b0-bed2-a33fd9910cb5-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T09:05:39.785Z">
+<meta property="og:updated_time" content="2019-01-12T14:58:43.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java GC笔记">
-<meta name="twitter:description" content="GC 算法标记清除算法 Mark-Sweep  原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象   缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
+<meta name="twitter:description" content="GC 算法标记清除算法 Mark-Sweep原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象  缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
 <meta name="twitter:image" content="https://mubu.com/document_image/e4f0c0d5-4045-4f24-b6ae-8ad9bd67b5b8-983181.jpg">
 
 
@@ -541,25 +541,18 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h4 id="GC-算法"><a href="#GC-算法" class="headerlink" title="GC 算法"></a>GC 算法</h4><p><strong>标记清除算法 Mark-Sweep</strong></p>
-<ul>
-<li><p>原理</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h4 id="GC-算法"><a href="#GC-算法" class="headerlink" title="GC 算法"></a>GC 算法</h4><h5 id="标记清除算法-Mark-Sweep"><a href="#标记清除算法-Mark-Sweep" class="headerlink" title="标记清除算法 Mark-Sweep"></a>标记清除算法 Mark-Sweep</h5><p>原理</p>
 <ul>
 <li>标记出所有需要回收的对象</li>
 <li>标记完成后统一回收所有被标记的对象<img src="https://mubu.com/document_image/e4f0c0d5-4045-4f24-b6ae-8ad9bd67b5b8-983181.jpg" alt="img"></li>
 </ul>
-</li>
-<li><p>缺点</p>
+<p>缺点</p>
 <ul>
 <li>效率不高，标记和清除效率都不高</li>
 <li>空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作</li>
 </ul>
 <a id="more"></a>
-</li>
-</ul>
-<p><strong>复制算法 Copying</strong></p>
-<ul>
-<li><p>原理</p>
+<h5 id="复制算法-Copying"><a href="#复制算法-Copying" class="headerlink" title="复制算法 Copying"></a>复制算法 Copying</h5><p>原理</p>
 <ul>
 <li><p>将可用内存按容量划分为大小相等的两块,每次只使用其中的一块。</p>
 </li>
@@ -567,22 +560,17 @@
 <p><img src="https://mubu.com/document_image/bb382fc9-43e3-47a3-9ca6-b1c3731dc613-983181.jpg" alt="img"></p>
 </li>
 </ul>
-</li>
-<li><p>优点</p>
+<p>优点</p>
 <ul>
 <li>实现简单，运行高效</li>
 <li>不用考虑内存碎片问题</li>
 </ul>
-</li>
-<li><p>缺点</p>
+<p>缺点</p>
 <ul>
 <li>可用内存缩小为原来的一半</li>
 <li>在对象存活率较高的情况下，会进行较多的复制操作导致效率降低</li>
 </ul>
-</li>
-<li><p>标记整理算法 Mark-Compact</p>
-<ul>
-<li><p>原理</p>
+<h5 id="标记整理算法-Mark-Compact"><a href="#标记整理算法-Mark-Compact" class="headerlink" title="标记整理算法 Mark-Compact"></a>标记整理算法 Mark-Compact</h5><p>原理</p>
 <ul>
 <li><p>标记</p>
 </li>
@@ -590,56 +578,38 @@
 <p><img src="https://mubu.com/document_image/e70278a1-4648-4b87-9277-68237fb0efae-983181.jpg" alt="img"></p>
 </li>
 </ul>
-</li>
-</ul>
-<p><strong>分代收集算法 Generational Collection</strong></p>
+<h5 id="分代收集算法-Generational-Collection"><a href="#分代收集算法-Generational-Collection" class="headerlink" title="分代收集算法 Generational Collection"></a>分代收集算法 Generational Collection</h5><p>原理</p>
 <ul>
-<li>原理<ul>
-<li>根据对象存活周期的不同将内存划分为几块。</li>
-<li>一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</li>
-<li>在新生代中,每次垃圾收集时都发现有大批对象死去,只有少量存活,那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</li>
-<li>老年代中因为对象存活率高、没有额外空间对它进行分配担保,就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</li>
-</ul>
+<li><p>根据对象存活周期的不同将内存划分为几块。</p>
+</li>
+<li><p>一般是把Java堆分为新生代和老年代，这样就可以根据各个年代的特点采用最适当的收集算法。</p>
 </li>
 </ul>
-</li>
-</ul>
-<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><p><strong>Serial 收集器</strong></p>
-<ul>
-<li><p>Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器</p>
-</li>
-<li><p>特点</p>
+<p>  在新生代中,每次垃圾收集时都发现有大批对象死去,只有少量存活,那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
+<p>  老年代中因为对象存活率高、没有额外空间对它进行分配担保,就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h5><p>Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器</p>
+<p>特点</p>
 <ul>
 <li>针对新生代；</li>
 <li>采用复制算法；</li>
 <li>单线程收集；</li>
 <li>进行垃圾收集时，必须暂停所有工作线程，直到完成，即会”Stop The World”；</li>
 </ul>
-</li>
-<li><p>Serial/Serial Old组合收集器运行示意图</p>
+<p>Serial/Serial Old组合收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/b5ba06ff-4688-4d46-91e8-64245ee2b45c-983181.jpg" alt="img"></p>
-</li>
-</ul>
-<p><strong>ParNew 收集器</strong></p>
-<ul>
-<li><p>ParNew 垃圾收集器是 Serial 收集器的多线程版本。</p>
-</li>
-<li><p>特点</p>
+<h5 id="ParNew-收集器"><a href="#ParNew-收集器" class="headerlink" title="ParNew 收集器"></a>ParNew 收集器</h5><p>ParNew 垃圾收集器是 Serial 收集器的多线程版本。</p>
+<p>特点</p>
 <ul>
 <li>新生代收集器；</li>
 <li>采用复制算法；</li>
 <li>多线程收集；</li>
 </ul>
-</li>
-<li><p>ParNew/Serial Old组合收集器运行示意图</p>
+<p>ParNew/Serial Old组合收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/316e4e38-9858-4b95-863e-7530388bb69a-983181.jpg" alt="img"></p>
-</li>
-</ul>
-<p><strong>Parallel Scavenge 收集器</strong></p>
+<h5 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h5><p>与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）</p>
+<p>高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间</p>
+<p>特点</p>
 <ul>
-<li>与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）</li>
-<li>高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间</li>
-<li>特点<ul>
 <li>新生代收集器；</li>
 <li>采用复制算法；</li>
 <li>多线程收集；</li>
@@ -655,23 +625,16 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><strong>Serial Old 收集器</strong></p>
-<ul>
-<li><p>Serial Old 是 Serial 收集器的老年代版本；</p>
-</li>
-<li><p>特点</p>
+<h5 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h5><p>Serial Old 是 Serial 收集器的老年代版本；</p>
+<p>特点</p>
 <ul>
 <li>针对老年代；</li>
 <li>采用”标记-整理”算法（还有压缩，Mark-Sweep-Compact）；</li>
 <li>单线程收集；</li>
 </ul>
-</li>
-<li><p>Serial/Serial Old收集器运行示意图</p>
+<p>Serial/Serial Old收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/916c2bb2-09dd-4f5d-b59b-d5ac58b1c133-983181.jpg" alt="img"></p>
-</li>
-<li><p>应用场景</p>
+<p>应用场景</p>
 <ul>
 <li>主要用于 Client 模式；</li>
 <li>在 Server 模式有两大用途<ul>
@@ -680,35 +643,23 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p><strong>Parallel Old 收集器</strong></p>
-<ul>
-<li><p>Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供</p>
-</li>
-<li><p>特点</p>
+<h5 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h5><p>Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供</p>
+<p>特点</p>
 <ul>
 <li>针对老年代；</li>
 <li>采用”标记-整理”算法；</li>
 <li>多线程收集；</li>
 </ul>
-</li>
-<li><p>Parallel Scavenge/Parallel Old 收集器运行示意图</p>
+<p>Parallel Scavenge/Parallel Old 收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/cfc359f4-21a0-4f03-a4b5-ae39ac349047-983181.jpg" alt="img"></p>
-</li>
-<li><p>使用场景</p>
+<p>使用场景</p>
 <ul>
 <li>JDK1.6及之后用来代替老年代的 Serial Old 收集器；</li>
 <li>特别是在Server模式，多CPU的情况下；</li>
 <li>这样在注重吞吐量以及CPU资源敏感的场景，就有了 Parallel Scavenge 加 Parallel Old收集器的”给力”应用组合</li>
 </ul>
-</li>
-</ul>
-<p><strong>CMS收集器</strong></p>
-<ul>
-<li><p>并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器</p>
-</li>
-<li><p>特点</p>
+<h5 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h5><p>并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器</p>
+<p>特点</p>
 <ul>
 <li>针对老年代；</li>
 <li>基于”标记-清除”算法(不进行压缩操作，产生内存碎片)；</li>
@@ -716,15 +667,13 @@
 <li>并发收集、低停顿；</li>
 <li>需要更多的内存（缺点）</li>
 </ul>
-</li>
-<li><p>应用场景</p>
+<p>应用场景</p>
 <ul>
 <li>与用户交互较多的场景；</li>
 <li>希望系统停顿时间最短，注重服务的响应速度；以给用户带来较好的体验；</li>
 <li>如常见WEB、B/S系统的服务器上的应用；</li>
 </ul>
-</li>
-<li><p>运行过程</p>
+<p>运行过程</p>
 <ul>
 <li>初始标记（CMS initial mark）<ul>
 <li>仅标记一下GC Roots能直接关联到的对象；</li>
@@ -750,23 +699,27 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><p>缺点</p>
+<p>缺点</p>
 <ul>
-<li>对CPU资源非常敏感<ul>
+<li><p>对CPU资源非常敏感</p>
+<ul>
 <li>并发收集虽然不会暂停用户线程，但因为占用一部分CPU资源，还是会导致应用程序变慢，总吞吐量降低。</li>
 <li>CMS 的默认收集线程数量是=(CPU数量+3)/4；</li>
 </ul>
 </li>
-<li>无法处理浮动垃圾<ul>
+<li><p>无法处理浮动垃圾</p>
+<ul>
 <li>在并发清除时，用户线程新产生的垃圾，称为浮动垃圾；</li>
 </ul>
 </li>
-<li>产生大量内存碎片<ul>
+<li><p>产生大量内存碎片</p>
+<ul>
 <li>CMS 基于”标记-清除”算法，清除后不进行压缩操作；可通过配置实现内存碎片整理</li>
 </ul>
 </li>
-<li>promotion failed – concurrent mode failure<ul>
+</ul>
+<p>promotion failed – concurrent mode failure</p>
+<ul>
 <li>Minor GC后， surviver 空间容纳不了剩余对象，将要放入老年代，老年代有碎片或者不能容纳这些对象，即 CMS 预留内存空间无法满足程序需要，就会出现一次”Concurrent Mode Failure”失败。</li>
 <li>解决方案<ul>
 <li>让 CMS 在进行一定次数的 Full GC（标记清除）的时候进行一次标记整理算法，在一定程度上控制碎片的数量。 使用标记整理清除碎片<br>-XX:UseCMSCompactAtFullCollection -XX:CMSFullGCBeforeCompaction=5</li>
@@ -774,8 +727,8 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>concurrent mode failure<ul>
+<p>concurrent mode failure</p>
+<ul>
 <li>将大对象放入老年代空间时，老年代空间无法满足程序需要，就会出现一次”Concurrent Mode Failure”失败。这时JVM启用后备预案：临时启用Serail Old收集器，而导致另一次 Full GC 的产生，此时代价较大(会Stop the world)，所以CMS预留内存空间不能设置得太小。</li>
 <li>解决方案<ul>
 <li>调低触发 CMS GC 执行的阀值。CMS GC 触发主要由 CMSInitiatingOccupancyFraction 值决定，默认情况是当老年代已用空间为68%时，即触发 CMS GC。尽早进行CMS操作，使其预留空间变大</li>
@@ -783,33 +736,23 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-<li><p>CMS 收集器运行示意图</p>
+<p>CMS 收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/415ade9c-b92f-40c2-9f51-830bdaaaf757-983181.jpg" alt="img"></p>
-</li>
-</ul>
-<p><strong>G1 收集器</strong></p>
-<ul>
-<li><p>G1（Garbage-First）是JDK7-u4才推出商用的收集器；</p>
-</li>
-<li><p>特点</p>
+<h5 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h5><p>G1（Garbage-First）是JDK7-u4才推出商用的收集器；</p>
+<p>特点</p>
 <ul>
 <li>并行与并发</li>
 <li>分代收集，收集范围包括新生代和老年代   </li>
 <li>结合多种垃圾收集算法，空间整合，不产生碎片</li>
 <li>可预测的停顿：低停顿的同时实现高吞吐量</li>
 </ul>
-</li>
-<li><p>应用场景</p>
+<p>应用场景</p>
 <ul>
 <li>面向服务端应用，针对具有大内存、多处理器的机器；</li>
 <li>最主要的应用是为需要低GC延迟，并具有大堆的应用程序提供解决方案；</li>
 <li>如：在堆大小约6GB或更大时，可预测的暂停时间可以低于0.5秒；</li>
 </ul>
-</li>
-<li><p>运作过程</p>
+<p>运作过程</p>
 <ul>
 <li><p>初始标记（Initial Marking）</p>
 <ul>
@@ -844,41 +787,31 @@
 <li>可以并发进行，降低停顿时间，并增加吞吐量；</li>
 </ul>
 </li>
-<li><p>G1收集器运行示意图</p>
+</ul>
+<p>G1收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/ca0c2332-d94f-44b0-bed2-a33fd9910cb5-983181.jpg" alt="img"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h4><ul>
-<li>收集器设置<ul>
+<h4 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h4><h5 id="收集器设置"><a href="#收集器设置" class="headerlink" title="收集器设置"></a>收集器设置</h5><ul>
 <li>-XX:+UseSerialGC:设置串行收集器</li>
 <li>-XX:+UseParallelGC:设置并行收集器</li>
 <li>-XX:+UseParalledlOldGC:设置并行年老代收集器</li>
 <li>-XX:+UseConcMarkSweepGC:设置并发收集器</li>
 </ul>
-</li>
-<li>垃圾回收统计信息<ul>
+<h5 id="垃圾回收统计信息"><a href="#垃圾回收统计信息" class="headerlink" title="垃圾回收统计信息"></a>垃圾回收统计信息</h5><ul>
 <li>-XX:+PrintGC</li>
 <li>-XX:+PrintGCDetails</li>
 <li>-XX:+PrintGCTimeStamps</li>
 <li>-Xloggc:filename</li>
 </ul>
-</li>
-<li>并行收集器设置<ul>
+<h5 id="并行收集器设置"><a href="#并行收集器设置" class="headerlink" title="并行收集器设置"></a>并行收集器设置</h5><ul>
 <li>-XX:ParallelGCThreads=n:设置并行收集器收集时使用的CPU数。并行收集线程数。</li>
 <li>-XX:MaxGCPauseMillis=n:设置并行收集最大暂停时间</li>
 <li>-XX:GCTimeRatio=n:设置垃圾回收时间占程序运行时间的百分比。公式为1/(1+n)</li>
 </ul>
-</li>
-<li><p>并发收集器设置</p>
-<ul>
+<h5 id="并发收集器设置"><a href="#并发收集器设置" class="headerlink" title="并发收集器设置"></a>并发收集器设置</h5><ul>
 <li>-XX:+CMSIncrementalMode:设置为增量模式。适用于单CPU情况。</li>
 <li>-XX:ParallelGCThreads=n:设置并发收集器年轻代收集方式为并行收集时,使用的CPU数。并行收集线程数。</li>
 </ul>
-</li>
-<li><p>垃圾收集器期望的目标</p>
-<ul>
+<h5 id="垃圾收集器期望的目标"><a href="#垃圾收集器期望的目标" class="headerlink" title="垃圾收集器期望的目标"></a>垃圾收集器期望的目标</h5><ul>
 <li>停顿时间<ul>
 <li>停顿时间越短就适合需要与用户交互的程序；</li>
 <li>良好的响应速度能提升用户体验；</li>
@@ -895,30 +828,24 @@
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h4 id="面试常见的问题"><a href="#面试常见的问题" class="headerlink" title="面试常见的问题"></a>面试常见的问题</h4><ul>
-<li>对象提升原则<ul>
+<h4 id="面试常见的问题"><a href="#面试常见的问题" class="headerlink" title="面试常见的问题"></a>面试常见的问题</h4><h5 id="对象提升原则"><a href="#对象提升原则" class="headerlink" title="对象提升原则"></a>对象提升原则</h5><ul>
 <li>对象优先分配在 Eden 区，空间不够时，执行 Minor GC 。</li>
 <li>大对象直接进入老年代（需要大量连续内存空间的对象）。目的：避免在 Eden 区和两个 Survivor 区之间发生大量的内存拷贝。</li>
 <li>长期存活的对象进入老年代。Survivor 区中的对象每经过一次 Minor GC ，其对象年龄就+1。</li>
 <li>动态判断对象的年龄。如果 Survivor 区中的相同年龄的所有对象的总和大于 Survivor 空间的一半，年龄大于或等于该年龄的对象可以直接进入老年代。</li>
 <li>空间分配担保。每次 Minor GC 时，计算 Survivor 区移至老年区的对象平均大小，是否大于老年区剩余空间大小。是否需要 Full GC。</li>
 </ul>
-</li>
-<li>触发 Full GC 的情况<ul>
+<h5 id="触发-Full-GC-的情况"><a href="#触发-Full-GC-的情况" class="headerlink" title="触发 Full GC 的情况"></a>触发 Full GC 的情况</h5><ul>
 <li>老年代空间不足</li>
 <li>永久代被占满</li>
 <li>CMS GC时出现 Promotion Failed 和 Concurrent Mode Failure（产生的浮动垃圾）</li>
 <li>空间分配担保失败（晋升到老年代的平均大小大于老年代的剩余空间）</li>
 </ul>
-</li>
-<li>Stop the World<ul>
+<h5 id="Stop-the-World"><a href="#Stop-the-World" class="headerlink" title="Stop the World"></a>Stop the World</h5><ul>
 <li>GC 事件/过程发生过程当中停止所有应用程序线程的执行。</li>
 <li>停顿保证系统状态在某一瞬间的一致性，并且不会产生新的垃圾，有利于垃圾回收器更好的标记垃圾对象。</li>
 </ul>
-</li>
-<li>判断对象是否存活<ul>
+<h5 id="判断对象是否存活"><a href="#判断对象是否存活" class="headerlink" title="判断对象是否存活"></a>判断对象是否存活</h5><ul>
 <li>引用计数法 问题： 循环引用问题</li>
 <li>GC ROOTS 可达行分析法<ul>
 <li>Java 虚拟机栈引用的对象</li>
@@ -928,13 +855,10 @@
 </ul>
 </li>
 </ul>
-</li>
-<li><strong>GC是在什么时候，对什么东西，做了什么事情</strong><ul>
+<h5 id="GC是在什么时候，对什么东西，做了什么事情"><a href="#GC是在什么时候，对什么东西，做了什么事情" class="headerlink" title="GC是在什么时候，对什么东西，做了什么事情"></a><strong>GC是在什么时候，对什么东西，做了什么事情</strong></h5><ul>
 <li>堆中年轻代的 eden 区满执行 minor gc，提升到老年代的对象大于老年代剩余空间大小则执行 full gc。我们无法控制 GC 发生时间，另外 System.gc 只是建议 JVM 进行 GC 。</li>
 <li>从 gc root 开始搜索找不到的对象，而且经过一次标记、清理，仍然没有复活的对象。</li>
 <li>删除不使用的对象，回收内存空间；运行默认的 finalize，JVM 对年轻代执行复制算法，对老年代执行标记清理/标记整理算法。</li>
-</ul>
-</li>
 </ul>
 
       
@@ -1351,7 +1275,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#GC-算法"><span class="nav-number">1.</span> <span class="nav-text">GC 算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数配置"><span class="nav-number">3.</span> <span class="nav-text">参数配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试常见的问题"><span class="nav-number">4.</span> <span class="nav-text">面试常见的问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#GC-算法"><span class="nav-number">1.</span> <span class="nav-text">GC 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标记清除算法-Mark-Sweep"><span class="nav-number">1.1.</span> <span class="nav-text">标记清除算法 Mark-Sweep</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制算法-Copying"><span class="nav-number">1.2.</span> <span class="nav-text">复制算法 Copying</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标记整理算法-Mark-Compact"><span class="nav-number">1.3.</span> <span class="nav-text">标记整理算法 Mark-Compact</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分代收集算法-Generational-Collection"><span class="nav-number">1.4.</span> <span class="nav-text">分代收集算法 Generational Collection</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Serial-收集器"><span class="nav-number">2.1.</span> <span class="nav-text">Serial 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ParNew-收集器"><span class="nav-number">2.2.</span> <span class="nav-text">ParNew 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parallel-Scavenge-收集器"><span class="nav-number">2.3.</span> <span class="nav-text">Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Serial-Old-收集器"><span class="nav-number">2.4.</span> <span class="nav-text">Serial Old 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parallel-Old-收集器"><span class="nav-number">2.5.</span> <span class="nav-text">Parallel Old 收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CMS收集器"><span class="nav-number">2.6.</span> <span class="nav-text">CMS收集器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#G1-收集器"><span class="nav-number">2.7.</span> <span class="nav-text">G1 收集器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参数配置"><span class="nav-number">3.</span> <span class="nav-text">参数配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#收集器设置"><span class="nav-number">3.1.</span> <span class="nav-text">收集器设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾回收统计信息"><span class="nav-number">3.2.</span> <span class="nav-text">垃圾回收统计信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#并行收集器设置"><span class="nav-number">3.3.</span> <span class="nav-text">并行收集器设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#并发收集器设置"><span class="nav-number">3.4.</span> <span class="nav-text">并发收集器设置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#垃圾收集器期望的目标"><span class="nav-number">3.5.</span> <span class="nav-text">垃圾收集器期望的目标</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面试常见的问题"><span class="nav-number">4.</span> <span class="nav-text">面试常见的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#对象提升原则"><span class="nav-number">4.1.</span> <span class="nav-text">对象提升原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#触发-Full-GC-的情况"><span class="nav-number">4.2.</span> <span class="nav-text">触发 Full GC 的情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Stop-the-World"><span class="nav-number">4.3.</span> <span class="nav-text">Stop the World</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判断对象是否存活"><span class="nav-number">4.4.</span> <span class="nav-text">判断对象是否存活</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GC是在什么时候，对什么东西，做了什么事情"><span class="nav-number">4.5.</span> <span class="nav-text">GC是在什么时候，对什么东西，做了什么事情</span></a></li></ol></li></ol></div>
             
 
           </div>
