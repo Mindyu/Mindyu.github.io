@@ -104,17 +104,17 @@
 <meta property="og:site_name" content="Yang Cq">
 <meta property="og:description" content="Java线程Java线程状态  初始(NEW)：新创建线程对象，但还没有调用start()方法。 运行(RUNNABLE)：Java 虚拟机中线程的可运行状态包括操作系统中线程的就绪（ready）和运行中（running）两种状态。即处于该状态时，线程可能正在等待来自操作系统的其他资源（如CPU）。 阻塞(BLOCKED)：表示线程阻塞于锁。 等待(WAITING)：进入该状态的线程需要等待其他线">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg?q-sign-algorithm=sha1&q-ak=AKIDYBXU1S2PCapUgiAcktuHze6btFSdqO8O&q-sign-time=1547285568;1547287368&q-key-time=1547285568;1547287368&q-header-list=&q-url-param-list=&q-signature=69c806ab297717edca22594b2f3ed6eb0819c6c4&x-cos-security-token=eab019e78be1c3f831e7e234074f503b1dafdeb710001">
+<meta property="og:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg">
 <meta property="og:image" content="https://mubu.com/document_image/db2709d8-0f5f-458d-bf74-a95fb6f8d466-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/7935a7c8-e708-4cd0-9220-09d2dc12f767-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/fbaf90a5-779a-4c70-95a2-f591d7c77276-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/abc70866-0760-4e45-b895-ac1968ac0801-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/b260e0bf-9055-419c-b565-6903bc9b1957-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T09:44:39.055Z">
+<meta property="og:updated_time" content="2019-01-12T11:24:09.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 线程与线程池">
 <meta name="twitter:description" content="Java线程Java线程状态  初始(NEW)：新创建线程对象，但还没有调用start()方法。 运行(RUNNABLE)：Java 虚拟机中线程的可运行状态包括操作系统中线程的就绪（ready）和运行中（running）两种状态。即处于该状态时，线程可能正在等待来自操作系统的其他资源（如CPU）。 阻塞(BLOCKED)：表示线程阻塞于锁。 等待(WAITING)：进入该状态的线程需要等待其他线">
-<meta name="twitter:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg?q-sign-algorithm=sha1&q-ak=AKIDYBXU1S2PCapUgiAcktuHze6btFSdqO8O&q-sign-time=1547285568;1547287368&q-key-time=1547285568;1547287368&q-header-list=&q-url-param-list=&q-signature=69c806ab297717edca22594b2f3ed6eb0819c6c4&x-cos-security-token=eab019e78be1c3f831e7e234074f503b1dafdeb710001">
+<meta name="twitter:image" content="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg">
 
 
 
@@ -549,7 +549,7 @@
 </ol>
 </blockquote>
 <a id="more"></a>
-<h5 id="线程的状态变化图"><a href="#线程的状态变化图" class="headerlink" title="线程的状态变化图"></a>线程的状态变化图</h5><p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg?q-sign-algorithm=sha1&amp;q-ak=AKIDYBXU1S2PCapUgiAcktuHze6btFSdqO8O&amp;q-sign-time=1547285568;1547287368&amp;q-key-time=1547285568;1547287368&amp;q-header-list=&amp;q-url-param-list=&amp;q-signature=69c806ab297717edca22594b2f3ed6eb0819c6c4&amp;x-cos-security-token=eab019e78be1c3f831e7e234074f503b1dafdeb710001" alt="img"></p>
+<h5 id="线程的状态变化图"><a href="#线程的状态变化图" class="headerlink" title="线程的状态变化图"></a>线程的状态变化图</h5><p><img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2018/Java%E7%AC%94%E8%AE%B0/%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81%E5%9B%BE.jpeg" alt="img"></p>
 <p>JDK1.8 线程状态源码</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> State &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a thread which has not yet started.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        NEW,</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a runnable thread.  A thread in the runnable</span></span><br><span class="line"><span class="comment">         * state is executing in the Java virtual machine but it may</span></span><br><span class="line"><span class="comment">         * be waiting for other resources from the operating system</span></span><br><span class="line"><span class="comment">         * such as processor.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        RUNNABLE,</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a thread blocked waiting for a monitor lock.</span></span><br><span class="line"><span class="comment">         * A thread in the blocked state is waiting for a monitor lock</span></span><br><span class="line"><span class="comment">         * to enter a synchronized block/method or</span></span><br><span class="line"><span class="comment">         * reenter a synchronized block/method after calling</span></span><br><span class="line"><span class="comment">         * &#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125;.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        BLOCKED,</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a waiting thread.</span></span><br><span class="line"><span class="comment">         * A thread is in the waiting state due to calling one of the</span></span><br><span class="line"><span class="comment">         * following methods:</span></span><br><span class="line"><span class="comment">         * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait() Object.wait&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join() Thread.join&#125; with no timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#park() LockSupport.park&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * &lt;p&gt;A thread in the waiting state is waiting for another thread to</span></span><br><span class="line"><span class="comment">         * perform a particular action.</span></span><br><span class="line"><span class="comment">         *</span></span><br><span class="line"><span class="comment">         * For example, a thread that has called &lt;tt&gt;Object.wait()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">         * on an object is waiting for another thread to call</span></span><br><span class="line"><span class="comment">         * &lt;tt&gt;Object.notify()&lt;/tt&gt; or &lt;tt&gt;Object.notifyAll()&lt;/tt&gt; on</span></span><br><span class="line"><span class="comment">         * that object. A thread that has called &lt;tt&gt;Thread.join()&lt;/tt&gt;</span></span><br><span class="line"><span class="comment">         * is waiting for a specified thread to terminate.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        WAITING,</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a waiting thread with a specified waiting time.</span></span><br><span class="line"><span class="comment">         * A thread is in the timed waiting state due to calling one of</span></span><br><span class="line"><span class="comment">         * the following methods with a specified positive waiting time:</span></span><br><span class="line"><span class="comment">         * &lt;ul&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> #sleep Thread.sleep&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> Object#wait(long) Object.wait&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> #join(long) Thread.join&#125; with timeout&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkNanos LockSupport.parkNanos&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         *   &lt;li&gt;&#123;<span class="doctag">@link</span> LockSupport#parkUntil LockSupport.parkUntil&#125;&lt;/li&gt;</span></span><br><span class="line"><span class="comment">         * &lt;/ul&gt;</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        TIMED_WAITING,</span><br><span class="line"></span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * Thread state for a terminated thread.</span></span><br><span class="line"><span class="comment">         * The thread has completed execution.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        TERMINATED;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h5 id="线程常用方法"><a href="#线程常用方法" class="headerlink" title="线程常用方法"></a>线程常用方法</h5><ul>
@@ -791,8 +791,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/18/品优购项目学习笔记/" rel="prev" title="品优购项目学习笔记">
-                品优购项目学习笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/16/Java 锁详解/" rel="prev" title="Java 锁详解">
+                Java 锁详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -871,7 +871,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">35</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1001,7 +1001,17 @@
                     
                       
                     
-                    <span class="site-state-item-count">43</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
