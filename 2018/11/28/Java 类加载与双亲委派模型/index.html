@@ -96,21 +96,23 @@
 
 
 
-  <meta name="description" content="一个叫做2048的小游戏 许久未更新我的博客了，只是因为，这几天觉得并没有什么好写的，好记录下来的。有时候只是学习到编码中的一点点小技巧，大多也是自己通过在网上学习，自己敲代码所总结出来的。可能是自己做的不多吧。  这两天重新把自己开始接触安卓时想做的一个小游戏继续完善了一下，两个月之后回头再看看自己当时的代码，还是学的有许多许多需要去改进的地方，这也说明我还是不断的在学习^ - ^。">
-<meta name="keywords" content="andriod,安卓,2048">
+  <meta name="description" content="类加载过程加载，连接(验证，准备，解析)，初始化">
+<meta name="keywords" content="笔记整理,面经,Java类加载机制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安卓学习之2048">
-<meta property="og:url" content="http://mindyu.com/2017/07/07/安卓学习之2048/index.html">
+<meta property="og:title" content="Java 类加载和双亲委派模型">
+<meta property="og:url" content="http://mindyu.com/2018/11/28/Java 类加载与双亲委派模型/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="一个叫做2048的小游戏 许久未更新我的博客了，只是因为，这几天觉得并没有什么好写的，好记录下来的。有时候只是学习到编码中的一点点小技巧，大多也是自己通过在网上学习，自己敲代码所总结出来的。可能是自己做的不多吧。  这两天重新把自己开始接触安卓时想做的一个小游戏继续完善了一下，两个月之后回头再看看自己当时的代码，还是学的有许多许多需要去改进的地方，这也说明我还是不断的在学习^ - ^。">
+<meta property="og:description" content="类加载过程加载，连接(验证，准备，解析)，初始化">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/S70707-150825.jpg">
-<meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/S70707-150832.jpg">
-<meta property="og:updated_time" content="2018-02-25T14:06:45.149Z">
+<meta property="og:image" content="https://mubu.com/document_image/1274e1ce-70d8-467b-b8ba-de9c51d3fb9a-983181.jpg">
+<meta property="og:image" content="https://mubu.com/document_image/610c4fad-fb70-456d-96c3-7bb615f0edc0-983181.jpg">
+<meta property="og:image" content="https://mubu.com/document_image/136b94af-57ea-4e10-b05f-41996811545d-983181.jpg">
+<meta property="og:image" content="https://mubu.com/document_image/6c5df023-bda6-4b36-ad9c-bd1f7b5e652c-983181.jpg">
+<meta property="og:updated_time" content="2019-01-13T07:44:09.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="安卓学习之2048">
-<meta name="twitter:description" content="一个叫做2048的小游戏 许久未更新我的博客了，只是因为，这几天觉得并没有什么好写的，好记录下来的。有时候只是学习到编码中的一点点小技巧，大多也是自己通过在网上学习，自己敲代码所总结出来的。可能是自己做的不多吧。  这两天重新把自己开始接触安卓时想做的一个小游戏继续完善了一下，两个月之后回头再看看自己当时的代码，还是学的有许多许多需要去改进的地方，这也说明我还是不断的在学习^ - ^。">
-<meta name="twitter:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/S70707-150825.jpg">
+<meta name="twitter:title" content="Java 类加载和双亲委派模型">
+<meta name="twitter:description" content="类加载过程加载，连接(验证，准备，解析)，初始化">
+<meta name="twitter:image" content="https://mubu.com/document_image/1274e1ce-70d8-467b-b8ba-de9c51d3fb9a-983181.jpg">
 
 
 
@@ -119,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://mindyu.com/2017/07/07/安卓学习之2048/"/>
+  <link rel="canonical" href="http://mindyu.com/2018/11/28/Java 类加载与双亲委派模型/"/>
 
 
 
@@ -129,7 +131,7 @@
   };
 </script>
 
-  <title>安卓学习之2048 | Yang Cq</title>
+  <title>Java 类加载和双亲委派模型 | Yang Cq</title>
   
 
 
@@ -390,7 +392,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2017/07/07/安卓学习之2048/"/>
+    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2018/11/28/Java 类加载与双亲委派模型/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Yang Cq"/>
@@ -407,7 +409,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">安卓学习之2048
+          <h1 class="post-title" itemprop="name headline">Java 类加载和双亲委派模型
 
               
             
@@ -433,7 +435,7 @@
                 
               
 
-              <time title="创建时间：2017-07-07 15:11:40" itemprop="dateCreated datePublished" datetime="2017-07-07T15:11:40+08:00">2017-07-07</time>
+              <time title="创建时间：2018-11-28 20:48:41" itemprop="dateCreated datePublished" datetime="2018-11-28T20:48:41+08:00">2018-11-28</time>
             
 
             
@@ -451,7 +453,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/安卓学习/" itemprop="url" rel="index"><span itemprop="name">安卓学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java-学习/" itemprop="url" rel="index"><span itemprop="name">Java 学习</span></a></span>
 
                 
                 
@@ -466,8 +468,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/07/安卓学习之2048/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2017/07/07/安卓学习之2048/" itemprop="commentCount"></span>
+                <a href="/2018/11/28/Java 类加载与双亲委派模型/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018/11/28/Java 类加载与双亲委派模型/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -475,7 +477,7 @@
 
           
           
-            <span id="/2017/07/07/安卓学习之2048/" class="leancloud_visitors" data-flag-title="安卓学习之2048">
+            <span id="/2018/11/28/Java 类加载与双亲委派模型/" class="leancloud_visitors" data-flag-title="Java 类加载和双亲委派模型">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -500,7 +502,7 @@
                 
                   <span class="post-meta-item-text">文章字数：</span>
                 
-                <span title="文章字数">5.7k</span>
+                <span title="文章字数">5.8k</span>
               
 
               
@@ -534,30 +536,99 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h3 id="一个叫做2048的小游戏"><a href="#一个叫做2048的小游戏" class="headerlink" title="一个叫做2048的小游戏"></a>一个叫做2048的小游戏</h3><ul>
-<li><p>许久未更新我的博客了，只是因为，这几天觉得并没有什么好写的，好记录下来的。有时候只是学习到编码中的一点点小技巧，大多也是自己通过在网上学习，自己敲代码所总结出来的。可能是自己做的不多吧。</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h4 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h4><p>加载，连接(验证，准备，解析)，初始化</p>
+<p><img src="https://mubu.com/document_image/1274e1ce-70d8-467b-b8ba-de9c51d3fb9a-983181.jpg" alt="img"></p>
+<a id="more"></a>
+<h5 id="类加载阶段总共分为五个阶段："><a href="#类加载阶段总共分为五个阶段：" class="headerlink" title="类加载阶段总共分为五个阶段："></a>类加载阶段总共分为五个阶段：</h5><p><strong>加载</strong></p>
+<p>在内存中生成一个代表这个类的 java.lang.Class 对象，作为方法区这个类的各种数据的入口。注意这里不一定非得要从一个 class 文件获取，这里既可以从ZIP包中读取（比如从jar包和war包中读取），也可以在运行时计算生成（动态代理），也可以由其它文件生成（比如将JSP文件转换成对应的Class类）</p>
+<p><strong>验证</strong></p>
+<p>为了确保 Class 文件的字节流中包含的信息是否符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</p>
+<p>包含四种验证：</p>
+<ol>
+<li>文件格式验证</li>
+</ol>
+<p>验证字节流是否符合 class 文件格式的规范，并且能被当前版本的虚拟机处理</p>
+<ol start="2">
+<li>元数据验证</li>
+</ol>
+<p>对字节码描述的信息进行语义分析，以保证其描述的信息符合Java语言规范的要求</p>
+<ol start="3">
+<li>字节码验证</li>
+</ol>
+<p>进行数据流和控制流分析</p>
+<ol start="4">
+<li>符号引用验证</li>
+</ol>
+<p><strong>准备</strong></p>
+<p>为类的静态变量分配内存并将其初始化为默认值,这些内存都将在方法区中进行分配。准备阶段不分配类中的实例变量的内存,实例变量将会在对象实例化时随着对象一起分配在Java 堆中。静态常量会直接赋值。</p>
+<p>默认值</p>
+<p><img src="https://mubu.com/document_image/610c4fad-fb70-456d-96c3-7bb615f0edc0-983181.jpg" alt="img"></p>
+<p><strong>解析</strong></p>
+<p>虚拟机将常量池中的符号引用替换为直接引用的过程。</p>
+<blockquote>
+<p>符号引用：以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。</p>
+<p>直接引用：指向目标的指针，相对偏移量或是一个能间接定位到目标的句柄。如果有了直接引用，那引用的目标必定已经在内存中存在。</p>
+</blockquote>
+<p><strong>初始化</strong></p>
+<p>类加载最后一个阶段，前面的类加载阶段之后，除了在加载阶段可以自定义类加载器以外，其它操作都由JVM主导。到了初始化阶段，才开始真正执行类中定义的Java程序代码。</p>
+<p>初始化阶段是<strong>执行类构造器 clinit() 方法</strong>的过程。clinit() 方法是由编译器自动收集类中的所有<strong>类变量</strong>的赋值动作和<strong>静态语句块(static{}块)</strong>中的语句合并产生的。</p>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><h5 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h5><h6 id="启动类加载器-Bootstrap-ClassLoader"><a href="#启动类加载器-Bootstrap-ClassLoader" class="headerlink" title="启动类加载器(Bootstrap ClassLoader)"></a>启动类加载器(Bootstrap ClassLoader)</h6><p>负责加载 JAVA_HOME\lib 目录中的，或通过-Xbootclasspath参数指定路径中的，且被虚拟机认可（按文件名识别，如rt.jar）的类。<u>使用C++实现，属于虚拟机的自身的一部分。而其他的类加载器使用Java语言实现，独立于虚拟机外部，并且全部继承自java.lang.ClassLoader。</u></p>
+<h6 id="扩展类加载器-Extension-ClassLoader"><a href="#扩展类加载器-Extension-ClassLoader" class="headerlink" title="扩展类加载器(Extension ClassLoader)"></a>扩展类加载器(Extension ClassLoader)</h6><p>负责加载 JAVA_HOME\lib\ext 目录中的，或通过java.ext.dirs系统变量指定路径中的类库。</p>
+<h6 id="应用程序类加载器-Application-ClassLoader"><a href="#应用程序类加载器-Application-ClassLoader" class="headerlink" title="应用程序类加载器(Application ClassLoader)"></a>应用程序类加载器(Application ClassLoader)</h6><p>负责加载用户路径（classpath）上的类库。可以通过ClassLoader.getSystemClassLoader()来获取它。</p>
+<h6 id="用户自定义类加载器"><a href="#用户自定义类加载器" class="headerlink" title="用户自定义类加载器"></a>用户自定义类加载器</h6><p>通过继承 java.lang.ClassLoader 类的方式实现。</p>
+<h5 id="自定义加载器"><a href="#自定义加载器" class="headerlink" title="自定义加载器"></a>自定义加载器</h5><ol>
+<li>继承 ClassLoader 类并重写 findClass 方法。否则会报运行时异常。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(name);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>如果想打破双亲委派模型则需要重写 loadClass 方法。默认的 loadClass 方法是实现了双亲委派机制的逻辑，即会先让父类加载器加载，当无法加载时才由自己加载。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</span><br><span class="line">        <span class="keyword">throws</span> ClassNotFoundException</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</span><br><span class="line">            <span class="comment">// 首先检查请求的类是否已经被加载过</span></span><br><span class="line">            Class&lt;?&gt; c = findLoadedClass(name);</span><br><span class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;	<span class="comment">// 未被加载</span></span><br><span class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);	<span class="comment">// 调用父加载器的 loadclass</span></span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                        c = findBootstrapClassOrNull(name); <span class="comment">// 父加载器为空时，使用启动类加载器</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">                    <span class="comment">// ClassNotFoundException thrown if class not found</span></span><br><span class="line">                    <span class="comment">// from the non-null parent class loader</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="comment">// If still not found, then invoke findClass in order</span></span><br><span class="line">                    <span class="comment">// to find the class.</span></span><br><span class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</span><br><span class="line">                    c = findClass(name);</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></span><br><span class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</span><br><span class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (resolve) &#123;</span><br><span class="line">                resolveClass(c);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><p>当一个类加载器收到类加载任务，会先交给其父类加载器去完成，因此最终加载任务都会传递到顶层的启动类加载器，只有当父类加载器无法完成加载任务时，才会尝试执行加载任务。</p>
+<p><img src="https://mubu.com/document_image/136b94af-57ea-4e10-b05f-41996811545d-983181.jpg" alt="img"></p>
+<p><u>注：启动类加载器无法被 java 程序直接引用，用户在编写自定义类加载器时，如果需要把请求加载委派给引导类加载器，那么字节使用 null 即可。</u></p>
+<p>好处：比如加载位于rt.jar包中的类 java.lang.Object，不管是哪个加载器加载这个类，最终都是委托给顶层的启动类加载器进行加载，这样就保证了使用不同的类加载器最终得到的都是同样一个Object对象。<strong>保证类的唯一性</strong>、 <strong>因类加载器的分层使得类也分层次加载(带有优先级)</strong>。</p>
+<h5 id="打破双亲委派模型的三种情况"><a href="#打破双亲委派模型的三种情况" class="headerlink" title="打破双亲委派模型的三种情况"></a>打破双亲委派模型的三种情况</h5><ol>
+<li><p>双亲委派模型与JDK1.2时引入的，为了向前兼容，新增一个 protected 的 findClass() 方法。在此之前用户继承 ClassLoader 类就是为了重写 loadClass() 方法。而之后则不推荐覆盖 loadClass() 方法，而是<strong>把类加载逻辑写到 findClass() 方法中</strong>。</p>
 </li>
-<li><p>这两天重新把自己开始接触安卓时想做的一个小游戏继续完善了一下，两个月之后回头再看看自己当时的代码，还是学的有许多许多需要去改进的地方，这也说明我还是不断的在学习^ - ^。<a id="more"></a> 以前直接将每一种方块看成图片，然后自己做2~2048的图片，以图片的形式填充到每一个ImageView中，现在则是以TextView形式，动态设置每一方块的数字以及背景色。这样使得游戏占得空间小多啦，这也是网上所推荐的方法。</p>
+<li><p>双亲委派很好的解决了各个类加载器的基础类的统一问题。但是如果基础类需要回调用户代码则无法实现。<em>比如 JNDI（Java 命名和目录接口），由启动类加载器加载，实现对资源进行集中管理和查找，它需要调用由独立厂商实现并部署在应用程序的 ClassPath 下的 JNDI 接口提供者（SPI），但是启动类加载器不可能“认识”这些代码。JDBC、JCE、JAXB、JBI也是如此。</em></p>
+<p>解决方案为：<strong>线程上下文类加载器</strong>。该类加载器通过 Thread 类的 setContextClassLoader() 方法进行设置。 如果创建线程时没有还未设置，则从父线程中继承一个，如果应用程序的全局范围内都没有设置过的话，那么该类加载器就是应用程序类启动器。</p>
+<p>然后上下文类加载器去加载所需要的SPI代码，也就是父类加载器请求子类加载器去完成类加载的动作。</p>
 </li>
-</ul>
-<center><br> <img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/S70707-150825.jpg" width="150" height="200"><br> </center>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">private LinearLayout layout;</span><br><span class="line">   private Button mainMenu;</span><br><span class="line">   private Button btnReset;</span><br><span class="line">   private Button btnUp;</span><br><span class="line">   private TextView textScore;</span><br><span class="line">   private TextView textBestScore;</span><br><span class="line">   private int[][] oldFlag = new int[4][4];</span><br><span class="line">   private static int score = 0;</span><br><span class="line">   private static int best_score=0;</span><br><span class="line">   //触摸事件手指按下和松开的两个坐标</span><br><span class="line">   private float x1 = 0;</span><br><span class="line">   private float x2 = 0;</span><br><span class="line">   private float y1 = 0;</span><br><span class="line">   private float y2 = 0;</span><br><span class="line">   //16个方块的id</span><br><span class="line">   static int[][] btnBlock = &#123;</span><br><span class="line">           &#123;R.id.btn00, R.id.btn01, R.id.btn02, R.id.btn03&#125;,</span><br><span class="line">           &#123;R.id.btn10, R.id.btn11, R.id.btn12, R.id.btn13&#125;,</span><br><span class="line">           &#123;R.id.btn20, R.id.btn21, R.id.btn22, R.id.btn23&#125;,</span><br><span class="line">           &#123;R.id.btn30, R.id.btn31, R.id.btn32, R.id.btn33&#125;</span><br><span class="line">   &#125;;</span><br><span class="line">   //16个方块的对应的值</span><br><span class="line">   static int[][] flag = &#123;</span><br><span class="line">           &#123;0, 0, 0, 0&#125;,</span><br><span class="line">           &#123;0, 0, 0, 0&#125;,</span><br><span class="line">           &#123;0, 0, 0, 0&#125;,</span><br><span class="line">           &#123;0, 0, 0, 0&#125;</span><br><span class="line">   &#125;;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>以二维数组的形式存储每一个方块对应的值，然后根据方块中的值，来动态绘制每一个方块的数字以及背景色。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">//手势滑动</span><br><span class="line">    @TargetApi(Build.VERSION_CODES.M)</span><br><span class="line">    @Override</span><br><span class="line">    public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">        switch (event.getAction()) &#123;</span><br><span class="line">            case MotionEvent.ACTION_DOWN:</span><br><span class="line">                x1 = event.getX();</span><br><span class="line">                y1 = event.getY();</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_MOVE:</span><br><span class="line">                x2 = event.getX();</span><br><span class="line">                y2 = event.getY();</span><br><span class="line">                break;</span><br><span class="line">            case MotionEvent.ACTION_UP:</span><br><span class="line">                if (x2 - x1 &gt; 50 &amp;&amp; Math.abs(x2 - x1) &gt; Math.abs(y2 - y1)) &#123;</span><br><span class="line">//                    Toast.makeText(this,&quot;向右滑动&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                    moveToRight();</span><br><span class="line">                &#125; else if (x1 - x2 &gt; 50 &amp;&amp; Math.abs(x2 - x1) &gt; Math.abs(y2 - y1)) &#123;</span><br><span class="line">//                    Toast.makeText(this,&quot;向左滑动&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                    moveToLeft();</span><br><span class="line">                &#125; else if (y2 - y1 &gt; 50 &amp;&amp; Math.abs(x2 - x1) &lt; Math.abs(y2 - y1)) &#123;</span><br><span class="line">//                    Toast.makeText(this,&quot;向下滑动&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                    moveToBottom();</span><br><span class="line">                &#125; else if (y1 - y2 &gt; 50 &amp;&amp; Math.abs(x2 - x1) &lt; Math.abs(y2 - y1)) &#123;</span><br><span class="line">//                    Toast.makeText(this,&quot;向上滑动&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                    moveToUp();</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<li><p>由于用户对程序动态性的追求而导致。比如<strong>代码热替换、模块热部署</strong>等。</p>
+<p>OSGI（Open Service Gateway Initiative）开放服务网关协议为 Java 动态化模块化系统的一系列规范。而 <strong>OSGI 实现模块化热部署的关键则是它自定义的类加载器机制的实现</strong>。每一个程序模块（OSGI中称为 Bundle）都有一个自己的类加载器，当需要更换一个 Bundle 时，就把 Bundle 连同类加载器一起换掉以实现代码的热替换。</p>
+<p>在OSGI环境下，类加载器不再是双亲委派模型的树状结构，而是进一步发展为更加复杂的网状结构。加载流程为：</p>
+<blockquote>
+<ol>
+<li>将以 java.* 开头的类委派给父类加载器加载</li>
+<li>否则，将委派列表名单内的类委派给父类加载器加载</li>
+<li>否则，将 Import 列表中的类委派给 Export 这个类的 Bundle 的类加载器加载</li>
+<li>否则，查找当前 Bundle 的 ClassPath ，使用自己的类加载器加载</li>
+<li>否则，查找类是否在自己的 Fragment Bundle 中，如果在，则委派给 Fragment Bundle 的类加载器加载</li>
+<li>否则，查找 Dynamic Import 列表的 Bundle，委派给对应的 Bundle 的类加载器加载</li>
+<li>否则，类查找失败。</li>
+</ol>
+</blockquote>
 </li>
-</ul>
-<p>重写触摸事件，按下的时候记录当前的坐标，手指滑动时记录手指所在坐标。滑动结束时（也就是手指放开时），计算坐标之间的变化来判断手势的滑动方向以进行方块的滑动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">//向右滑动</span><br><span class="line">    public void moveToRight() &#123;</span><br><span class="line">        for (int i = 0; i &lt; 16; i++) &#123;</span><br><span class="line">            oldFlag[i / 4][i % 4] = flag[i / 4][i % 4];</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; 4; j++) &#123;</span><br><span class="line">            ArrayList&lt;Integer&gt; list1 = new ArrayList&lt;&gt;();</span><br><span class="line">            for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">                if (flag[j][3 - i] != 0) &#123;</span><br><span class="line">                    list1.add(flag[j][3 - i]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ArrayList&lt;Integer&gt; temp = new ArrayList&lt;&gt;();</span><br><span class="line">            int i = 0;</span><br><span class="line">            for (i = 0; i &lt; list1.size() - 1; i++) &#123;</span><br><span class="line">                if (list1.get(i) == 2048)&#123;</span><br><span class="line">                &#125;else if (list1.get(i) == list1.get(i + 1)) &#123;</span><br><span class="line">                    temp.add(list1.get(i) * 2);</span><br><span class="line">                    score += list1.get(i) * 2;</span><br><span class="line">                    i++;</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    temp.add(list1.get(i));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (i == list1.size() - 1) &#123;</span><br><span class="line">                temp.add(list1.get(i));</span><br><span class="line">            &#125;</span><br><span class="line">            if (list1.size() &gt; 1) &#123;</span><br><span class="line">                list1 = temp;</span><br><span class="line">            &#125;</span><br><span class="line">            for (i = 0; i &lt; list1.size(); i++) &#123;</span><br><span class="line">                flag[j][3 - i] = list1.get(i);</span><br><span class="line">                fillBlock(list1.get(i), j, 3 - i);</span><br><span class="line">            &#125;</span><br><span class="line">            for (i = list1.size(); i &lt; 4; i++) &#123;</span><br><span class="line">                flag[j][3 - i] = 0;</span><br><span class="line">                fillBlock(0, j, 3 - i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //判断是否变化</span><br><span class="line">        boolean isNext = false;</span><br><span class="line">        for (int i = 0; i &lt; 16; i++) &#123;</span><br><span class="line">            if (oldFlag[i / 4][i % 4] != flag[i / 4][i % 4]) &#123;</span><br><span class="line">                isNext = true;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (isNext) &#123;</span><br><span class="line">            nextBlock();</span><br><span class="line">        &#125; else if (isGameOver()) &#123;</span><br><span class="line">            Toast.makeText(MainActivity.this, &quot;GAME OVER&quot;, Toast.LENGTH_SHORT);</span><br><span class="line">            reset();   //重新开始</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>首先记录滑动之前的二维数组（1.判断此次滑动时候有方块变化，2.便于返回上一步），然后根据手势滑动所得的方向，将方块中的值依次添加到四个List<integer>，接下来遍历一遍，如果当前list.get(i)与list.get(i+1)相等，则两个数据合并，保存到一个temp的List中。最后将temp中的值一次填到二维数组的对应位置中去。</integer></li>
-<li>最后将方块显示出来，通过设置每一个方块的数字以及背景色。（这里还是差一个动画的效果，就更完美了！）</li>
-<li><p>还有最高的记录，是用的安卓的SharedPreferences存储，以XML标签的形式将数据保存与本地手机上。每次打开游戏的时候，初始化界面的时候从score_data.xml文件中读取到对应的最高分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//保存数据</span><br><span class="line">   public void saveBest_score(Score score)&#123;</span><br><span class="line">       SharedPreferences.Editor editor =getApplicationContext().getSharedPreferences(&quot;score_data&quot;, Context.MODE_PRIVATE).edit();</span><br><span class="line">       editor.putString(&quot;name&quot;,score.getName());</span><br><span class="line">       editor.putInt(&quot;score&quot;,score.getScore());</span><br><span class="line">       editor.putString(&quot;time&quot;,score.getTime());</span><br><span class="line">       editor.commit();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<center><br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/S70707-150832.jpg" width="150" height="150"><br></center>
-
-</li>
-</ul>
-<p>我的<b><a href="https://github.com/Mindyu/2048Game.git" target="_blank" rel="noopener">2048游戏源码</a></b></p>
+</ol>
+<h4 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h4><h5 id="何时开始类的初始化（主动引用）"><a href="#何时开始类的初始化（主动引用）" class="headerlink" title="何时开始类的初始化（主动引用）"></a>何时开始类的初始化（主动引用）</h5><ol>
+<li>创建类的实例</li>
+<li>访问类的静态变量(除常量【被final修辞的静态变量】)</li>
+<li>访问类的静态方法</li>
+<li>反射如(Class.forName(“my.xyz.Test”))</li>
+<li>当初始化一个类时，发现其父类还未初始化，则先出发父类的初始化（对于接口，使用时才会去初始化父接口）</li>
+<li>虚拟机启动时，定义了Main()方法的那个类先初始化</li>
+</ol>
+<h5 id="不会初始化类的情况-（被动引用）"><a href="#不会初始化类的情况-（被动引用）" class="headerlink" title="不会初始化类的情况 （被动引用）"></a>不会初始化类的情况 （被动引用）</h5><ol>
+<li><strong>子类调用父类的静态变量，子类不会被初始化</strong>。只有父类被初始化。对于静态字段，只有直接定义这个字段的类才会被初始化</li>
+<li>通过数组定义来引用类，不会触发类的初始化  SubClass[] arr= new SubClass[10];</li>
+<li>访问类的常量，不会初始化类</li>
+<li>反射通过 .class 获取 class 对象时</li>
+<li>反射通过 Class.forName(“my.xyz.Test”,false,ClassLoader.getSystemClassLoader()) 第二个参数代表是否初始化类</li>
+</ol>
+<h5 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.java;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		System.out.println(Father.FAN); 			 <span class="comment">// 访问常量</span></span><br><span class="line">		Class clazz = Father.class;					<span class="comment">// .class 获取 class 对象</span></span><br><span class="line">		System.out.println(clazz.getName());		 <span class="comment">// 输出全限定名</span></span><br><span class="line">		System.out.println(clazz.getSimpleName());    <span class="comment">// 输出类名(不包含包名)</span></span><br><span class="line">		Father[] f = <span class="keyword">new</span> Father[<span class="number">10</span>];				<span class="comment">// 数组定义来引用类</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"Father"</span>,<span class="keyword">false</span>,ClassLoader.getSystemClassLoader());  <span class="comment">// 也不会初始化</span></span><br><span class="line">			System.out.println(<span class="string">"----------"</span>);</span><br><span class="line">			Class.forName(<span class="string">"Father"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FAN = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		System.out.println(<span class="string">"Father类初始化"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果图</p>
+<p><img src="https://mubu.com/document_image/6c5df023-bda6-4b36-ad9c-bd1f7b5e652c-983181.jpg" alt="img"></p>
 
       
     </div>
@@ -620,7 +691,7 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="http://mindyu.com/2017/07/07/安卓学习之2048/" title="安卓学习之2048">http://mindyu.com/2017/07/07/安卓学习之2048/</a>
+    <a href="http://mindyu.com/2018/11/28/Java 类加载与双亲委派模型/" title="Java 类加载和双亲委派模型">http://mindyu.com/2018/11/28/Java 类加载与双亲委派模型/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -633,11 +704,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/andriod/" rel="tag"># andriod</a>
+            <a href="/tags/笔记整理/" rel="tag"># 笔记整理</a>
           
-            <a href="/tags/安卓/" rel="tag"># 安卓</a>
+            <a href="/tags/面经/" rel="tag"># 面经</a>
           
-            <a href="/tags/2048/" rel="tag"># 2048</a>
+            <a href="/tags/Java类加载机制/" rel="tag"># Java类加载机制</a>
           
         </div>
       
@@ -650,8 +721,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/02/JNI（java-本地接口）开发/" rel="next" title="JNI（java 本地接口）开发">
-                <i class="fa fa-chevron-left"></i> JNI（java 本地接口）开发
+              <a href="/2018/11/24/Java Object类与内部类/" rel="next" title="Java Object类与内部类">
+                <i class="fa fa-chevron-left"></i> Java Object类与内部类
               </a>
             
           </div>
@@ -660,8 +731,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/17/安卓自定义控件/" rel="prev" title="安卓自定义控件">
-                安卓自定义控件 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/30/Java 异常与反射/" rel="prev" title="Java 异常与反射">
+                Java 异常与反射 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -973,7 +1044,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个叫做2048的小游戏"><span class="nav-number">1.</span> <span class="nav-text">一个叫做2048的小游戏</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载过程"><span class="nav-number">1.</span> <span class="nav-text">类加载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#类加载阶段总共分为五个阶段："><span class="nav-number">1.1.</span> <span class="nav-text">类加载阶段总共分为五个阶段：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载器"><span class="nav-number">2.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#分类"><span class="nav-number">2.1.</span> <span class="nav-text">分类</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#启动类加载器-Bootstrap-ClassLoader"><span class="nav-number">2.1.1.</span> <span class="nav-text">启动类加载器(Bootstrap ClassLoader)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#扩展类加载器-Extension-ClassLoader"><span class="nav-number">2.1.2.</span> <span class="nav-text">扩展类加载器(Extension ClassLoader)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#应用程序类加载器-Application-ClassLoader"><span class="nav-number">2.1.3.</span> <span class="nav-text">应用程序类加载器(Application ClassLoader)</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#用户自定义类加载器"><span class="nav-number">2.1.4.</span> <span class="nav-text">用户自定义类加载器</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义加载器"><span class="nav-number">2.2.</span> <span class="nav-text">自定义加载器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">3.</span> <span class="nav-text">双亲委派模型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打破双亲委派模型的三种情况"><span class="nav-number">3.2.</span> <span class="nav-text">打破双亲委派模型的三种情况</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见问题"><span class="nav-number">4.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#何时开始类的初始化（主动引用）"><span class="nav-number">4.1.</span> <span class="nav-text">何时开始类的初始化（主动引用）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不会初始化类的情况-（被动引用）"><span class="nav-number">4.2.</span> <span class="nav-text">不会初始化类的情况 （被动引用）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试"><span class="nav-number">4.3.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></div>
             
 
           </div>
