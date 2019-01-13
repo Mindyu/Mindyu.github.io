@@ -94,7 +94,7 @@ notifyAll()则是唤醒所有等待的线程。
 
 
 
-###### 内部类 <https://www.cnblogs.com/chenssy/p/3388487.html>
+##### 内部类 <https://www.cnblogs.com/chenssy/p/3388487.html>
 
 ###### 为什么要使用内部类
 

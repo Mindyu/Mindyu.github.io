@@ -134,7 +134,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
 ​	一套用于实现基于FIFO等待队列的阻塞锁和相关的同步器的一个同步框架。
 
-**原理**
+###### 原理
 
 1. 使用一个 volatile int 类型的成员变量 state 来表示**状态信息**。
 
@@ -152,7 +152,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
    
 
-**使用方法** <https://blog.csdn.net/vernonzheng/article/details/8275624>
+###### 使用方法 <https://blog.csdn.net/vernonzheng/article/details/8275624>
 
 使用 AQS 来实现一个同步器需要覆盖实现如下几个方法
 
@@ -168,7 +168,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
   
 
-**AQS 实现类**
+###### AQS 实现类
 
 继承关系图
 
@@ -204,7 +204,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
 ##### java 并发包(J.U.C) 同步控制工具 <https://blog.csdn.net/heting717/article/details/76768971>
 
-**ReentrantLock**
+###### ReentrantLock
 
 *特性*
 
@@ -215,6 +215,8 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 - 可限时 tryLock()（规定的时间内未能获取锁，则返回 false）
 
 - 公平锁与非公平锁（默认）
+
+  
 
   一般意义上的锁是不公平的，不一定先来的线程能先得到锁，后来的线程就后得到锁。不公平的锁可能会产生**饥饿现象**。公平锁的意思就是，这个锁能保证线程是先来的先得到锁。虽然公平锁不会产生饥饿现象，但是公平锁的性能会比非公平锁差很多。
 
@@ -231,7 +233,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
 
 
-**Condition**
+###### Condition
 
 - Condition与ReentrantLock的关系就类似于 Object.wait()/notify() 与synchronized
 - await()方法会使当前线程等待，同时释放当前锁，当其他线程中使用signal()时或者signalAll()方法时，线程会重新获得锁并继续执行。或者当线程被中断时，也能跳出等待。这和 Object.wait() 方法很相似。
@@ -240,7 +242,7 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
 
 
-**Semaphore**
+###### Semaphore
 
 信号量，控制线程同时进入临界区的数量，可用作流量控制
 
@@ -258,25 +260,25 @@ protected T initialValue() { } //initialValue()是一个protected方法，一般
 
 
 
-**ReadWriteLock**
+###### ReadWriteLock
 
-​	读和写是两种不同的功能，读-读不互斥，读-写互斥，写-写互斥。这样的设计是并发量提高了，又保证了数据安全。
-
-
-
-**CountDownLatch** 倒数计时器、闭锁
-
-​	一种典型的场景就是火箭发射。在火箭发射前，为了保证万无一失，往往还要进行各项设备、仪器的检查。只有等所有检查完毕后，引擎才能点火。这种场景就非常适合使用CountDownLatch。它可以使得点火线程，等待所有检查线程全部完工后，再执行。
+读和写是两种不同的功能，读-读不互斥，读-写互斥，写-写互斥。这样的设计是并发量提高了，又保证了数据安全。
 
 
 
-**CyclicBarrier** 屏障
+###### CountDownLatch 倒数计时器、闭锁
 
-​	CyclicBarrier 是所有线程都进行等待，直到所有线程都准备好进入 await() 方法之后，所有线程同时开始执行！另外 CyclicBarrier 可以反复使用。
+一种典型的场景就是火箭发射。在火箭发射前，为了保证万无一失，往往还要进行各项设备、仪器的检查。只有等所有检查完毕后，引擎才能点火。这种场景就非常适合使用CountDownLatch。它可以使得点火线程，等待所有检查线程全部完工后，再执行。
 
 
 
-**LockSupport**
+###### CyclicBarrier 屏障
 
-​	提供线程阻塞原语，和 suspend 类似。与 suspend 相比 不容易引起线程冻结，使用 LockSupport 则不会发生死锁。park() 能够响应中断，但不抛出异常。中断响应的结果是，park() 函数的返回，可以从Thread.interrupted() 得到中断标志。LockSupport 提供 park() 和 unpark() 方法实现**阻塞线程和解除线程阻塞**,实现的阻塞和解除阻塞是基于”许可(permit)”作为关联,permit 相当于一个信号量(0,1)，默认是0。线程之间不再需要一个Object或者其它变量来存储状态,不再需要关心对方的状态。
+CyclicBarrier 是所有线程都进行等待，直到所有线程都准备好进入 await() 方法之后，所有线程同时开始执行！另外 CyclicBarrier 可以反复使用。
+
+
+
+###### LockSupport
+
+提供线程阻塞原语，和 suspend 类似。与 suspend 相比 不容易引起线程冻结，使用 LockSupport 则不会发生死锁。park() 能够响应中断，但不抛出异常。中断响应的结果是，park() 函数的返回，可以从Thread.interrupted() 得到中断标志。LockSupport 提供 park() 和 unpark() 方法实现**阻塞线程和解除线程阻塞**,实现的阻塞和解除阻塞是基于”许可(permit)”作为关联,permit 相当于一个信号量(0,1)，默认是0。线程之间不再需要一个Object或者其它变量来存储状态,不再需要关心对方的状态。
 

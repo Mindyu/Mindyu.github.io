@@ -20,13 +20,17 @@ Error和RuntimeException 及其子类都是未检查的异常（unchecked except
 
 
 
-checked exceptions：通常是从一个可以恢复的程序中抛出来的，并且最好能够从这种异常中使程序恢复。比如 **ParseException(DateFormat日期转换时)、IOException、SQLException、InterruptedException(Thread.sleep方法)、ClassNotFoundException、FileNotFoundException**等。检查异常发生在编译阶段，必须要使用 try…catch（或者throws）否则编译不通过。
+checked exceptions
 
-unchecked exceptions：通常是如果一切正常的话本不该发生的异常，但是的确发生了。发生在运行期，具有不确定性，主要是由于程序的逻辑问题所引起的。比如**IndexOutOfBoundException、ClassCastException(强制类型转换)、NullPointerException、NumberFormatException(Integer.valueOf("123a");)、ArithmeticException(15/0)、ConcurrentModificationException(迭代时快速失败)、NoSuchMethodException**等。这类错误本身就是bug，应该被修复，出现此类错误时程序就应该立即停止执行。因此，面对 Errors 和 unchecked exceptions 应该让程序自动终止执行，程序员不该做诸如 try/catch 这样的事情，而是应该查明原因，修改代码逻辑。
+​	通常是从一个可以恢复的程序中抛出来的，并且最好能够从这种异常中使程序恢复。比如 **ParseException(DateFormat日期转换时)、IOException、SQLException、InterruptedException(Thread.sleep方法)、ClassNotFoundException、FileNotFoundException**等。检查异常发生在编译阶段，必须要使用 try…catch（或者throws）否则编译不通过。
+
+unchecked exceptions
+
+​	通常是如果一切正常的话本不该发生的异常，但是的确发生了。发生在运行期，具有不确定性，主要是由于程序的逻辑问题所引起的。比如**IndexOutOfBoundException、ClassCastException(强制类型转换)、NullPointerException、NumberFormatException(Integer.valueOf("123a");)、ArithmeticException(15/0)、ConcurrentModificationException(迭代时快速失败)、NoSuchMethodException**等。这类错误本身就是bug，应该被修复，出现此类错误时程序就应该立即停止执行。因此，面对 Errors 和 unchecked exceptions 应该让程序自动终止执行，程序员不该做诸如 try/catch 这样的事情，而是应该查明原因，修改代码逻辑。
 
 
 
-###### 一个线程运行时发生异常会怎样？
+##### 一个线程运行时发生异常会怎样？
 
 存在两种情形(属于运行时异常)：
 
@@ -38,7 +42,7 @@ Thread.UncaughtExceptionHandler 是用于处理未捕获异常造成线程突然
 
 
 
-###### Java 反射
+##### Java 反射
 
 ###### 概述
 
@@ -154,7 +158,9 @@ Thread.UncaughtExceptionHandler 是用于处理未捕获异常造成线程突然
 
 
 
-##### Java 新特性 <https://www.cnblogs.com/tony-yang-flutter/p/3503935.html>
+##### Java 新特性
+
+https://www.cnblogs.com/tony-yang-flutter/p/3503935.html
 
 - jdk 1.5
 
@@ -226,31 +232,31 @@ Thread.UncaughtExceptionHandler 是用于处理未捕获异常造成线程突然
 
   - 接口的默认方法 <https://blog.csdn.net/qq_40369829/article/details/79356133>
 
-    - 默认方法 default :
+    *默认方法 default :*
 
-      - 可以通过实现接口的类实例化的对象来调用，也可以被重写。
-      - 是 public 的。
+    - 可以通过实现接口的类实例化的对象来调用，也可以被重写。
+    - 是 public 的。
 
-    - 静态方法 static：
+    *静态方法 static：*
 
-      - 只能在本接口中调用，实现类中也不能调用。职责上是工具方法
+    只能在本接口中调用，实现类中也不能调用。职责上是工具方法
 
-      ```java
-      public interface A {
-          int get();
-          static int getStatic() {
-              return 1;
-          }
-          default int getDefault() {
-              getStatic();
-              return 1;
-          }
-      }
-      ```
+    ```java
+    public interface A {
+        int get();
+        static int getStatic() {
+            return 1;
+        }
+        default int getDefault() {
+            getStatic();
+            return 1;
+        }
+    }
+    ```
 
-      
+  - 注解(Annotation)
 
-  - 注解(Annotation) <https://www.cnblogs.com/xdp-gacl/p/3622275.html>
+     <https://www.cnblogs.com/xdp-gacl/p/3622275.html>
 
   - Fork/Join 框架
 
