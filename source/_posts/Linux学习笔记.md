@@ -70,18 +70,18 @@ categories: [Linux 学习]
 1. 首先备份/etc/yum.repos.d/CentOS-Base.repo 
 
 ```
-mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 ```
 
 2. 下载对应版本repo文件, 放入/etc/yum.repos.d/(操作前请做好相应备份) 
 
-CentOS7: http://mirrors.163.com/.help/CentOS7-Base-163.repo
+   CentOS7: http://mirrors.163.com/.help/CentOS7-Base-163.repo
 
 3. 运行以下命令生成缓存 
 
 ```
-yum clean all
-yum makecache
+	yum clean all
+	yum makecache
 ```
 <img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/%E4%BF%AE%E6%94%B9%E9%BB%98%E8%AE%A4%E6%BA%90.png" width="80%" height="80%"/>
 
@@ -90,7 +90,7 @@ yum makecache
 #### 安装 Vim
 
 ```
-yum install vim
+	yum install vim
 ```
 
 
@@ -104,12 +104,12 @@ yum install vim
 对于服务器版本的系统默认是已经安装了ssh服务的。
 
 ```
-# 安装SSH
-yum install openssh-server
-# 启动SSH
-service sshd start
-# 设置开机运行
-chkconfig sshd on
+    # 安装SSH
+    yum install openssh-server
+    # 启动SSH
+    service sshd start
+    # 设置开机运行
+    chkconfig sshd on
 ```
 
 #### SSH客户端安装
@@ -126,11 +126,11 @@ ssh root@192.168.156.188
 
 **存在的问题**
 
-Windows平台的Xshell连接服务器后提示`WARNING! The remote SSH server rejected X11 forwarding request.`警告
+​	Windows平台的Xshell连接服务器后提示`WARNING! The remote SSH server rejected X11 forwarding request.`警告
 
 解决办法：
 
-编辑 /etc/ssh/sshd_config。设置 X11Forwarding yes。如果依然无法解决则修改Xshell中当前连接的SSH->隧道(Tunneling)，然后关闭 X11转发 。
+​	编辑 /etc/ssh/sshd_config。设置 X11Forwarding yes。如果依然无法解决则修改Xshell中当前连接的SSH->隧道(Tunneling)，然后关闭 X11转发 。
 <img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/x11%E9%97%AE%E9%A2%98.png" width="50%" height="50%"/>
 
 
@@ -153,11 +153,11 @@ config 用于方便我们管理多个SSH，存放路径为 ~/.ssh/config 。
 
 Windows平台
 
-通过 **Xshell -> 工具 -> 用户秘钥管理者 -> 生成 -> 设置秘钥类型和秘钥长度 -> 设置秘钥名称和秘钥加密的密码 -> 点击完成（另保存公钥）**
+​	通过 **Xshell -> 工具 -> 用户秘钥管理者 -> 生成 -> 设置秘钥类型和秘钥长度 -> 设置秘钥名称和秘钥加密的密码 -> 点击完成（另保存公钥）**
 
 Linux平台
 
-**进入.ssh目录 -> 使用 ssh-keygen -t rsa 命令 -> 设置秘钥名称和密码**
+​	**进入.ssh目录 -> 使用 ssh-keygen -t rsa 命令 -> 设置秘钥名称和密码**
 
 <img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/sshkey%E7%94%9F%E6%88%90.png"  width="80%" height="80%"/>
 
@@ -174,11 +174,11 @@ Linux平台
 修改SSH默认的端口号
 
 ```
-# 修改配置文件中 Port (可以监听多个端口)
-vim /etc/ssh/sshd_config
+    # 修改配置文件中 Port (可以监听多个端口)
+    vim /etc/ssh/sshd_config
 
-# 重启SSH服务
-service sshd restart
+    # 重启SSH服务
+    service sshd restart
 ```
 
 
@@ -187,55 +187,410 @@ service sshd restart
 
 #### 软件操作命令
 
-软件包管理器：yum
-
-安装软件：yum install xxx
-
-卸载软件：yum remove xxx
-
-搜索软件：yum search xxx
-
-清理缓存：yum clean packages
-
-列出已安装：yum list 
-
-软件包信息：yum info xxx
+> 软件包管理器：yum
+>
+> 安装软件：yum install xxx
+>
+> 卸载软件：yum remove xxx
+>
+> 搜索软件：yum search xxx
+>
+> 清理缓存：yum clean packages
+>
+> 列出已安装：yum list 
+>
+> 软件包信息：yum info xxx
+>
 
 
 
 #### 服务器硬件资源和磁盘操作
 
-内存：free -m
+> 内存：free -m
+>
+> 硬盘：df -h
+>
+> 负载：w 、top （Load Average 就是一段时间 (1 分钟、5分钟、15分钟) 内平均 Load ）
+>
+> CPU：cat /proc/cpuinfo
 
-硬盘：df -h
-
-负载：w 、top （Load Average 就是一段时间 (1 分钟、5分钟、15分钟) 内平均 Load ）
-
-CPU：cat /proc/cpuinfo
 <img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/%E7%A1%AC%E4%BB%B6%E8%B5%84%E6%BA%90%E4%BF%A1%E6%81%AF.png" width="80%" height="80%" />
-
 
 
 
 #### 文件和文件夹操作
 
+##### Linux 文件目录结构
 
+![Linux 文件目录结构](https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/linux%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png )
+
+
+
+##### 文件基本操作
+
+|  命令   |          解释           | 命令  |   解释   |
+| :-----: | :---------------------: | :---: | :------: |
+| ls / ll |     查看目录下文件      | touch | 新建文件 |
+|  mkdir  | 创建文件夹(-p 逐层创建) |  cd   | 进入目录 |
+|   rm    | 删除文件和目录(-r 循环) |  cp   |   复制   |
+|   mv    |          移动           |  pwd  | 显示路径 |
+
+
+
+##### 文件编辑神器 Vim
+
+​	快捷键键盘图：
+
+![键盘图](http://www.runoob.com/wp-content/uploads/2015/10/vi-vim-cheat-sheet-sch.gif)
+
+​	工作模式：
+
+<img src="http://www.runoob.com/wp-content/uploads/2014/07/vim-vi-workmodel.png" width="50%" height="50%" />
+
+[Linux vi/vim | 菜鸟教程](http://www.runoob.com/linux/linux-vim.html)
+
+
+
+##### 文件权限421
+
+rwx （读4、写2、可执行1）
+
+```
+drwxr-xr-x    // 表示当前为文件夹，创建者权限为rwx，用户组权限为r-x，其他用户权限为r-x
+```
+
+
+
+##### 文件搜索、查找、读取
+
+| 命令 |      解释      | 命令 |    解释    |
+| :--: | :------------: | :--: | :--------: |
+| tail | 从文件尾开始读 | head | 从文件头读 |
+| cat  |  读取整个文件  | more |  分页读取  |
+| less |    可控分页    | grep | 搜索关键字 |
+| find |    查找文件    |  wc  |  统计个数  |
+
+
+
+##### 文件的压缩和解压
+
+**tar 命令**
+	以下5个独立命令，解压缩时只能用到其中一个。
+```
+-c: 建立压缩档案 
+-x：解压 
+-t：查看内容 
+-r：向压缩归档文件末尾追加文件 
+-u：更新原压缩包中的文件
+```
+
+下面的参数是根据需要在压缩或解压档案时可选的。
+```
+-z：有gzip属性的 
+-j：有bz2属性的 
+-Z：有compress属性的 
+-v：显示所有过程 
+-O：将文件解开到标准输出 
+```
+
+-f 命令为**必选**的命令，后面添加档案名
+
+```
+-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。 
+```
+
+ [Linux tar.gz、tar、bz2、zip 等解压缩、压缩命令详解](http://www.runoob.com/w3cnote/linux-tar-gz.html)
 
 
 
 #### 系统用户操作命令
 
+| 命令    | 解释                          |
+| ------- | ----------------------------- |
+| useradd | 添加用户                      |
+| adduser | 添加用户                      |
+| userdel | 删除用户(-r 表示删除用户目录) |
+| passwd  | 设置密码                      |
 
+在 CentOS 中，useradd和adduser是一样的。都是在创建了用户之后，会在/etc/passwd文件中加一条新建用户的记录，然后在/home目录下创建新用户的主目录，并把/etc/skel目录中的文件复制到这个主目录下面。 **注意：这种方法创建的新用户，在设置密码之前是不能登陆到系统上的，需要在root权限下使用“passwd 用户名”的方法为指定的用户设置密码。下次才能以该用户名和密码登陆到系统中。** 
+
+在 Ubuntu 中，推荐使用adduser命令，adduser命令会创建用户，同时创建同名的组，添加用户到对应的组中，创建对应的home文件夹，拷贝/etc/skel文件，最后输入用户密码。而useradd还需要添加其他参数。
 
 
 
 #### 防火墙相关设置
 
+**安装及使用**
+
+> 安装：yum install firewalld
+>
+> 启动：service firewalld start 
+>
+> 检查状态：service firewalld status 
+>
+> 关闭或禁用防火墙：service firewalld stop/disable
+
+**配置 firewalld-cmd**
+
+> 查看版本： firewall-cmd --version
+>
+> 查看帮助： firewall-cmd --help
+>
+> 显示状态： firewall-cmd –state
+>
+> 列出所有的区域：firewall-cmd --get-zones
+>
+> 列出默认区域：firewall-cmd --get-default-zone
+>
+> 列出所有区域配置： firewall-cmd --list-all-zone
+>
+> 查看所有打开的端口： firewall-cmd --zone=public --list-ports
+>
+> 查看规则：iptables -L -n
+>
+> 更新防火墙规则： firewall-cmd --reload
+>
+> 查看区域信息:  firewall-cmd --get-active-zones
+>
+> 查看指定接口所属区域： firewall-cmd --get-zone-of-interface=eth0
+
+**添加服务** 
+
+> firewall-cmd –add-service=ssh
+>
+> firewall-cmd –query-service=ssh
+>
+> firewall-cmd –remove-service=ssh
+
+**添加端口**
+
+> 添加：firewall-cmd --zone=public --add-port=80/tcp 
+>
+> 重新载入：firewall-cmd --reload
+>
+> 查看：firewall-cmd --zone=public --query-port=80/tcp
+>
+> 删除：firewall-cmd --zone=public --remove-port=80/tcp
+
+
+
+#### 提权和文件上传和下载
+
+使用普通用户时，当我们安装软件等操作时，就会提示权限不够，此时就需要提权操作。但是当我们使用 sudo 进行提权时，会提示 `xxx用户 is not in the sudoers file.  This incident will be reported.`即当前用户不在 sudoers 文件中。
+
+那么就需要使用 root 用户登录然后通过 visudo 命令添加。
+
+```
+## Allows people in group wheel to run all commands
+%wheel  ALL=(ALL)       ALL
+%mindyu ALL=(ALL)       ALL		# 允许mindyu用户使用提权操作
+```
+
+<img src="https://hexoblog-1253306922.cos.ap-guangzhou.myqcloud.com/photo2019/%E5%BF%AB%E9%80%9F%E4%B8%8A%E6%89%8BLinux%20%E7%8E%A9%E8%BD%AC%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8/visudo.png" width="80%" height="80%"/>
+
+
+
+**服务器端下载命令**
+
+```
+	wget http://www.baidu.com
+
+	curl -o baidu.html http://www.baidu.com		// -o 指定文件名
+```
+
+
+
+**本地上传命令**
+
+对于 Linux 平台：
+
+```
+# 上传本地 test.txt 文件到服务器的 tmp 目录下
+scp test.txt root@192.168.156.188:/tmp/
+
+# 下载服务器的 test.txt 文件到本地当前目录
+scp root@192.168.156.188:/tmp/test.txt ./
+```
+
+对于 Windows 平台：
+
+使用 Xshell 软件即可。首先需要在服务器端安装 `yum install lrzsz`，然后就可以使用一下命令：
+
+```
+# 上传，回车之后选择需上传的文件
+rz 
+
+# 下载，xxx表示文件名，回车之后选择下载的路径
+sz xxx
+```
+
+另外 WinSCP 软件可以实现可视化的文件上传下载功能。EditPlus 软件可以实现修改远程服务器配置文件。
+
+
+
+### WebServer 安装和配置
+
+#### Apache
+
+**基本操作**
+
+| 解释 | 命令                |
+| ---- | ------------------- |
+| 安装 | yum install httpd   |
+| 启动 | service httpd start |
+| 停止 | service httpd stop  |
+
+**虚拟主机配置**
+
+配置 /etc/httpd/conf/httpd.conf 文件
+
+```xml
+<VirtualHost *:80>
+    ServerName www.mindyu.test
+    DocumentRoot /data/www
+    <Directory "/data/www">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
+
+在本地需要修改 host 文件，添加 www.mindyu.test 的映射。Windows 平台在 `C:\WINDOWS\system32\drivers\etc` 路径下。
+
+如果配置完成之后，访问该网址时，依然进入的是 Apache的默认页，则 `sudo setenforce 0`即可！
+
+同时可以通过修改默认配置 `/etc/selinux/config `文件中的 SELINUX 值为 disabled 。
+
+
+
+**伪静态**
+
+通过 rewrite 模块实现
+
+```xml
+<VirtualHost *:80>
+    ServerName www.mindyu.test
+    DocumentRoot /data/www
+    <Directory "/data/www">
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        Require all granted
+        <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteRule ^(.*).htmp$ index.html    # 将所有 .htmp 请求重写到 index.html
+        </IfModule>
+    </Directory>
+</VirtualHost>
+```
+
+
+
+#### Nginx
+
+**安装**
+
+1. 添加源
+
+```
+sudo rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+```
+
+2. 安装
+
+```
+sudo yum install -y nginx
+```
+
+3. 使用
+
+```
+# 启动
+sudo service nginx start
+# 重载
+sudo service nginx reload
+# 停止
+sudo service nginx stop
+# 开机启动
+sudo systemctl enable nginx.service
+```
+
+**配置一个虚拟主机**
+
+在 /etc/nginx/conf.d/ 目录下，新建一个 test.conf 的文件进行以下配置。
+
+```
+server {
+    listen       80;
+    server_name  www.mindyu.test;
+    root   /data/www;
+    index  index.html index.htm;
+}
+```
+
+配置完成之后，进行重载即可访问。
+
+*注：当 Apache 服务启动时，就无法在启动 nginx 服务了，因为它们默认都是 80 端口。*
+
+
+
+**伪静态**
+
+```
+server {
+    listen       80;
+    server_name  www.mindyu.test;
+    root   /data/www;
+    index  index.html index.htm;
+    location / {
+        rewrite ^(.*)\.htmp$ /index.html;
+    }
+}
+```
+
+
+
+**日志记录**
+
+nginx 可进行日志记录，通过配置 nginx.conf 文件
+
+```
+	# 格式化样式
+	log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+                      
+	# 日志路径和采用的格式化方式
+    access_log  /var/log/nginx/access.log  main;
+```
+
+另外也可以在每个不同的虚拟主机中进行单独配置，实现不同的应用生成不同的日志文件。
+
+
+
+**反向代理和负载均衡**
+
+```
+upstream test_hosts{
+    server 185.199.111.153:80 weight=5;
+    server 192.168.156.188:80 weight=1;
+}
+
+server {
+    listen       80;
+    server_name  www.mindyu.test;
+    root   /data/www;
+    index  index.html index.htm;
+    location / {
+        # rewrite ^(.*)\.htmp$ /index.html;
+        proxy_pass http://test_hosts;
+    }    
+}
+```
 
 
 
 
-#### 文件传输
 
 
 
