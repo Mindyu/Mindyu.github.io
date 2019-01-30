@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="JNI开发之NDK环境搭建 首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间的耦合性">
+  <meta name="description" content="JNI开发之NDK环境搭建​    首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间">
 <meta name="keywords" content="安卓,NDK,JNI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JNI（java 本地接口）开发">
 <meta property="og:url" content="http://mindyu.com/2017/07/02/JNI（java-本地接口）开发/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="JNI开发之NDK环境搭建 首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间的耦合性">
+<meta property="og:description" content="JNI开发之NDK环境搭建​    首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-25T14:06:45.145Z">
+<meta property="og:updated_time" content="2019-01-30T06:10:40.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JNI（java 本地接口）开发">
-<meta name="twitter:description" content="JNI开发之NDK环境搭建 首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间的耦合性">
+<meta name="twitter:description" content="JNI开发之NDK环境搭建​    首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间">
 
 
 
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">文章字数：</span>
                 
-                <span title="文章字数">946</span>
+                <span title="文章字数">925</span>
               
 
               
@@ -531,9 +531,23 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h3 id="JNI开发之NDK环境搭建"><a href="#JNI开发之NDK环境搭建" class="headerlink" title="JNI开发之NDK环境搭建"></a>JNI开发之NDK环境搭建</h3><p> 首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间的耦合性。<a id="more"></a>开发JNI项目前提是需要有NDK（Native Development Kit）的支持。因此，在开发前需要先安装和配置NDK。推荐一个<a href="http://blog.csdn.net/xbw12138/article/details/54882331#html" target="_blank" rel="noopener">NDK安装教程</a> 对于windows系统依然适用。<br> 1.项目配置文件gradle.properties中添加<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.useDeprecatedNdk=true</span><br></pre></td></tr></table></figure></p>
-<p> 2.local.properties文件添加：（如果是在AS-&gt;SDK Manager-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Andriod SDK-&gt;SDK Tools安装，会自动配置）<br> <code>ndk.dir=NDK的路径</code><br>3.打开模块的build.gradle文件，在android/defaultConfig下面添加ndk节点，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ndk &#123;</span><br><span class="line">          moduleName &quot;JNIDemo&quot;</span><br><span class="line">          stl &quot;stlport_static&quot;</span><br><span class="line">          ldLibs &quot;log&quot;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
-<p>4.创建JNIUtil类，声明本地方法。编译后在Terminal终端面板中定位到<code>cd app/build/intermediates/classes/debug/</code> 执行<code>javah 包名.JNIUtil</code>（JNIUtil是刚刚定义的类名）执行成功之后会在刚刚的debug目录下生成一个.h的头文件（文件名为:Java.类名.包名.h(‘.’换成’_‘)）。<br>5.在app目录下新建JNI目录，拷贝第四步生成的.h文件，再创建一个.cpp文件实现头文件中的方法。<br>6.ok~   编译运行。完美~</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h3 id="JNI开发之NDK环境搭建"><a href="#JNI开发之NDK环境搭建" class="headerlink" title="JNI开发之NDK环境搭建"></a>JNI开发之NDK环境搭建</h3><p>​    首先得先说说JNI是什么，Java Native Interface(java本地接口)的缩写，主要是实现Java与其他语言的通信（主要是C，C++）。当实际项目中一些接口并不支持java安卓的时候，就得靠自己进行封装，来达到目的。缺点是java与本地以编译好的代码交互，可能会丧失平台可移植性，另外程序安全性降低使用不当可能是整个程序崩溃，使用时尽量降低语言之间的耦合性。<a id="more"></a>开发JNI项目前提是需要有NDK（Native Development Kit）的支持。因此，在开发前需要先安装和配置NDK。推荐一个<a href="http://blog.csdn.net/xbw12138/article/details/54882331#html" target="_blank" rel="noopener">NDK安装教程</a> 对于windows系统依然适用。</p>
+<ol>
+<li><p>项目配置文件gradle.properties中添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.useDeprecatedNdk=true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>local.properties文件添加：（如果是在AS-&gt;SDK Manager-&gt;Appearance&amp;Behavior-&gt;System Settings-&gt;Andriod SDK-&gt;SDK Tools安装，会自动配置）</p>
+<p><code>ndk.dir=NDK的路径</code> </p>
+</li>
+<li><p>打开模块的build.gradle文件，在android/defaultConfig下面添加ndk节点，如下所示：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ndk &#123;</span><br><span class="line">    moduleName &quot;JNIDemo&quot;</span><br><span class="line">    stl &quot;stlport_static&quot;</span><br><span class="line">    ldLibs &quot;log&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>创建JNIUtil类，声明本地方法。编译后在Terminal终端面板中定位到<code>cd app/build/intermediates/classes/debug/</code> 执行<code>javah 包名.JNIUtil</code>（JNIUtil是刚刚定义的类名）执行成功之后会在刚刚的debug目录下生成一个.h的头文件（文件名为:Java.类名.包名.h(‘.’换成’_‘)）。</li>
+<li>在app目录下新建JNI目录，拷贝第四步生成的.h文件，再创建一个.cpp文件实现头文件中的方法。</li>
+<li>ok~   编译运行。完美~</li>
+</ol>
 
       
     </div>

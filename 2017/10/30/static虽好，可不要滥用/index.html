@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="Java中static作用详解  在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。  static表示”静态”、”全局”的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静态域属于类而不属于任何一个独立的对">
+  <meta name="description" content="Java中static作用详解在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。 static表示&amp;quot;静态&amp;quot;、&amp;quot;全局&amp;quot;的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静">
 <meta name="keywords" content="安卓,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="static虽好，可不要滥用">
 <meta property="og:url" content="http://mindyu.com/2017/10/30/static虽好，可不要滥用/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="Java中static作用详解  在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。  static表示”静态”、”全局”的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静态域属于类而不属于任何一个独立的对">
+<meta property="og:description" content="Java中static作用详解在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。 static表示&amp;quot;静态&amp;quot;、&amp;quot;全局&amp;quot;的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-25T14:06:45.147Z">
+<meta property="og:updated_time" content="2019-01-30T06:10:06.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="static虽好，可不要滥用">
-<meta name="twitter:description" content="Java中static作用详解  在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。  static表示”静态”、”全局”的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静态域属于类而不属于任何一个独立的对">
+<meta name="twitter:description" content="Java中static作用详解在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。 static表示&amp;quot;静态&amp;quot;、&amp;quot;全局&amp;quot;的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：  静态域（静态变量）如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静">
 
 
 
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">文章字数：</span>
                 
-                <span title="文章字数">1k</span>
+                <span title="文章字数">1.1k</span>
               
 
               
@@ -531,24 +531,30 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h3 id="Java中static作用详解"><a href="#Java中static作用详解" class="headerlink" title="Java中static作用详解"></a>Java中static作用详解</h3><p>  在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。<br>  static表示”静态”、”全局”的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：</p>
-<ol>
+        <script src="\assets\js\APlayer.min.js"> </script><h3 id="Java中static作用详解"><a href="#Java中static作用详解" class="headerlink" title="Java中static作用详解"></a>Java中static作用详解</h3><pre><code>在自己的项目中已经两次入了static的坑，正如title所讲，static虽好但是请别滥用。
+static表示&quot;静态&quot;、&quot;全局&quot;的意思，可以修饰成员变量、方法，以及静态代码块，一下列举几种常用的static用法：
+</code></pre><ol>
 <li><p>静态域（静态变量）<br>如果将类中的域定义为static，那么所有该类的对象共享这一个静态域。域分为实例域与静态域。静态域属于类而不属于任何一个独立的对象。<a id="more"></a> 这也是我做项目是出现问题的所在，因为静态域可以更方便的访问，直接使用类名.静态域就可以轻松的访问，而忽略该类所有对象共用这一个域导致初始化出现遗漏。第一次是在图表类ChartService中将通道数设置为了静态变量，因为纵向梯度曲线比原始数据曲线数量少1，而导致原始数据数据集与数据渲染器初始化少了1，无法显示完整的曲线。第二次在读数据线程中，将暂停的flag设置为了静态变量，导致后面继续测量无法获取到数据，而调试了好久。</p>
 </li>
 <li><p>静态常量（使用比静态变量多）<br>比如Math类中定义到：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Math&#123;</span><br><span class="line">	...</span><br><span class="line">	public static final double PI = 3.14159265358979323846;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>然后就可以通过Math.PI的形式访问。<br>另外我们输出经常会用到System.out，它其实也是一个静态常量</p>
+<p> 然后就可以通过Math.PI的形式访问。<br> 另外我们输出经常会用到System.out，它其实也是一个静态常量</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public static final PrintStream out = ...;</span><br></pre></td></tr></table></figure>
-<p>但是Syetem类中却有一个setOut的方法，并且可以将System.out设置为不同的流。原因是setOut是一个本地方法，而不是通过java语言实现，本地方法可以绕过java语言的存取控制机制。</p>
 </li>
 </ol>
+<p>​    但是Syetem类中却有一个setOut的方法，并且可以将System.out设置为不同的流。原因是setOut是一个本地方法，而不是通过java语言实现，本地方法可以绕过java语言的存取控制机制。</p>
 <ol start="3">
-<li><p>静态方法<br>静态方法是一种不能向对象实施操作的方法。Math.pow(x,a)计算x的a次方。静态方法是没有this参数的方法。静态方法不能访问实例域（静态方法不能操作对象），只能访问自身类中的静态域。</p>
-<p>4.静态代码块</p>
+<li>静态方法<br>静态方法是一种不能向对象实施操作的方法。Math.pow(x,a)计算x的a次方。静态方法是没有this参数的方法。静态方法不能访问实例域（静态方法不能操作对象），只能访问自身类中的静态域。</li>
+<li><p>静态代码块</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">static &#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<p>静态代码块在类中独立于类成员，可以有多个，位置可以随便放，它不在任何的方法体内，JVM加载类时会执行这些静态的代码块，如果static代码块有多个，JVM将按照它们在类中出现的先后顺序依次执行它们，每个代码块只会被执行一次。执行顺序先于构造函数。</p>
+<p>​    静态代码块在类中独立于类成员，可以有多个，位置可以随便放，它不在任何的方法体内，JVM加载类时会执行这些静态的代码块，如果 static 代码块有多个，JVM将按照它们在类中出现的先后顺序依次执行它们，每个代码块只会被执行一次。执行顺序先于构造函数。</p>
+<ol start="5">
+<li><p>静态导包</p>
+<p>对于静态工具类，可以采用静态导包的方式引入包，就可以直接使用该包中的静态方法。</p>
+</li>
+</ol>
 
       
     </div>

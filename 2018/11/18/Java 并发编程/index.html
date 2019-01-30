@@ -96,19 +96,19 @@
 
 
 
-  <meta name="description" content="Java 并发基础在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代码的先后顺">
+  <meta name="description" content="Java 并发基础​    在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代">
 <meta name="keywords" content="笔记整理,面经,Java多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 并发编程">
 <meta property="og:url" content="http://mindyu.com/2018/11/18/Java 并发编程/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="Java 并发基础在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代码的先后顺">
+<meta property="og:description" content="Java 并发基础​    在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://mubu.com/document_image/a8bb1b96-b524-4032-870a-c491a203fd26-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T14:46:30.221Z">
+<meta property="og:updated_time" content="2019-01-30T06:05:21.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java 并发编程">
-<meta name="twitter:description" content="Java 并发基础在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代码的先后顺">
+<meta name="twitter:description" content="Java 并发基础​    在并发编程中，如果想要一个程序正确的执行，必须保证原子性、可见性以及有序性，只要有一个没有被保证，就有可能会导致程序运行不正确。 需要考虑的问题  原子问题 一个操作或多个操作要么全部执行并且执行过程中不能被任何操作打断，要么都不执行。  可见性问题 多个线程访问同一个变量时，一个线程修改了这个变量的值，其它线程能够立即看到修改的值。  有序性问题 程序执行的顺序按照代">
 <meta name="twitter:image" content="https://mubu.com/document_image/a8bb1b96-b524-4032-870a-c491a203fd26-983181.jpg">
 
 
@@ -533,7 +533,7 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h5 id="Java-并发基础"><a href="#Java-并发基础" class="headerlink" title="Java 并发基础"></a>Java 并发基础</h5><p>在并发编程中，如果想要一个程序正确的执行，必须保证<strong>原子性</strong>、<strong>可见性</strong>以及<strong>有序性</strong>，只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h5 id="Java-并发基础"><a href="#Java-并发基础" class="headerlink" title="Java 并发基础"></a>Java 并发基础</h5><p>​    在并发编程中，如果想要一个程序正确的执行，必须保证<strong>原子性</strong>、<strong>可见性</strong>以及<strong>有序性</strong>，只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
 <p>需要考虑的问题</p>
 <ul>
 <li><p>原子问题</p>
@@ -548,7 +548,7 @@
 </ul>
 <a id="more"></a>
 <p><strong>指令重排</strong></p>
-<p>一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。如果两个语句之间没有数据依赖，那么可能会被重排。指令重排不会影响单个线程的执行，但是会影响到线程并发执行的正确性。</p>
+<p>​    一般来说，处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。如果两个语句之间没有数据依赖，那么可能会被重排。指令重排不会影响单个线程的执行，但是会影响到线程并发执行的正确性。</p>
 <h5 id="CyclicBarrier-和-CountDownLatch-的区别"><a href="#CyclicBarrier-和-CountDownLatch-的区别" class="headerlink" title="CyclicBarrier 和 CountDownLatch 的区别"></a>CyclicBarrier 和 CountDownLatch 的区别</h5><ul>
 <li>CountDownLatch 简单的说就是<strong>一个或多个线程等待</strong>，直到它所等待的其他线程都<strong>执行完成</strong>并且调用countDown() 方法发出通知后，当前线程才可以继续执行。</li>
 <li>CyclicBarrier 是<strong>所有线程都进行等待</strong>，直到所有线程<strong>都准备好</strong>进入 await() 方法之后，<strong>所有线程同时开始执行</strong>！</li>
@@ -578,7 +578,7 @@
 <li>NIO方式适用于连接数目多且连接比较短（轻操作）的架构，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</li>
 <li>AIO方式使用于连接数目多且连接比较长（重操作）的架构，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
 </ul>
-<h5 id="ThreadLocal-线程本地存储-http-www-jasongj-com-java-threadlocal"><a href="#ThreadLocal-线程本地存储-http-www-jasongj-com-java-threadlocal" class="headerlink" title="ThreadLocal (线程本地存储) http://www.jasongj.com/java/threadlocal/"></a>ThreadLocal (线程本地存储) <a href="http://www.jasongj.com/java/threadlocal/" target="_blank" rel="noopener">http://www.jasongj.com/java/threadlocal/</a></h5><p>线程的局部变量， 是每一个线程所单独持有的，其他线程不能对其进行访问，可以用来解决对某一个变量的访问冲突问题。当使用 ThreadLocal 维护变量的时候，为每一个使用该变量的线程提供一个独立的变量副本。（会导致内存资源占用增加）</p>
+<h5 id="ThreadLocal-线程本地存储-http-www-jasongj-com-java-threadlocal"><a href="#ThreadLocal-线程本地存储-http-www-jasongj-com-java-threadlocal" class="headerlink" title="ThreadLocal (线程本地存储) http://www.jasongj.com/java/threadlocal/"></a>ThreadLocal (线程本地存储) <a href="http://www.jasongj.com/java/threadlocal/" target="_blank" rel="noopener">http://www.jasongj.com/java/threadlocal/</a></h5><p>​    线程的局部变量， 是每一个线程所单独持有的，其他线程不能对其进行访问，可以用来解决对某一个变量的访问冲突问题。当使用 ThreadLocal 维护变量的时候，为每一个使用该变量的线程提供一个独立的变量副本。（会导致内存资源占用增加）</p>
 <p><strong>方法详解</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">// 用来获取ThreadLocal在当前线程中保存的变量副本</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123; &#125; <span class="comment">//set()用来设置当前线程中变量的副本</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">//remove()用来移除当前线程中变量的副本</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> T <span class="title">initialValue</span><span class="params">()</span> </span>&#123; &#125; <span class="comment">//initialValue()是一个protected方法，一般是用来在使用时进行重写的</span></span><br></pre></td></tr></table></figure>
 <p><strong>原理</strong></p>
@@ -622,7 +622,7 @@
 <p>CLH 队列是一个非阻塞的 FIFO 队列，也就是说往里面插入或移除一个节点的时候，在并发条件下不会阻塞，而是通过自旋锁和 CAS 保证节点插入和移除的原子性。实现无锁且快速的插入。</p>
 </li>
 </ol>
-<h6 id="使用方法-https-blog-csdn-net-vernonzheng-article-details-8275624"><a href="#使用方法-https-blog-csdn-net-vernonzheng-article-details-8275624" class="headerlink" title="使用方法 https://blog.csdn.net/vernonzheng/article/details/8275624"></a>使用方法 <a href="https://blog.csdn.net/vernonzheng/article/details/8275624" target="_blank" rel="noopener">https://blog.csdn.net/vernonzheng/article/details/8275624</a></h6><p>使用 AQS 来实现一个同步器需要覆盖实现如下几个方法</p>
+<h6 id="使用方法-https-blog-csdn-net-vernonzheng-article-details-8275624"><a href="#使用方法-https-blog-csdn-net-vernonzheng-article-details-8275624" class="headerlink" title="使用方法 https://blog.csdn.net/vernonzheng/article/details/8275624"></a>使用方法 <a href="https://blog.csdn.net/vernonzheng/article/details/8275624" target="_blank" rel="noopener">https://blog.csdn.net/vernonzheng/article/details/8275624</a></h6><p>​    使用 AQS 来实现一个同步器需要覆盖实现如下几个方法</p>
 <ul>
 <li><p>tryAcquire(int arg)：独占式获取同步状态，获取同步状态成功后，其他线程需要等待该线程释放同步状态才能获取同步状态；</p>
 </li>
@@ -680,7 +680,7 @@
 <li>awaitUninterruptibly() 方法与 await() 方法基本相同，但是它并不会在等待过程中响应中断。</li>
 <li>singal() 方法用于唤醒一个在等待中的线程。相对的 singalAll() 方法会唤醒所有在等待中的线程。这和 Obejct.notify() 方法很类似。</li>
 </ul>
-<h6 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h6><p>信号量，控制线程同时进入临界区的数量，可用作流量控制</p>
+<h6 id="Semaphore"><a href="#Semaphore" class="headerlink" title="Semaphore"></a>Semaphore</h6><p>​    信号量，控制线程同时进入临界区的数量，可用作流量控制</p>
 <p>常用方法:</p>
 <blockquote>
 <p>acquire() : 获得许可从这个信号量,会阻塞,直到一个可用,或 interrupted线程。</p>
@@ -689,10 +689,10 @@
 <p>tryAcquire(long timeout, TimeUnit unit) : 获得许可从这个信号量,如果没有一个可用在给定的等待时间和当前线程则返回false,同时可以响应中断。</p>
 <p>release() : 发布许可证,返回信号量。</p>
 </blockquote>
-<h6 id="ReadWriteLock"><a href="#ReadWriteLock" class="headerlink" title="ReadWriteLock"></a>ReadWriteLock</h6><p>读和写是两种不同的功能，读-读不互斥，读-写互斥，写-写互斥。这样的设计是并发量提高了，又保证了数据安全。</p>
-<h6 id="CountDownLatch-倒数计时器、闭锁"><a href="#CountDownLatch-倒数计时器、闭锁" class="headerlink" title="CountDownLatch 倒数计时器、闭锁"></a>CountDownLatch 倒数计时器、闭锁</h6><p>一种典型的场景就是火箭发射。在火箭发射前，为了保证万无一失，往往还要进行各项设备、仪器的检查。只有等所有检查完毕后，引擎才能点火。这种场景就非常适合使用CountDownLatch。它可以使得点火线程，等待所有检查线程全部完工后，再执行。</p>
-<h6 id="CyclicBarrier-屏障"><a href="#CyclicBarrier-屏障" class="headerlink" title="CyclicBarrier 屏障"></a>CyclicBarrier 屏障</h6><p>CyclicBarrier 是所有线程都进行等待，直到所有线程都准备好进入 await() 方法之后，所有线程同时开始执行！另外 CyclicBarrier 可以反复使用。</p>
-<h6 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h6><p>提供线程阻塞原语，和 suspend 类似。与 suspend 相比 不容易引起线程冻结，使用 LockSupport 则不会发生死锁。park() 能够响应中断，但不抛出异常。中断响应的结果是，park() 函数的返回，可以从Thread.interrupted() 得到中断标志。LockSupport 提供 park() 和 unpark() 方法实现<strong>阻塞线程和解除线程阻塞</strong>,实现的阻塞和解除阻塞是基于”许可(permit)”作为关联,permit 相当于一个信号量(0,1)，默认是0。线程之间不再需要一个Object或者其它变量来存储状态,不再需要关心对方的状态。</p>
+<h6 id="ReadWriteLock"><a href="#ReadWriteLock" class="headerlink" title="ReadWriteLock"></a>ReadWriteLock</h6><p>​    读和写是两种不同的功能，读-读不互斥，读-写互斥，写-写互斥。这样的设计是并发量提高了，又保证了数据安全。</p>
+<h6 id="CountDownLatch-倒数计时器、闭锁"><a href="#CountDownLatch-倒数计时器、闭锁" class="headerlink" title="CountDownLatch 倒数计时器、闭锁"></a>CountDownLatch 倒数计时器、闭锁</h6><p>​    一种典型的场景就是火箭发射。在火箭发射前，为了保证万无一失，往往还要进行各项设备、仪器的检查。只有等所有检查完毕后，引擎才能点火。这种场景就非常适合使用CountDownLatch。它可以使得点火线程，等待所有检查线程全部完工后，再执行。</p>
+<h6 id="CyclicBarrier-屏障"><a href="#CyclicBarrier-屏障" class="headerlink" title="CyclicBarrier 屏障"></a>CyclicBarrier 屏障</h6><p>​    CyclicBarrier 是所有线程都进行等待，直到所有线程都准备好进入 await() 方法之后，所有线程同时开始执行！另外 CyclicBarrier 可以反复使用。</p>
+<h6 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h6><p>​    提供线程阻塞原语，和 suspend 类似。与 suspend 相比 不容易引起线程冻结，使用 LockSupport 则不会发生死锁。park() 能够响应中断，但不抛出异常。中断响应的结果是，park() 函数的返回，可以从Thread.interrupted() 得到中断标志。LockSupport 提供 park() 和 unpark() 方法实现<strong>阻塞线程和解除线程阻塞</strong>,实现的阻塞和解除阻塞是基于”许可(permit)”作为关联,permit 相当于一个信号量(0,1)，默认是0。线程之间不再需要一个Object或者其它变量来存储状态,不再需要关心对方的状态。</p>
 
       
     </div>

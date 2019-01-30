@@ -113,7 +113,7 @@
 <meta property="og:image" content="https://mubu.com/document_image/cfc359f4-21a0-4f03-a4b5-ae39ac349047-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/415ade9c-b92f-40c2-9f51-830bdaaaf757-983181.jpg">
 <meta property="og:image" content="https://mubu.com/document_image/ca0c2332-d94f-44b0-bed2-a33fd9910cb5-983181.jpg">
-<meta property="og:updated_time" content="2019-01-12T14:58:43.951Z">
+<meta property="og:updated_time" content="2019-01-30T06:03:28.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java GC笔记">
 <meta name="twitter:description" content="GC 算法标记清除算法 Mark-Sweep原理  标记出所有需要回收的对象 标记完成后统一回收所有被标记的对象  缺点  效率不高，标记和清除效率都不高 空间碎片问题，标记清除之后会产生大量不连续的内存碎片,空间碎片太多可能会导致以后在程序运行过程中需要分配较大对象时,无法找到足够的连续内存而不得不提前触发另一次垃圾收集动作">
@@ -587,7 +587,7 @@
 </ul>
 <p>  在新生代中,每次垃圾收集时都发现有大批对象死去,只有少量存活,那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
 <p>  老年代中因为对象存活率高、没有额外空间对它进行分配担保,就必须使用“标记—清理”或者“标记—整理”算法来进行回收。</p>
-<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h5><p>Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器</p>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><h5 id="Serial-收集器"><a href="#Serial-收集器" class="headerlink" title="Serial 收集器"></a>Serial 收集器</h5><p>​    Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器</p>
 <p>特点</p>
 <ul>
 <li>针对新生代；</li>
@@ -597,7 +597,7 @@
 </ul>
 <p>Serial/Serial Old组合收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/b5ba06ff-4688-4d46-91e8-64245ee2b45c-983181.jpg" alt="img"></p>
-<h5 id="ParNew-收集器"><a href="#ParNew-收集器" class="headerlink" title="ParNew 收集器"></a>ParNew 收集器</h5><p>ParNew 垃圾收集器是 Serial 收集器的多线程版本。</p>
+<h5 id="ParNew-收集器"><a href="#ParNew-收集器" class="headerlink" title="ParNew 收集器"></a>ParNew 收集器</h5><p>​    ParNew 垃圾收集器是 Serial 收集器的多线程版本。</p>
 <p>特点</p>
 <ul>
 <li>新生代收集器；</li>
@@ -606,8 +606,8 @@
 </ul>
 <p>ParNew/Serial Old组合收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/316e4e38-9858-4b95-863e-7530388bb69a-983181.jpg" alt="img"></p>
-<h5 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h5><p>与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）</p>
-<p>高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间</p>
+<h5 id="Parallel-Scavenge-收集器"><a href="#Parallel-Scavenge-收集器" class="headerlink" title="Parallel Scavenge 收集器"></a>Parallel Scavenge 收集器</h5><p>​    与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）</p>
+<p>​    高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间</p>
 <p>特点</p>
 <ul>
 <li>新生代收集器；</li>
@@ -625,7 +625,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h5><p>Serial Old 是 Serial 收集器的老年代版本；</p>
+<h5 id="Serial-Old-收集器"><a href="#Serial-Old-收集器" class="headerlink" title="Serial Old 收集器"></a>Serial Old 收集器</h5><p>​    Serial Old 是 Serial 收集器的老年代版本；</p>
 <p>特点</p>
 <ul>
 <li>针对老年代；</li>
@@ -643,7 +643,7 @@
 </ul>
 </li>
 </ul>
-<h5 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h5><p>Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供</p>
+<h5 id="Parallel-Old-收集器"><a href="#Parallel-Old-收集器" class="headerlink" title="Parallel Old 收集器"></a>Parallel Old 收集器</h5><p>​    Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供</p>
 <p>特点</p>
 <ul>
 <li>针对老年代；</li>
@@ -658,7 +658,7 @@
 <li>特别是在Server模式，多CPU的情况下；</li>
 <li>这样在注重吞吐量以及CPU资源敏感的场景，就有了 Parallel Scavenge 加 Parallel Old收集器的”给力”应用组合</li>
 </ul>
-<h5 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h5><p>并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器</p>
+<h5 id="CMS收集器"><a href="#CMS收集器" class="headerlink" title="CMS收集器"></a>CMS收集器</h5><p>​    并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器</p>
 <p>特点</p>
 <ul>
 <li>针对老年代；</li>
@@ -738,7 +738,7 @@
 </ul>
 <p>CMS 收集器运行示意图</p>
 <p><img src="https://mubu.com/document_image/415ade9c-b92f-40c2-9f51-830bdaaaf757-983181.jpg" alt="img"></p>
-<h5 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h5><p>G1（Garbage-First）是JDK7-u4才推出商用的收集器；</p>
+<h5 id="G1-收集器"><a href="#G1-收集器" class="headerlink" title="G1 收集器"></a>G1 收集器</h5><p>​    G1（Garbage-First）是JDK7-u4才推出商用的收集器；</p>
 <p>特点</p>
 <ul>
 <li>并行与并发</li>

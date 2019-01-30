@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="AndriodManifest的配置基础1.全局篇应用的包名以及版本信息，控制安卓的版本信息。">
+  <meta name="description" content="AndriodManifest的配置基础 全局篇  ​    应用的包名以及版本信息，控制安卓的版本信息。">
 <meta name="keywords" content="andriod,安卓">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AndriodManifest.xml配置">
 <meta property="og:url" content="http://mindyu.com/2017/07/19/AndriodManifest-xml配置/index.html">
 <meta property="og:site_name" content="Yang Cq">
-<meta property="og:description" content="AndriodManifest的配置基础1.全局篇应用的包名以及版本信息，控制安卓的版本信息。">
+<meta property="og:description" content="AndriodManifest的配置基础 全局篇  ​    应用的包名以及版本信息，控制安卓的版本信息。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/andriodmanifest.png">
 <meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E9%80%82%E9%85%8D%E5%99%A8.png">
 <meta property="og:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E7%9B%91%E5%90%AC%E5%99%A8.png">
-<meta property="og:updated_time" content="2018-02-25T14:06:45.143Z">
+<meta property="og:updated_time" content="2019-01-30T05:53:02.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndriodManifest.xml配置">
-<meta name="twitter:description" content="AndriodManifest的配置基础1.全局篇应用的包名以及版本信息，控制安卓的版本信息。">
+<meta name="twitter:description" content="AndriodManifest的配置基础 全局篇  ​    应用的包名以及版本信息，控制安卓的版本信息。">
 <meta name="twitter:image" content="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/andriodmanifest.png">
 
 
@@ -535,16 +535,50 @@
       
 
       
-        <script src="\assets\js\APlayer.min.js"> </script><h3 id="AndriodManifest的配置基础"><a href="#AndriodManifest的配置基础" class="headerlink" title="AndriodManifest的配置基础"></a>AndriodManifest的配置基础</h3><p>1.全局篇<br>应用的包名以及版本信息，控制安卓的版本信息。</p>
+        <script src="\assets\js\APlayer.min.js"> </script><h3 id="AndriodManifest的配置基础"><a href="#AndriodManifest的配置基础" class="headerlink" title="AndriodManifest的配置基础"></a>AndriodManifest的配置基础</h3><ol>
+<li>全局篇</li>
+</ol>
+<p>​    应用的包名以及版本信息，控制安卓的版本信息。</p>
 <center>
 
 <p><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/andriodmanifest.png" alt="andriodmanifest.xml"></p>
-<p></p></center><br><a id="more"></a><br>2.组件篇（四大组件）<br>    Activity(活动)<br>    ：启动一个没有在清单中定义的Activity会抛出异常<br>    Service(服务)<br>    ：做为后台运行的一个逻辑代码的处理<br>    Content Provider(内容提供者)<br>    ：是用来管理数据库访问以及程序内和程序间共享的<br>    Broadcast Receiver(广播接收者)<p></p>
-<p> 其属性可以设置：<br>图标：android:icon<br>标题：android:label<br>主题样式：android:theme<br>注意：只能包含一个application节点</p>
-<p>3.权限篇</p>
-<p><uses-permission>申请系统权限<br>自定义权限，限制其它应用使用该应用的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;permission</span><br><span class="line">        andriod:name=&quot;com.example.test&quot;</span><br><span class="line">        andriod:protectionLevel=&quot;normal&quot;&gt;</span><br><span class="line">&lt;/permission&gt;</span><br><span class="line"></span><br><span class="line">&lt;activity</span><br><span class="line">        andriod:permission=&quot;com.example.test&quot;</span><br><span class="line">        ....</span><br><span class="line">        &gt;</span><br></pre></td></tr></table></figure></uses-permission></p>
-<p>然后在其他应用中若希望调用该应用则必须声明权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission andriod:name=&quot;com.example.test&quot;&gt;</span><br></pre></td></tr></table></figure></p>
-<h3 id="ListView的使用"><a href="#ListView的使用" class="headerlink" title="ListView的使用"></a>ListView的使用</h3><p>数据适配器：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E9%80%82%E9%85%8D%E5%99%A8.png" alt="数据适配器作用"><br>纯文字使用ArrayAdapter,有图片有文字又复杂的一系列内容的用SimpleAdapter.<br>1.ArrayAdapter(context, 当前listview加载的每一个列表项所对应的布局文件，数据源)<br>2.SimpleAdapter( context, data , resource , from ,to )：<br>context：上下文<br>data：数据源（List&lt;? extends Map&lt;String,?&gt;&gt; data）一个由Map组成的List合集<br>    每一个Map都对应ListView列表中的一行<br>    每一个Map（键-值对）中的键都必须包含所有在from中所指定的键<br>resource：列表项的布局文件ID<br>from：Map中的键名<br>to：绑定数据视图中的ID，与from成对应关系。<br>监听器：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E7%9B%91%E5%90%AC%E5%99%A8.png" alt="ListView的两种监听器"></p>
+<p></p></center><br><a id="more"></a><p></p>
+<ol start="2">
+<li>组件篇（四大组件）</li>
+</ol>
+<p>​    Activity(活动)</p>
+<blockquote>
+<p>启动一个没有在清单中定义的Activity会抛出异常</p>
+</blockquote>
+<p>​    Service(服务)</p>
+<blockquote>
+<p>做为后台运行的一个逻辑代码的处理</p>
+</blockquote>
+<p>​    Content Provider(内容提供者)</p>
+<blockquote>
+<p>是用来管理数据库访问以及程序内和程序间共享的</p>
+</blockquote>
+<p>​    Broadcast Receiver(广播接收者)</p>
+<p>​     其属性可以设置：</p>
+<blockquote>
+<p>图标：android:icon<br>标题：android:label<br>主题样式：android:theme<br>注意：只能包含一个application节点</p>
+</blockquote>
+<ol start="3">
+<li><p>权限篇</p>
+<p><uses-permission>申请系统权限<br>自定义权限，限制其它应用使用该应用的效果。</uses-permission></p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;permission</span><br><span class="line">        andriod:name=&quot;com.example.test&quot;</span><br><span class="line">        andriod:protectionLevel=&quot;normal&quot;&gt;</span><br><span class="line">&lt;/permission&gt;</span><br><span class="line"></span><br><span class="line">&lt;activity</span><br><span class="line">        andriod:permission=&quot;com.example.test&quot;</span><br><span class="line">        ....</span><br><span class="line">        &gt;</span><br></pre></td></tr></table></figure>
+<p>​    然后在其他应用中若希望调用该应用则必须声明权限：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission andriod:name=&quot;com.example.test&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="ListView的使用"><a href="#ListView的使用" class="headerlink" title="ListView的使用"></a>ListView的使用</h3><p>数据适配器：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E6%95%B0%E6%8D%AE%E9%80%82%E9%85%8D%E5%99%A8.png" alt="数据适配器作用"><br>纯文字使用ArrayAdapter,有图片有文字又复杂的一系列内容的用SimpleAdapter.</p>
+<ol>
+<li>ArrayAdapter(context, 当前listview加载的每一个列表项所对应的布局文件，数据源)</li>
+<li>SimpleAdapter( context, data , resource , from ,to )：</li>
+</ol>
+<blockquote>
+<p>context：上下文<br>data：数据源（List&lt;? extends Map&lt;String,?&gt;&gt; data）一个由Map组成的List合集<br>    每一个Map都对应ListView列表中的一行<br>    每一个Map（键-值对）中的键都必须包含所有在from中所指定的键<br>resource：列表项的布局文件ID<br>from：Map中的键名<br>to：绑定数据视图中的ID，与from成对应关系。</p>
+</blockquote>
+<p>监听器：<br><img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E7%9B%91%E5%90%AC%E5%99%A8.png" alt="ListView的两种监听器"></p>
 
       
     </div>

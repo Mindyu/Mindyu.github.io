@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">文章字数：</span>
                 
-                <span title="文章字数">4.4k</span>
+                <span title="文章字数">4.5k</span>
               
 
               
@@ -523,7 +523,7 @@
 
       
         
-          <h5 id="Object-类"><a href="#Object-类" class="headerlink" title="Object 类"></a>Object 类</h5><p>Java Object类为所有类的基类，所有类都是该类的子类。有时候面试官也会问到Object类中存在哪些方法等问题。</p>
+          <h5 id="Object-类"><a href="#Object-类" class="headerlink" title="Object 类"></a>Object 类</h5><p>​    Java Object类为所有类的基类，所有类都是该类的子类。有时候面试官也会问到Object类中存在哪些方法等问题。</p>
 <p><strong>包含的所有方法</strong></p>
 <p>9个 public 方法（4+5）</p>
 <ul>
@@ -734,7 +734,7 @@
 
       
         
-          <h5 id="Java-并发基础"><a href="#Java-并发基础" class="headerlink" title="Java 并发基础"></a>Java 并发基础</h5><p>在并发编程中，如果想要一个程序正确的执行，必须保证<strong>原子性</strong>、<strong>可见性</strong>以及<strong>有序性</strong>，只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
+          <h5 id="Java-并发基础"><a href="#Java-并发基础" class="headerlink" title="Java 并发基础"></a>Java 并发基础</h5><p>​    在并发编程中，如果想要一个程序正确的执行，必须保证<strong>原子性</strong>、<strong>可见性</strong>以及<strong>有序性</strong>，只要有一个没有被保证，就有可能会导致程序运行不正确。</p>
 <p>需要考虑的问题</p>
 <ul>
 <li><p>原子问题</p>
@@ -2073,6 +2073,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2018/04/27/Ubuntu16-04安装及配置Hadoop详细过程/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Yang Cq"/>
+      <meta itemprop="description" content="陪伴是最长情的告白~"/>
+      <meta itemprop="image" content="/images/avatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Yang Cq"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/04/27/Ubuntu16-04安装及配置Hadoop详细过程/" class="post-title-link" itemprop="url">Ubuntu16.04LTS安装及配置Hadoop</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-04-27 17:49:07" itemprop="dateCreated datePublished" datetime="2018-04-27T17:49:07+08:00">2018-04-27</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu学习/" itemprop="url" rel="index"><span itemprop="name">Ubuntu学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+            <span id="/2018/04/27/Ubuntu16-04安装及配置Hadoop详细过程/" class="leancloud_visitors" data-flag-title="Ubuntu16.04LTS安装及配置Hadoop">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">文章字数：</span>
+                
+                <span title="文章字数">3.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  这学期有一门云计算的课程，有接触到Hadoop，后来需要完成Hadoop的安装及配置，折腾了好久，决定以此记录下来。以供学习！课本附录简单介绍了在Windows上的安装及配置过程，但是推荐在Linux系统下完成，正好对Linux系统及一些命令比较感兴趣，趁着这个机会正好学习一波。以此记录之！
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/04/27/Ubuntu16-04安装及配置Hadoop详细过程/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://mindyu.com/2018/04/26/Ubuntu系统的使用及常用命令集合/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2210,212 +2411,11 @@
 
       
         
-          <h2 id="Ubuntu系统尝鲜"><a href="#Ubuntu系统尝鲜" class="headerlink" title="Ubuntu系统尝鲜"></a>Ubuntu系统尝鲜</h2><p>不知何时起，对Linux操作系统充满了好奇心，想去接触一番。    都说学编程搞开发的都离不开Linux操作系统，个人觉得Linux操作系统更适合学习，少了各种弹窗，界面更加清爽，系统任由你自己去操控，系统也更加稳定，许多的服务器也基本上都是Linux操作系统。然后就自己倒腾，在Windows上装了一个Ubuntu16.04LTS的双系统，通过日常是的使用去渐渐熟悉Linux操作系统，以及各种命令的使用～
+          <h2 id="Ubuntu系统尝鲜"><a href="#Ubuntu系统尝鲜" class="headerlink" title="Ubuntu系统尝鲜"></a>Ubuntu系统尝鲜</h2><p>​    不知何时起，对Linux操作系统充满了好奇心，想去接触一番。    都说学编程搞开发的都离不开Linux操作系统，个人觉得Linux操作系统更适合学习，少了各种弹窗，界面更加清爽，系统任由你自己去操控，系统也更加稳定，许多的服务器也基本上都是Linux操作系统。然后就自己倒腾，在Windows上装了一个Ubuntu16.04LTS的双系统，通过日常是的使用去渐渐熟悉Linux操作系统，以及各种命令的使用～
           <!--noindex-->
           
             <div class="post-button text-center">
               <a class="btn" href="/2018/04/26/Ubuntu系统的使用及常用命令集合/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://mindyu.com/2018/04/24/Ubuntu安装小书匠并创建桌面快捷方式/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yang Cq"/>
-      <meta itemprop="description" content="陪伴是最长情的告白~"/>
-      <meta itemprop="image" content="/images/avatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yang Cq"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/04/24/Ubuntu安装小书匠并创建桌面快捷方式/" class="post-title-link" itemprop="url">Ubuntu安装小书匠并创建桌面快捷方式</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-04-24 23:47:16" itemprop="dateCreated datePublished" datetime="2018-04-24T23:47:16+08:00">2018-04-24</time>
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Ubuntu学习/" itemprop="url" rel="index"><span itemprop="name">Ubuntu学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-            <span id="/2018/04/24/Ubuntu安装小书匠并创建桌面快捷方式/" class="leancloud_visitors" data-flag-title="Ubuntu安装小书匠并创建桌面快捷方式">
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读次数：</span>
-              
-                <span class="leancloud-visitors-count"></span>
-            </span>
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">文章字数：</span>
-                
-                <span title="文章字数">1.4k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="小书匠简介"><a href="#小书匠简介" class="headerlink" title="小书匠简介"></a>小书匠简介</h2><p> <a href="http://soft.xiaoshujiang.com/" target="_blank" rel="noopener">小书匠编辑器</a>是一款专为markdown写作而设计的编辑器。 支持多种编辑模式。单栏编辑，双栏编辑，三栏编辑，实时预览，全屏写作，全屏阅读…想怎么切换，就怎么切换，就是这样随心所欲。 多种主题选择、丰富的语法支持、第三方同步等功能特色。<br>原先在windows上习惯了使用小书匠，然后就想着在Ubuntu上也装一个。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/04/24/Ubuntu安装小书匠并创建桌面快捷方式/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
