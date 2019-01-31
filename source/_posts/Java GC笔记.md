@@ -76,7 +76,7 @@ categories: [Java 学习]
 
 ##### Serial 收集器
 
-Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器
+​	Serial（串行）垃圾收集器是最基本、发展历史最悠久的收集器
 
 特点
 
@@ -91,7 +91,7 @@ Serial/Serial Old组合收集器运行示意图
 
 ##### ParNew 收集器
 
-ParNew 垃圾收集器是 Serial 收集器的多线程版本。
+​	ParNew 垃圾收集器是 Serial 收集器的多线程版本。
 
 特点
 
@@ -105,9 +105,9 @@ ParNew/Serial Old组合收集器运行示意图
 
 ##### Parallel Scavenge 收集器
 
-与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）
+​	与吞吐量关系密切，也称为吞吐量收集器（Throughput Collector）吞吐量=运行用户代码时间/（运行用户代码时间+垃圾收集时间）
 
-高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间
+​	高吞吐量即减少垃圾收集时间，让用户代码获得更长的运行时间
 
 特点
 - 新生代收集器；
@@ -123,7 +123,7 @@ ParNew/Serial Old组合收集器运行示意图
 
 ##### Serial Old 收集器
 
-Serial Old 是 Serial 收集器的老年代版本；
+​	Serial Old 是 Serial 收集器的老年代版本；
 
 特点
 
@@ -144,7 +144,7 @@ Serial/Serial Old收集器运行示意图
 
 ##### Parallel Old 收集器
 
-Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供
+​	Parallel Old 垃圾收集器是 Parallel Scavenge 收集器的老年代版本；JDK1.6中才开始提供
 
 特点
 
@@ -164,7 +164,7 @@ Parallel Scavenge/Parallel Old 收集器运行示意图
 
 ##### CMS收集器
 
-并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器
+​	并发标记清理（Concurrent Mark Sweep，CMS）收集器也称为并发低停顿收集器（Concurrent Low Pause Collector）或低延迟（low-latency）垃圾收集器
 
 特点
 
@@ -234,7 +234,7 @@ CMS 收集器运行示意图
 
 ##### G1 收集器
 
-G1（Garbage-First）是JDK7-u4才推出商用的收集器；
+​	G1（Garbage-First）是JDK7-u4才推出商用的收集器；
 
 特点
 

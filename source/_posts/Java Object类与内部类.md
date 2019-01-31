@@ -9,7 +9,7 @@ categories: [Java 学习]
 
 ##### Object 类
 
-Java Object类为所有类的基类，所有类都是该类的子类。有时候面试官也会问到Object类中存在哪些方法等问题。
+​	Java Object类为所有类的基类，所有类都是该类的子类。有时候面试官也会问到Object类中存在哪些方法等问题。
 
 **包含的所有方法**
 
@@ -84,13 +84,13 @@ public class Object {
 
 **wait() 与 notify()/notifyAll()**
 
-wait(): 释放占有的对象锁，线程进入等待池，释放cpu，而其他正在等待的线程即可抢占此锁，获得锁的线程即可运行程序。
+​	wait(): 释放占有的对象锁，线程进入等待池，释放cpu，而其他正在等待的线程即可抢占此锁，获得锁的线程即可运行程序。
 
-Thread.sleep()：此方法为**线程方法**，线程调用此方法后，会休眠一段时间，休眠期间，会暂时释放cpu，但并不释放对象锁。
+​	Thread.sleep()：此方法为**线程方法**，线程调用此方法后，会休眠一段时间，休眠期间，会暂时释放cpu，但并不释放对象锁。
 
-notify(): 该方法会唤醒因为调用对象的wait()而等待的线程，其实就是对对象锁的唤醒，从而使得wait()的线程可以有机会获取对象锁。调用notify()后，并不会立即释放锁，而是继续执行当前代码，直到 synchronized 中的代码全部执行完毕，才会释放对象锁。JVM则会在等待的线程中调度一个线程去获得对象锁，执行代码。*注意：wait() 方法需要 try/catch 包裹（会出现 InterruptedException 检查异常），另外wait()和notify()必须在 synchronized 代码块中（否则出现 IllegalMonitorStateException 运行时异常）。*
+​	notify(): 该方法会唤醒因为调用对象的wait()而等待的线程，其实就是对对象锁的唤醒，从而使得wait()的线程可以有机会获取对象锁。调用notify()后，并不会立即释放锁，而是继续执行当前代码，直到 synchronized 中的代码全部执行完毕，才会释放对象锁。JVM则会在等待的线程中调度一个线程去获得对象锁，执行代码。*注意：wait() 方法需要 try/catch 包裹（会出现 InterruptedException 检查异常），另外wait()和notify()必须在 synchronized 代码块中（否则出现 IllegalMonitorStateException 运行时异常）。*
 
-notifyAll()则是唤醒所有等待的线程。
+​	notifyAll()则是唤醒所有等待的线程。
 
 
 

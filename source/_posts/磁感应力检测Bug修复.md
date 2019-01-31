@@ -6,15 +6,17 @@ categories: [安卓学习]
 ---
 
 ### 又是忙碌的一天...
-&nbsp;&nbsp;&nbsp;&nbsp;又是一天过去，昨天的生成报告的插图始终还是没有头绪，一直停留在原地。
-&nbsp;&nbsp;&nbsp;&nbsp;今天测试的时候发现原来做的通道选择的弹框和地磁场校准的位置有两个小小的bug，通道选择，点击全部通道之后，再点击其它的通道，取消该通道时，全部通道的选择并没取消。在点击每个通道时，如果该通道已被选则判断全部通道是否被选，若被选则取消全部通道的选择。<!-- more -->
+​	又是一天过去，昨天的生成报告的插图始终还是没有头绪，一直停留在原地。
+今天测试的时候发现原来做的通道选择的弹框和地磁场校准的位置有两个小小的bug，通道选择，点击全部通道之后，再点击其它的通道，取消该通道时，全部通道的选择并没取消。在点击每个通道时，如果该通道已被选则判断全部通道是否被选，若被选则取消全部通道的选择。<!-- more -->
 ![通道选择](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/%E9%80%9A%E9%81%93%E9%80%89%E6%8B%A9.jpg)
 
-修改后的效果：
-<center>{% dplayer "url=http://hexoblog-1253306922.cosgz.myqcloud.com/video2017/%E9%80%9A%E9%81%93%E9%80%89%E6%8B%A9.mp4" "api=http://dplayer.daoapp.io"  "id=9E2E3368B56CDBB4" "loop=yes" "theme=#FADFA3" "autoplay=false" "token=tokendemo" "height=400px" "width=240px" %}</center>
+​	修改后的效果：
+<center>
+{% dplayer "url=http://hexoblog-1253306922.cosgz.myqcloud.com/video2017/%E9%80%9A%E9%81%93%E9%80%89%E6%8B%A9.mp4" "api=http://dplayer.daoapp.io"  "id=9E2E3368B56CDBB4" "loop=yes" "theme=#FADFA3" "autoplay=false" "token=tokendemo" "height=400px" "width=240px" %}
+</center>
 
-&nbsp;&nbsp;&nbsp;&nbsp;另外通道校准画图时，ChartService是以系统参数的通道数初始化的，导致校准非全部通道时，未被选择的通道也绘制了折线。
+​	另外通道校准画图时，ChartService是以系统参数的通道数初始化的，导致校准非全部通道时，未被选择的通道也绘制了折线。
 
-&nbsp;&nbsp;&nbsp;&nbsp;项目差不多接近尾声了，但是实际调试的过程中，依然会遇到许多许多的Bug，而这些是你在开始设计时、编码时未注意到的小细节。事情往往都是看起来挺简单，但是想要做好，可并不容易哦~
+​	项目差不多接近尾声了，但是实际调试的过程中，依然会遇到许多许多的Bug，而这些是你在开始设计时、编码时未注意到的小细节。事情往往都是看起来挺简单，但是想要做好，可并不容易哦~
 
-&nbsp;&nbsp;&nbsp;&nbsp;暑假这两个月，得好好规划一下自己的时间。 学好安卓，看看web。另外算法的能力也得提高，学会如何把代码写的优雅~
+​	暑假这两个月，得好好规划一下自己的时间。 学好安卓，看看web。另外算法的能力也得提高，学会如何把代码写的优雅~

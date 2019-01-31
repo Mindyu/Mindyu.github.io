@@ -1,6 +1,6 @@
 ---
 title: Ubuntu16.04LTS安装及配置Hadoop
-date: 2017-04-27 17:49:07
+date: 2018-04-27 17:49:07
 tags: [Hadoop,Ubuntu16.04,MyEclipse]
 categories: [Ubuntu学习]
 password: 123456
@@ -25,7 +25,7 @@ password: 123456
 	hadoop安装路径：/usr/local/hadoop/hadoop-2.7.3
 	jdk路径：/usr/lib/jvm/java-8-oracle
 	MyEclipse路径：/opt/MyEclipse 2017
-	
+
 ### 一、Java 环境安装
 此处引用我朋友的CSDN上一篇[关于java web环境配置的博客](https://blog.csdn.net/u011324454/article/details/78497021)
 

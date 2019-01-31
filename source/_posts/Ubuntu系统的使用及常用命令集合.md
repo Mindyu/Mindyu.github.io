@@ -6,7 +6,7 @@ categories: [Ubuntu学习]
 ---
 
 ## Ubuntu系统尝鲜
-不知何时起，对Linux操作系统充满了好奇心，想去接触一番。	都说学编程搞开发的都离不开Linux操作系统，个人觉得Linux操作系统更适合学习，少了各种弹窗，界面更加清爽，系统任由你自己去操控，系统也更加稳定，许多的服务器也基本上都是Linux操作系统。然后就自己倒腾，在Windows上装了一个Ubuntu16.04LTS的双系统，通过日常是的使用去渐渐熟悉Linux操作系统，以及各种命令的使用～<!--more-->
+​	不知何时起，对Linux操作系统充满了好奇心，想去接触一番。	都说学编程搞开发的都离不开Linux操作系统，个人觉得Linux操作系统更适合学习，少了各种弹窗，界面更加清爽，系统任由你自己去操控，系统也更加稳定，许多的服务器也基本上都是Linux操作系统。然后就自己倒腾，在Windows上装了一个Ubuntu16.04LTS的双系统，通过日常是的使用去渐渐熟悉Linux操作系统，以及各种命令的使用～<!--more-->
 
 ## 常用软件安装
 
@@ -21,7 +21,7 @@ categories: [Ubuntu学习]
 ```
 
 ![enter description here](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/shadowsocks.png)
-在Ubuntu系统上使用还需要设置系统代理，在 设置-》网络-》网络代理 中设置代理模式，最好设置为自动代理方式，然后添加一个pac文件，应用到整个系统即可。
+	在Ubuntu系统上使用还需要设置系统代理，在 设置-》网络-》网络代理 中设置代理模式，最好设置为自动代理方式，然后添加一个pac文件，应用到整个系统即可。
 
 2. 小书匠安装
 一款Markdown编辑器，支持多平台使用。详细的[安装及添加桌面快捷方式](http://www.mindyu.com/2018/04/28/Ubuntu%E5%AE%89%E8%A3%85%E5%B0%8F%E4%B9%A6%E5%8C%A0%E5%B9%B6%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/)可见我的另一篇博客。
@@ -43,7 +43,7 @@ sudo add-apt-repository ppa:webupd8team/java
 sudo apt-get update
 ```
  - 安装oracle-java-installer
- 
+
 
 ``` stylus
 JDK8
@@ -53,7 +53,7 @@ sudo apt-get install oracle-java8-installer
 JDK7
 sudo apt-get install oracle-java7-installer
 ```
-安装时会提示你同意Oracle的服务条款，选择ok，然后选择yes
+​	安装时会提示你同意Oracle的服务条款，选择ok，然后选择yes
 
 
 5. Eclipse安装
@@ -75,37 +75,45 @@ sudo apt-get install oracle-java7-installer
 
 7. Google浏览器安装
 - 下载 Chrome（Linux 版）https://www.google.cn/intl/zh-CN/chrome/
+
 - 终端下输入如下内容来安装.deb文件
-`sudo dpkg -i 软件包名.deb`
+  `sudo dpkg -i 软件包名.deb`
+
 - 然后在Dash中搜索Google，打开即可。
 
-使用中可能遇到两个问题：
- （1）重启之后，Google浏览器就打不开了
- （2）设置新标签页打开网页
- 
- 解决方案：
- 问题1：
- 网上的解决办法，大多是删除chrome的配置文件
- `rm -r~/.config/google-chrome `
- 但是指标不治本，下次打开依然会出现问题
- 真正的解决方案是：
- 安装gnome-keyring。因为在登录谷歌账户之后，chrome会使用gnome-keyring来保护你的账户。
- `sudo apt install gnome-keyring`
- 
- 问题2：
- 打开google页面，任意搜索一个内容，在搜索结果页面的上面靠中间位置有一个设置，点击设置然后选择 搜索设置 ，即进入如下页面。
- 	![enter description here](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/google%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F.png)
-	然后勾选结果打开方式的 在新的浏览器窗口中打开所选的每条搜索结果即可。
+  使用中可能遇到两个问题：
+   （1）重启之后，Google浏览器就打不开了
+   （2）设置新标签页打开网页
 
-8. 系统监视器
-实时查看电脑的cpu，内存占用率，更可以查看网速
-安装：
+  
+
+   解决方案：
+   问题1：
+   网上的解决办法，大多是删除chrome的配置文件
+   `rm -r~/.config/google-chrome `
+   但是指标不治本，下次打开依然会出现问题
+   真正的解决方案是：
+   安装gnome-keyring。因为在登录谷歌账户之后，chrome会使用gnome-keyring来保护你的账户。
+   `sudo apt install gnome-keyring`
+
+  
+
+   问题2：
+   打开google页面，任意搜索一个内容，在搜索结果页面的上面靠中间位置有一个设置，点击设置然后选择 搜索设置 ，即进入如下页面。
+   	![enter description here](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/google%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F.png)
+
+  然后勾选结果打开方式的 在新的浏览器窗口中打开所选的每条搜索结果即可。
+
+8. 系统监视器 
+
+  实时查看电脑的cpu，内存占用率，更可以查看网速
+  安装：
 ``` stylus
-		sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor 
+sudo add-apt-repository ppa:fossfreedom/indicator-sysmonitor 
 
-        sudo apt-get update  
+sudo apt-get update  
 
-        sudo apt-get install indicator-sysmonitor  
+sudo apt-get install indicator-sysmonitor  
 ```
 ![	](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/sysmonitor.png)
 
@@ -130,14 +138,14 @@ sudo apt-get install oracle-java7-installer
 10. 下载工具uget安装
 
 ``` stylus
-	sudo add-apt-repository ppa:plushuang-tw/uget-stable
+sudo add-apt-repository ppa:plushuang-tw/uget-stable
 
-　　 sudo apt-get update
+sudo apt-get update
 
-　　 sudo apt-get install uget
+sudo apt-get install uget
 ```
 ![enter description here](http://hexoblog-1253306922.cosgz.myqcloud.com/photo2018/ubuntu%E8%BD%AF%E4%BB%B6/uget.png)
-终端和浏览器下载东西比较慢的时候可以试试，下载速度还是比较可观！
+	终端和浏览器下载东西比较慢的时候可以试试，下载速度还是比较可观！
 
 
 

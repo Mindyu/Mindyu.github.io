@@ -7,28 +7,28 @@ categories: [安卓学习]
 
 ### 安卓系统DatePicker与TimePicker的妙用
 
-  其实安卓系统自带的DatePicker和TimePicker的界面都已经很好看啦~
+​	 其实安卓系统自带的DatePicker和TimePicker的界面都已经很好看啦~
 可以直接拿过来直接用，当然也可以自定义。
-  它们可以直接以界面的形式显示，也可以用new DatePickerDialog()的方法以弹框的形式显示，使用特别方便。不信？你看~
-  main.xml:定义一个需要用到的Datepicker和TimePicker，首先然后先设置visibility为gone，<!-- more -->我想通过按钮来实现它们的显示效果，而不会两个同时显示时，无法完全显示在界面上。
-```
-	<DatePicker
-        android:id="@+id/datePicker"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        android:layout_weight="1" />
+	它们可以直接以界面的形式显示，也可以用new DatePickerDialog()的方法以弹框的形式显示，使用特别方便。不信？你看~
+ 	main.xml:定义一个需要用到的Datepicker和TimePicker，首先然后先设置visibility为gone，<!-- more -->我想通过按钮来实现它们的显示效果，而不会两个同时显示时，无法完全显示在界面上。
+```xml
+<DatePicker
+    android:id="@+id/datePicker"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:visibility="gone"
+    android:layout_weight="1" />
 
-    <TimePicker
-        android:id="@+id/timePicker"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+<TimePicker
+    android:id="@+id/timePicker"
+    android:layout_width="match_parent"
+    android:visibility="gone"
+    android:layout_height="0dp"
+    android:layout_weight="1" />
 ```
 
-MainActivity.java类：添加四个按钮，分别实现不同的点击事件（事件的监听，三种方法：1.匿名内部类 2.在MainActivity类中实现 View.OnClickListener接口，3.自定义监听类，实现接口），完成TimePicker、DatePicker以及它们的弹框形式的分别显示。
-```
+​	MainActivity.java类：添加四个按钮，分别实现不同的点击事件（事件的监听，三种方法：1.匿名内部类 2.在MainActivity类中实现 View.OnClickListener接口，3.自定义监听类，实现接口），完成TimePicker、DatePicker以及它们的弹框形式的分别显示。
+```java
 package com.example.datetimepicker;
 
 import android.app.DatePickerDialog;
@@ -174,16 +174,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 }
 
 ```
-注意事项：
+​	注意事项：
 
 ![datetimepicker][1]
 
-最后的显示效果：
+​	最后的显示效果：
 <center>
 
- <img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/TimePicker.jpg" width="150" height="150" />
- <img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/DatePickerDialog.jpg" width="150" height="150" />
+<img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/TimePicker.jpg" width="50%" height="50%" />
+<img src="http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/DatePickerDialog.jpg" width="50%" height="50%" />
  </center>
 
 
-  [1]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/datatimepicker.png
+
+
+[1]: http://hexoblog-1253306922.cosgz.myqcloud.com/photo2017/datatimepicker.png
